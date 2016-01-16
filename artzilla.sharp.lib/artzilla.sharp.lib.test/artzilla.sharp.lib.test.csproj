@@ -6,8 +6,8 @@
     <ProjectGuid>{811D45C2-F507-461E-8334-E0399BC6541D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>artzilla.sharp.lib.test</RootNamespace>
-    <AssemblyName>artzilla.sharp.lib.test</AssemblyName>
+    <RootNamespace>ArtZilla.Sharp.Lib.Test</RootNamespace>
+    <AssemblyName>ArtZilla.Sharp.Lib.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -48,7 +48,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -56,8 +58,14 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Extensions\StringExtTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\artzilla.sharp.lib\ArtZilla.Sharp.Lib.csproj">
+      <Project>{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}</Project>
+      <Name>ArtZilla.Sharp.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

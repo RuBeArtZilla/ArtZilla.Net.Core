@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace artzilla.sharp.lib.Extenstions {
+namespace ArtZilla.Sharp.Lib.Extenstions {
 	public static class StringExtensions {
 		/// <summary>
 		/// Wrapper for <see cref="string.IsNullOrWhiteSpace"/>
