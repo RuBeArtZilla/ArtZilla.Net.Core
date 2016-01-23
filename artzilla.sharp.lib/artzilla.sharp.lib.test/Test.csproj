@@ -62,9 +62,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\artzilla.sharp.lib\ArtZilla.Sharp.Lib.csproj">
+    <ProjectReference Include="..\artzilla.sharp.lib\Lib.csproj">
       <Project>{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}</Project>
-      <Name>ArtZilla.Sharp.Lib</Name>
+      <Name>Lib</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

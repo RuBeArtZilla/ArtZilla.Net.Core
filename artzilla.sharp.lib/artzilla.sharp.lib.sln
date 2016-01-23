@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtZilla.Sharp.Lib", "artzilla.sharp.lib\ArtZilla.Sharp.Lib.csproj", "{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "artzilla.sharp.lib\Lib.csproj", "{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtZilla.Sharp.Lib.Test", "artzilla.sharp.lib.test\ArtZilla.Sharp.Lib.Test.csproj", "{811D45C2-F507-461E-8334-E0399BC6541D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "artzilla.sharp.lib.test\Test.csproj", "{811D45C2-F507-461E-8334-E0399BC6541D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F6773F6A-3BF9-469E-8349-74A3E0EF18FF} = {F6773F6A-3BF9-469E-8349-74A3E0EF18FF}
 	EndProjectSection
@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\LICENSE = ..\LICENSE
 		SolutionInfo.cs = SolutionInfo.cs
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Debug.Con", "Debug.Console\Debug.Con.csproj", "{B4757519-C671-4460-86EA-BF1BC65B63CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,10 @@ Global
 		{811D45C2-F507-461E-8334-E0399BC6541D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{811D45C2-F507-461E-8334-E0399BC6541D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{811D45C2-F507-461E-8334-E0399BC6541D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4757519-C671-4460-86EA-BF1BC65B63CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4757519-C671-4460-86EA-BF1BC65B63CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4757519-C671-4460-86EA-BF1BC65B63CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4757519-C671-4460-86EA-BF1BC65B63CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
