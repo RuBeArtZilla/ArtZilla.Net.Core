@@ -17,14 +17,14 @@ namespace Debug.Con {
 		public ConMenu() { }
 
 		public ConMenu(string header, IEnumerable<ConMenuItem> menuItems = null) : base(header) {
-			_childs = menuItems == null ? new List<ConMenuItem>() : new List<ConMenuItem>(menuItems);
+			Childs = menuItems == null ? new List<ConMenuItem>() : new List<ConMenuItem>(menuItems);
 		}
 
 		protected override void OnExecute() {
 			var isExit = false;
 			var count = _childs.Count;
 			var currentScreen = 0;
-			var screenCount = (int) Math.Ceiling((double) count / MaxItemCount);
+			var screenCount = (int) Math.Ceiling((double) count / MaxItemCount) - 1;
 			var header = GetHeader();
 
 			var i = 0;
@@ -43,7 +43,7 @@ namespace Debug.Con {
 															: MaxItemCount;
 
 				for (var j = 0; j < pageItemCount; j++)
-					Console.WriteLine($"{j - 1} {items[currentScreen * MaxItemCount + j].Header}");
+					Console.WriteLine($"[{j + 1}] {items[currentScreen * MaxItemCount + j].Header}");
 
 				if (currentScreen != 0)
 					Console.WriteLine("[-] Prev page");
@@ -53,28 +53,29 @@ namespace Debug.Con {
 				
 				Console.WriteLine(Parent == null ? "[0] Exit" : "[0] Back");
 				
-				var key = Console.ReadKey();
+				var key = Console.ReadKey(true);
 				
-				switch (key.co) {
-					case '0':
+				switch (key.Key) {
+					case ConsoleKey.NumPad0:
+					case ConsoleKey.D0:
 						isExit = true;
 						break;
 
-					case '+':
-						currentScreen = Math.Min(++currentScreen, MaxItemCount);
+					case ConsoleKey.Add:
+						currentScreen = Math.Min(++currentScreen, screenCount);
 						break;
 
-					case '-':
+					case ConsoleKey.Subtract:
 						currentScreen = Math.Max(--currentScreen, 0);
 						break;
 
 					default:
 						byte b;
-						if (byte.TryParse(key.KeyChar.ToString(), out b) && b > 0 && b < pageItemCount)
-							items[currentScreen * MaxItemCount + b].Execute();
+						if (byte.TryParse(key.KeyChar.ToString(), out b) && b > 0 && b <= pageItemCount)
+							items[currentScreen * MaxItemCount + b - 1].Execute();
 						break;
 				}
-			} while (isExit);
+			} while (!isExit);
 		}
 
 		private string GetHeader() {
