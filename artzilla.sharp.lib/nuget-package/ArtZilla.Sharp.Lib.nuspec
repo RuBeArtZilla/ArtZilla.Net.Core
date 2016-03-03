@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>ArtZilla.Sharp.Lib</id>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <authors>Artyom Fomin (ArtZilla)</authors>
     <description>Common library</description>
     <language>en-US</language>
