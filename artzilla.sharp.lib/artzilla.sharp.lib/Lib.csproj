@@ -50,6 +50,8 @@
     <Compile Include="Extenstions\StringExtensions.cs" />
     <Compile Include="Extenstions\TypeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\SerBi.cs" />
+    <Compile Include="Serialization\SerXml.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
