@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}</ProjectGuid>
+    <ProjectGuid>{8ECA6C6F-CB7D-4EF4-B9BC-1A644C3DCB50}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ArtZilla.Sharp.Lib</RootNamespace>
-    <AssemblyName>ArtZilla.Sharp.Lib</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>Plugin</RootNamespace>
+    <AssemblyName>Plugin</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\nuget-package\lib\4.0\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -36,34 +36,27 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SolutionInfo.cs">
-      <Link>Properties\SolutionInfo.cs</Link>
-    </Compile>
-    <Compile Include="Console\ConAction.cs" />
-    <Compile Include="Console\ConApp.cs" />
-    <Compile Include="Console\ConMenu.cs" />
-    <Compile Include="Console\ConMenuItem.cs" />
-    <Compile Include="Extenstions\ObjectExtensions.cs" />
-    <Compile Include="Extenstions\StringExtensions.cs" />
-    <Compile Include="Extenstions\TypeExtensions.cs" />
-    <Compile Include="Patterns\Disposable.cs" />
-    <Compile Include="PInvoke\Advapi32.cs" />
-    <Compile Include="PInvoke\Kernel32.cs" />
-    <Compile Include="PInvoke\User32.cs" />
-    <Compile Include="Plugins\APlugin.cs" />
-    <Compile Include="Plugins\IPlugin.cs" />
-    <Compile Include="Plugins\IPluginService.cs" />
-    <Compile Include="Plugins\PluginService.cs" />
-    <Compile Include="Plugins\VersionInfo.cs" />
+    <Compile Include="TestPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Serialization\SerBi.cs" />
-    <Compile Include="Serialization\SerXml.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\artzilla.sharp.lib\Lib.csproj">
+      <Project>{f6773f6a-3bf9-469e-8349-74a3e0ef18ff}</Project>
+      <Name>Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetPath) $(SolutionDir)PlugTest\bin\$(ConfigurationName)\plugins\$(TargetFileName)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
