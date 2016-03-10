@@ -5,6 +5,31 @@ using ArtZilla.Sharp.Lib.Extenstions;
 
 namespace ArtZilla.Sharp.Lib.Serialization {
 	public static class SerXml {
+		public static object Load(Type type, string file, bool clear = false) {
+			// Будет исключение, если тип нельзя сериализовать в XML
+			var serializator = new XmlSerializer(type);
+			object res = null;
+
+			try {
+				if (!File.Exists(file))
+					return null;
+
+				using (var fs = new FileStream(file, FileMode.Open)) {
+					if (fs.Length == 0)
+						return null;
+
+					res = serializator.Deserialize(fs);
+
+					if (clear)
+						fs.SetLength(0);
+				}
+			} catch (Exception ex) {
+				// ignored
+			}
+
+			return res;
+		}
+
 		public static T Load<T>(string file, bool clear = false) where T : class {
 			// Будет исключение, если тип нельзя сериализовать в XML
 			var serializator = new XmlSerializer(typeof(T));
@@ -29,6 +54,22 @@ namespace ArtZilla.Sharp.Lib.Serialization {
 			}
 
 			return res;
+		}
+
+		public static bool Save(string file, object item, bool append = false) {
+			// Будет исключение, если тип нельзя сериализовать в XML
+			var serializator = new XmlSerializer(item.GetType());
+
+			CreateIfNotExist(file);
+
+			try {
+				using (var fs = new FileStream(file, append ? FileMode.Append : FileMode.Create))
+					serializator.Serialize(fs, item);
+
+				return true;
+			} catch (Exception ex) {
+				return false;
+			}
 		}
 
 		public static bool Save<T>(string file, T item, bool append = false) where T : class {
