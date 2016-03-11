@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace ArtZilla.Sharp.Lib.Extenstions {
+namespace ArtZilla.Sharp.Lib.Extensions {
 	public static class TypeExtensions {
 		public static IEnumerable<PropertyInfo> GetReadableNonIndexerProperties(this Type type) {
 			var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);

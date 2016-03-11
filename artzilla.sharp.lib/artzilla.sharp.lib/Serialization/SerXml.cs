@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
-using ArtZilla.Sharp.Lib.Extenstions;
+using ArtZilla.Sharp.Lib.Extensions;
 
 namespace ArtZilla.Sharp.Lib.Serialization {
 	public static class SerXml {

@@ -1,5 +1,5 @@
 ﻿using System;
-using ArtZilla.Sharp.Lib.Extenstions;
+using ArtZilla.Sharp.Lib.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ArtZilla.Sharp.Lib.Test.Extensions {

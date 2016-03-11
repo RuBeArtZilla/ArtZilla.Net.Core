@@ -46,9 +46,9 @@
     <Compile Include="Console\ConApp.cs" />
     <Compile Include="Console\ConMenu.cs" />
     <Compile Include="Console\ConMenuItem.cs" />
-    <Compile Include="Extenstions\ObjectExtensions.cs" />
-    <Compile Include="Extenstions\StringExtensions.cs" />
-    <Compile Include="Extenstions\TypeExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Patterns\Disposable.cs" />
     <Compile Include="PInvoke\Advapi32.cs" />
     <Compile Include="PInvoke\Kernel32.cs" />
