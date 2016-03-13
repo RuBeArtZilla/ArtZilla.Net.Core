@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using ArtZilla.Sharp.Lib.Extenstions;
+using ArtZilla.Sharp.Lib.Extensions;
 
 namespace ArtZilla.Sharp.Lib.Serialization {
 	public class SerBi {

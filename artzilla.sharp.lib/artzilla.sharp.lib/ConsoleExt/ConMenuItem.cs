@@ -1,6 +1,6 @@
 using System;
 
-namespace Debug.Con {
+namespace ArtZilla.Sharp.Lib.ConsoleExt {
 	public abstract class ConMenuItem {
 		public ConMenu Parent { get; set; }
 

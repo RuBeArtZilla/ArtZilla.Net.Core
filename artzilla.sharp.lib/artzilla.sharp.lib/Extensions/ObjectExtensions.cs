@@ -1,4 +1,4 @@
-﻿namespace ArtZilla.Sharp.Lib.Extenstions {
+﻿namespace ArtZilla.Sharp.Lib.Extensions {
 	public static class ObjectExtensions {
 		// Использовать аккуратно, т.к. такие проверки не поддерживаются решарпером,
 		// т.е. он, после такой проверки, будет говорить, что функция может быть равна null и т.д.

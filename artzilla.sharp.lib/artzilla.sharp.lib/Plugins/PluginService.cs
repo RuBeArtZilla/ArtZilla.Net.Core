@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using ArtZilla.Sharp.Lib.Extenstions;
+using ArtZilla.Sharp.Lib.Extensions;
 using ArtZilla.Sharp.Lib.Patterns;
 using ArtZilla.Sharp.Lib.Serialization;
 

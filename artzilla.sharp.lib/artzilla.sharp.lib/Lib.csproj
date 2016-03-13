@@ -42,13 +42,13 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="Console\ConAction.cs" />
-    <Compile Include="Console\ConApp.cs" />
-    <Compile Include="Console\ConMenu.cs" />
-    <Compile Include="Console\ConMenuItem.cs" />
-    <Compile Include="Extenstions\ObjectExtensions.cs" />
-    <Compile Include="Extenstions\StringExtensions.cs" />
-    <Compile Include="Extenstions\TypeExtensions.cs" />
+    <Compile Include="ConsoleExt\ConAction.cs" />
+    <Compile Include="ConsoleExt\ConApp.cs" />
+    <Compile Include="ConsoleExt\ConMenu.cs" />
+    <Compile Include="ConsoleExt\ConMenuItem.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Patterns\Disposable.cs" />
     <Compile Include="PInvoke\Advapi32.cs" />
     <Compile Include="PInvoke\Kernel32.cs" />

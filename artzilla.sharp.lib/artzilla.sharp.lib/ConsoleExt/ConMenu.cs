@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Debug.Con {
+namespace ArtZilla.Sharp.Lib.ConsoleExt {
 	public class ConMenu : ConMenuItem {
 		private const int MaxItemCount = 5;
 		private const string NextPage = "Next page";
