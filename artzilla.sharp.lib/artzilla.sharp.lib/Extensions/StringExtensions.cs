@@ -2,15 +2,13 @@
 
 namespace ArtZilla.Sharp.Lib.Extensions {
 	public static class StringExtensions {
-		/// <summary>
-		/// Wrapper for <see cref="string.IsNullOrWhiteSpace"/>
-		/// </summary>
-		public static bool IsBad(this string str) => String.IsNullOrWhiteSpace(str);
+		/// <summary> Wrapper for <see cref="string.IsNullOrWhiteSpace"/> </summary>
+		public static bool IsBad(this string str)
+			=> String.IsNullOrWhiteSpace(str);
 
-		/// <summary>
-		/// Wrapper for <see cref="string.Equals(string, System.StringComparison)"/> with InvariantCultureIgnoreCase
-		/// </summary>
-		public static bool Like(this string s1, string s2) => s1.Equals(s2, StringComparison.InvariantCultureIgnoreCase);
+		/// <summary> Wrapper for <see cref="string.Equals(string, System.StringComparison)"/> with InvariantCultureIgnoreCase </summary>
+		public static bool Like(this string s1, string s2) 
+			=> s1?.Equals(s2, StringComparison.InvariantCultureIgnoreCase) ?? false;
 
 		public static int ParseIntEx(this string s, int defValue = int.MinValue) {
 			int val;

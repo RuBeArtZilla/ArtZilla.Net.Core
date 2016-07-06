@@ -42,6 +42,7 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="BkgOp\BackgroundRepeater.cs" />
     <Compile Include="ConsoleExt\ConAction.cs" />
     <Compile Include="ConsoleExt\ConApp.cs" />
     <Compile Include="ConsoleExt\ConMenu.cs" />

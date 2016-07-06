@@ -1,15 +1,15 @@
 ﻿using System;
-using ArtZilla.Sharp.Lib.Extenstions;
+using ArtZilla.Sharp.Lib.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ArtZilla.Sharp.Lib.Test.Extensions {
 	[TestClass]
 	public class StringExtTest {
+		private static readonly String ExampleEmpty = String.Empty;
 		private const string ExampleEnBase = "Hello World!";
 		private const string ExampleEnDown = "hello world!";
 		private const string ExampleEnUp = "HELLO WORLD!";
 		private const string ExampleNull = null;
-		private const string ExampleEmpty = "";
 		private const string ExampleWhitespace = " ";
 		private const string ExampleWhitespaces = "     ";
 
@@ -18,6 +18,10 @@ namespace ArtZilla.Sharp.Lib.Test.Extensions {
 			Assert.IsTrue(ExampleEnBase.Like(ExampleEnBase));
 			Assert.IsTrue(ExampleEnBase.Like(ExampleEnDown));
 			Assert.IsTrue(ExampleEnBase.Like(ExampleEnUp));
+
+			Assert.IsFalse(ExampleEnBase.Like(ExampleNull));
+			Assert.IsFalse(ExampleNull.Like(ExampleEnBase));
+			Assert.IsFalse(ExampleNull.Like(ExampleNull));
 		}
 
 		[TestMethod]

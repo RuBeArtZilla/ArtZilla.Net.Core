@@ -58,6 +58,7 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="BkgOp\BkgRepeaterTests.cs" />
     <Compile Include="Extensions\StringExtTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
