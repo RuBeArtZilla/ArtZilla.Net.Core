@@ -279,3 +279,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/artzilla.sharp.lib/nuget-package/make.public — копия.bat
+/artzilla.sharp.lib/nuget-package/lib/4.0/ArtZilla.Sharp.Lib.dll
+/artzilla.sharp.lib/artzilla.sharp.lib/Lib.csproj.DotSettings
+/artzilla.sharp.lib/artzilla.sharp.lib.test/Test.csproj.DotSettings

@@ -1,6 +1,6 @@
 using System;
 
-namespace Debug.Con {
+namespace ArtZilla.Sharp.Lib.ConsoleExt {
 	public class ConAction : ConMenuItem {
 		public Action Action { get; set; }
 

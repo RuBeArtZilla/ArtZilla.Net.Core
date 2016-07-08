@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Debug.Con {
+namespace ArtZilla.Sharp.Lib.ConsoleExt {
 	public class ConApp {
 		public ConMenu MainMenu = new ConMenu();
 
