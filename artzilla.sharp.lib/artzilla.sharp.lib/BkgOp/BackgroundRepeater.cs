@@ -99,7 +99,7 @@ namespace ArtZilla.Sharp.Lib {
 						action?.Invoke(t);
 
 					if (!t.IsCancellationRequested)
-						Thread.Sleep(Cooldown);
+						t.WaitHandle.WaitOne(Cooldown);  // Thread.Sleep(Cooldown);
 				}
 			} catch (OperationCanceledException) {
 				// ignored, worked in rare cases!
