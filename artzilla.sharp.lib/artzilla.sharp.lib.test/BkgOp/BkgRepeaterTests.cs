@@ -111,7 +111,8 @@ namespace ArtZilla.Sharp.Lib.Test {
 			_counter = 0;
 			bkg.Start();
 
-			Thread.Sleep(TimeSpan.FromSeconds(4D));
+			SpinWait.SpinUntil(() => _counter == 4);
+			Thread.Sleep(TimeSpan.FromSeconds(1D));
 
 			Assert.IsTrue(_counter == 4);
 			Assert.IsFalse(bkg.IsStarted());
