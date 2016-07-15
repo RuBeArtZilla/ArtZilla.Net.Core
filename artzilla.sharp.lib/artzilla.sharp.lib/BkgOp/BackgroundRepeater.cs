@@ -18,6 +18,12 @@ namespace ArtZilla.Sharp.Lib {
 		/// <summary> When true any exception from repeated operation will be ignored </summary>
 		public Boolean IsCatchExceptions { get; set; } = DefaultIsCatchExceptions;
 
+		/// <summary> Set repeater on/off </summary>
+		public void Enabled(Boolean value) { // todo: write test?
+			if (value) Start();
+			else Stop();
+		}
+
 		/// <summary> Start repeating </summary>
 		public void Start() {
 			Debug.Assert(_sync != null, "_sync != null");

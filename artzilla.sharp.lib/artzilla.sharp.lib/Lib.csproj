@@ -52,6 +52,7 @@
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Common\Lib.cs" />
     <Compile Include="Patterns\Disposable.cs" />
     <Compile Include="PInvoke\Advapi32.cs" />
     <Compile Include="PInvoke\Kernel32.cs" />
