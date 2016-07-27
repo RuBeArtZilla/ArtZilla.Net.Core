@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ArtZilla.Sharp.Lib</name>
+    </assembly>
+    <members>
+        <member name="T:ArtZilla.Sharp.Lib.BackgroundRepeater">
+            <summary> Represent a background repeated action </summary>
+        </member>
+        <member name="F:ArtZilla.Sharp.Lib.BackgroundRepeater.DefaultCooldownMs">
+            <summary> Default value of <see cref="P:ArtZilla.Sharp.Lib.BackgroundRepeater.Cooldown"/> in milliseconds </summary>
+        </member>
+        <member name="F:ArtZilla.Sharp.Lib.BackgroundRepeater.DefaultIsCatchExceptions">
+            <summary> Default value of <see cref="P:ArtZilla.Sharp.Lib.BackgroundRepeater.IsCatchExceptions"/></summary>
+        </member>
+        <member name="P:ArtZilla.Sharp.Lib.BackgroundRepeater.Cooldown">
+            <summary> Period between repeating background operation </summary>
+        </member>
+        <member name="P:ArtZilla.Sharp.Lib.BackgroundRepeater.IsCatchExceptions">
+            <summary> When true any exception from repeated operation will be ignored </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.Enabled(System.Boolean)">
+            <summary> Set repeater on/off </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.Start">
+            <summary> Start repeating </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.Stop">
+            <summary> Stop repeating </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.IsStarted">
+            <summary> Gets a value indicating the execution status of current <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action)">
+            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified action to repeat. </summary>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+            <param name="action">The delegate that represents the code to repeat.</param>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action{System.Threading.CancellationToken})">
+            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+            <param name="action">The delegate that represents the code to repeat.</param>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.ObjectExtensions.IsNull(System.Object)">
+            <summary>
+            Просто обертка для красоты, проверяет равен ли объект null.
+            </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.StringExtensions.IsBad(System.String)">
+            <summary> Wrapper for <see cref="M:System.String.IsNullOrWhiteSpace(System.String)"/> </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.StringExtensions.Like(System.String,System.String)">
+            <summary> Wrapper for <see cref="M:System.String.Equals(System.String,System.StringComparison)"/> with InvariantCultureIgnoreCase </summary>
+        </member>
+        <member name="T:ArtZilla.Sharp.Lib.PInvoke.ShowWindowCommand">
+            <summary>
+            Second argument for function <see cref="M:ArtZilla.Sharp.Lib.PInvoke.User32.ShowWindowAsync(System.IntPtr,System.Int32)"/> 
+            </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Plugins.PluginDependency.#ctor(System.String,ArtZilla.Sharp.Lib.Plugins.VersionInfo)">
+            <summary>
+            Инициализирует новый экземпляр класса <see cref="T:System.Object"/>.
+            </summary>
+        </member>
+    </members>
+</doc>

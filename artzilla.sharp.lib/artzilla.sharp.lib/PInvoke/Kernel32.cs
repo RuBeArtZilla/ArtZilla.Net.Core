@@ -4,33 +4,33 @@ using System.Text;
 
 namespace ArtZilla.Sharp.Lib.PInvoke {
 	public static class Kernel32 {
-		public const string DllName = "kernel32.dll";
+		public const String DllName = "kernel32.dll";
 
 		[DllImport(DllName, CharSet = CharSet.Auto, SetLastError = true)]
-		static extern uint GetShortPathName(
-			[MarshalAs(UnmanagedType.LPTStr)]string lpszLongPath,
+		static extern UInt32 GetShortPathName(
+			[MarshalAs(UnmanagedType.LPTStr)]String lpszLongPath,
 			[MarshalAs(UnmanagedType.LPTStr)]StringBuilder lpszShortPath,
-			uint cchBuffer);
+			UInt32 cchBuffer);
 
 		[DllImport(DllName, CharSet = CharSet.Auto, SetLastError = true)]
-		static extern uint GetShortPathName(string lpszLongPath, char[] lpszShortPath, int cchBuffer);
+		static extern UInt32 GetShortPathName(String lpszLongPath, Char[] lpszShortPath, Int32 cchBuffer);
 
 		[DllImport(DllName)]
-		public static extern bool AllocConsole();
+		public static extern Boolean AllocConsole();
 
 		[DllImport(DllName)]
-		public static extern bool FreeConsole();
+		public static extern Boolean FreeConsole();
 
 		[DllImport(DllName)]
 		public static extern IntPtr GetConsoleWindow();
 
 		[DllImport(DllName)]
-		public static extern int GetConsoleOutputCP();
+		public static extern Int32 GetConsoleOutputCP();
 
-		public static string GetShortPathName(string longpath) {
-			var buffer = new char[256];
+		public static String GetShortPathName(String longpath) {
+			var buffer = new Char[256];
 			GetShortPathName(longpath, buffer, buffer.Length);
-			return new string(buffer);
+			return new String(buffer);
 		}
 	}
 }
