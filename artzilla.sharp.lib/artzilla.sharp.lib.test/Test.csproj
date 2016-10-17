@@ -59,6 +59,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="BkgOp\BkgRepeaterTests.cs" />
+    <Compile Include="Common\AssertEx.cs" />
     <Compile Include="Common\LibTests.cs" />
     <Compile Include="Extensions\StringExtTest.cs" />
     <Compile Include="Plugins\VersionTest.cs" />

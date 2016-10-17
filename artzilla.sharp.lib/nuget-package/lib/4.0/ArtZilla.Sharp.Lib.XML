@@ -52,6 +52,14 @@
         <member name="M:ArtZilla.Sharp.Lib.Extensions.StringExtensions.Like(System.String,System.String)">
             <summary> Wrapper for <see cref="M:System.String.Equals(System.String,System.StringComparison)"/> with InvariantCultureIgnoreCase </summary>
         </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.StringExtensions.ParseIntEx(System.String,System.Int32)">
+            <summary>
+            	Converts the string representation of a number to its 32-bit signed integer equivalent, or default value
+            </summary>
+            <param name="s">A string containing a number to convert.</param>
+            <param name="defValue">Default value, returned if conversion failed. Default value <see cref="F:System.Int32.MinValue"/></param>
+            <returns> When this method returns, result is the 32-bit signed integer value equivalent to the number contained in s, or defValue if can't parse number </returns>
+        </member>
         <member name="T:ArtZilla.Sharp.Lib.PInvoke.ShowWindowCommand">
             <summary>
             Second argument for function <see cref="M:ArtZilla.Sharp.Lib.PInvoke.User32.ShowWindowAsync(System.IntPtr,System.Int32)"/> 

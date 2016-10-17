@@ -55,7 +55,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetPath) $(SolutionDir)PlugTest\bin\$(ConfigurationName)\plugins\$(TargetFileName)</PostBuildEvent>
+    <PostBuildEvent>::copy $(TargetPath) $(SolutionDir)PlugTest\bin\$(ConfigurationName)\plugins\$(TargetFileName)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -123,10 +123,11 @@ namespace ArtZilla.Sharp.Lib.Test {
 			var bkg = new BackgroundRepeater(EverlastingMethod) {
 				Cooldown = TimeSpan.FromMilliseconds(10),
 			};
-			bkg.Start();
-			Thread.Sleep(TimeSpan.FromSeconds(.5D));
-			bkg.Stop();
 
+			bkg.Enabled(true);
+			Thread.Sleep(TimeSpan.FromSeconds(.5D));
+			bkg.Enabled(false);
+			
 			Assert.IsFalse(bkg.IsStarted());
 		}
 
