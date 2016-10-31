@@ -6,9 +6,13 @@ namespace ArtZilla.Sharp.Lib.Extensions {
 		public static Boolean IsBad(this String str)
 			=> String.IsNullOrWhiteSpace(str);
 
-		/// <summary> Wrapper for <see cref="string.Equals(string, System.StringComparison)"/> with InvariantCultureIgnoreCase </summary>
+		/// <summary> Wrapper for is not <see cref="string.IsNullOrWhiteSpace"/> </summary>
+		public static Boolean IsGood(this String str)
+			=> !String.IsNullOrWhiteSpace(str);
+
+		/// <summary> Wrapper for <see cref="string.Equals(string, System.StringComparison)"/> with OrdinalIgnoreCase </summary>
 		public static Boolean Like(this String s1, String s2) 
-			=> s1?.Equals(s2, StringComparison.InvariantCultureIgnoreCase) ?? false;
+			=> s1?.Equals(s2, StringComparison.OrdinalIgnoreCase) ?? false;
 
 		/// <summary>
 		///		Converts the string representation of a number to its 32-bit signed integer equivalent, or default value
