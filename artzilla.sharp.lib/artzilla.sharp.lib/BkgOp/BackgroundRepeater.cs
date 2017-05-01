@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ArtZilla.Sharp.Lib {
 	/// <summary> Represent a background repeated action </summary>
 	public class BackgroundRepeater {
+		private const String StopGuid = "{B098C6A3-C478-4E2B-969A-36B5F6D0B780}";
+
 		/// <summary> Default value of <see cref="Cooldown"/> in milliseconds </summary>
 		public const Double DefaultCooldownMs = 1000D;
 
@@ -51,7 +54,7 @@ namespace ArtZilla.Sharp.Lib {
 					return;
 
 				try {
-					_cts?.Cancel();
+					_cts.Cancel();
 					_thread?.Join();
 				} finally {
 					_cts = null;
@@ -72,40 +75,57 @@ namespace ArtZilla.Sharp.Lib {
 		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 		/// <param name="action">The delegate that represents the code to repeat.</param>
 		public BackgroundRepeater(Action action) : this(t => Cancelable(action, t)) {
-			if (action == null) throw new ArgumentNullException();
+			if (action == null)
+				throw new ArgumentNullException();
 		}
 
 		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
 		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 		/// <param name="action">The delegate that represents the code to repeat.</param>
-		public BackgroundRepeater(Action<CancellationToken> action) {
-			if (action == null) throw new ArgumentNullException();
-			_action = action;
-		}
+		public BackgroundRepeater(Action<CancellationToken> action)
+			=> _action = action ?? throw new ArgumentNullException();
+
+		public static void InnerStop() =>
+			throw new OperationCanceledException(StopGuid);
 
 		private static void Cancelable(Action action, CancellationToken token) {
-			using (var t = new Task(action, token)) {
-				t.Start();
-				t.Wait(token);
+			Debug.Assert(action != null, "action != null");
+
+			try {
+				using (var t = new Task(action, token)) {
+					t.Start();
+					t.Wait(token);
+				}
+			} catch (AggregateException ae) {
+				if (ae.InnerExceptions.Any(e => e is OperationCanceledException && e.Message.Equals(StopGuid)))
+					throw new OperationCanceledException(StopGuid);
+				throw;
 			}
 		}
 
 		private void Repeater(Action<CancellationToken> action, Object token) {
 			Debug.Assert(token is CancellationToken, "Wrong cancellation token.");
+			Debug.Assert(action != null, "action != null");
+
 			var t = (CancellationToken) token;
 
 			try {
 				while (!t.IsCancellationRequested) {
-					if (IsCatchExceptions)
+					if (IsCatchExceptions) {
 						try {
-							action?.Invoke(t);
+							action.Invoke(t);
+						} catch (OperationCanceledException e) {
+							if (e.Message.Equals(StopGuid))
+								throw; // Must exit when recieve this
 						} catch {
 							// ignored
-						} else
-						action?.Invoke(t);
+						}
+					} else {
+						action.Invoke(t);
+					}
 
 					if (!t.IsCancellationRequested)
-						t.WaitHandle.WaitOne(Cooldown);  // Thread.Sleep(Cooldown);
+						t.WaitHandle.WaitOne(Cooldown);
 				}
 			} catch (OperationCanceledException) {
 				// ignored, worked in rare cases!

@@ -1,13 +1,17 @@
-﻿namespace ArtZilla.Sharp.Lib.Extensions {
+﻿using System.Linq;
+
+namespace ArtZilla.Sharp.Lib.Extensions {
 	public static class ObjectExtensions {
-		// Использовать аккуратно, т.к. такие проверки не поддерживаются решарпером,
-		// т.е. он, после такой проверки, будет говорить, что функция может быть равна null и т.д.
-		// Также не надо забывать про лишний вызов функции, если, конечно, оптимизатор не поможет.
-		// По большей части, это подходит только для функций "в одну строчку" (удобно вместе с Linq)
+		/// <summary>
+		/// Simple check, that object is null
+		/// </summary>
+		public static bool IsNull<T>(this T self)
+			=> self == null;
 
 		/// <summary>
-		/// Просто обертка для красоты, проверяет равен ли объект null.
+		/// Simple check, that object is any of values by using the default equality comparer
 		/// </summary>
-		public static bool IsNull(this object o) => o == null;
+		public static bool IsAnyOf<T>(this T self, params T[] values)
+			=> values.Contains(self);
 	}
 }

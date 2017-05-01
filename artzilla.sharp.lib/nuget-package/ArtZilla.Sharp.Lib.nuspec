@@ -2,14 +2,14 @@
 <package>
   <metadata>
     <id>ArtZilla.Sharp.Lib</id>
-    <version>1.0.9.2</version>
+    <version>1.0.9.5</version>
     <authors>Artyom Fomin (ArtZilla)</authors>
     <description>Common library</description>
     <language>en-US</language>
     <licenseUrl>http://files.artzilla.name/ArtZilla.Sharp.Lib.License.txt</licenseUrl>
     <projectUrl>http://files.artzilla.name/nuget/</projectUrl>
     <iconUrl>http://files.artzilla.name/nuget/ArtZilla.Sharp.Lib.png</iconUrl>
-    <copyright>Copyright (c) 2016 Artyom Fomin</copyright>
+    <copyright>Copyright (c) 2016-2017 Artyom Fomin</copyright>
     <tags>ArtZilla</tags>
   </metadata>
 </package>

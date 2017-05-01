@@ -41,16 +41,24 @@
             <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
             <param name="action">The delegate that represents the code to repeat.</param>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.ObjectExtensions.IsNull(System.Object)">
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.ObjectExtensions.IsNull``1(``0)">
             <summary>
-            Просто обертка для красоты, проверяет равен ли объект null.
+            Simple check, that object is null
+            </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.ObjectExtensions.IsAnyOf``1(``0,``0[])">
+            <summary>
+            Simple check, that object is any of values by using the default equality comparer
             </summary>
         </member>
         <member name="M:ArtZilla.Sharp.Lib.Extensions.StringExtensions.IsBad(System.String)">
             <summary> Wrapper for <see cref="M:System.String.IsNullOrWhiteSpace(System.String)"/> </summary>
         </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.StringExtensions.IsGood(System.String)">
+            <summary> Wrapper for is not <see cref="M:System.String.IsNullOrWhiteSpace(System.String)"/> </summary>
+        </member>
         <member name="M:ArtZilla.Sharp.Lib.Extensions.StringExtensions.Like(System.String,System.String)">
-            <summary> Wrapper for <see cref="M:System.String.Equals(System.String,System.StringComparison)"/> with InvariantCultureIgnoreCase </summary>
+            <summary> Wrapper for <see cref="M:System.String.Equals(System.String,System.StringComparison)"/> with OrdinalIgnoreCase </summary>
         </member>
         <member name="M:ArtZilla.Sharp.Lib.Extensions.StringExtensions.ParseIntEx(System.String,System.Int32)">
             <summary>
@@ -59,6 +67,11 @@
             <param name="s">A string containing a number to convert.</param>
             <param name="defValue">Default value, returned if conversion failed. Default value <see cref="F:System.Int32.MinValue"/></param>
             <returns> When this method returns, result is the 32-bit signed integer value equivalent to the number contained in s, or defValue if can't parse number </returns>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.TypeExtensions.IsNullable(System.Type)">
+            <summary>
+            Return that null can be assigned to instance of this type.
+            </summary>
         </member>
         <member name="T:ArtZilla.Sharp.Lib.PInvoke.ShowWindowCommand">
             <summary>

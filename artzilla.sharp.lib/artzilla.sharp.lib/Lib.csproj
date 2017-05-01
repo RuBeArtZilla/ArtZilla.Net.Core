@@ -48,6 +48,7 @@
     <Compile Include="ConsoleExt\ConMenu.cs" />
     <Compile Include="ConsoleExt\ConMenuItem.cs" />
     <Compile Include="Experimental\VersionInfo.cs" />
+    <Compile Include="Extensions\Guard.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />

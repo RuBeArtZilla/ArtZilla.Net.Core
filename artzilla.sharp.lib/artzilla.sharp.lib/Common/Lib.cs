@@ -18,7 +18,7 @@ namespace ArtZilla.Sharp.Lib {
 		}
 		public FuncResult(Exception exception = null) {
 			Result = default(T);
-			Exception = exception; 
+			Exception = exception;
 		}
 	}
 

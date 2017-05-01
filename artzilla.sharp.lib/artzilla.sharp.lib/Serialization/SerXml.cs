@@ -57,7 +57,6 @@ namespace ArtZilla.Sharp.Lib.Serialization {
 		}
 
 		public static bool Save(string file, object item, bool append = false) {
-			// Будет исключение, если тип нельзя сериализовать в XML
 			var serializator = new XmlSerializer(item.GetType());
 
 			CreateIfNotExist(file);
@@ -67,13 +66,12 @@ namespace ArtZilla.Sharp.Lib.Serialization {
 					serializator.Serialize(fs, item);
 
 				return true;
-			} catch (Exception ex) {
+			} catch {
 				return false;
 			}
 		}
 
 		public static bool Save<T>(string file, T item, bool append = false) where T : class {
-			// Будет исключение, если тип нельзя сериализовать в XML
 			var serializator = new XmlSerializer(typeof(T));
 
 			CreateIfNotExist(file);
@@ -83,7 +81,7 @@ namespace ArtZilla.Sharp.Lib.Serialization {
 					serializator.Serialize(fs, item);
 
 				return true;
-			} catch (Exception ex) {
+			} catch {
 				return false;
 			}
 		}

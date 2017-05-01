@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace ArtZilla.Sharp.Lib.Extensions {
 	public static class StringExtensions {
@@ -29,7 +30,15 @@ namespace ArtZilla.Sharp.Lib.Extensions {
 		public static Double ParseDoubleEx(this String s, Double defValue = Double.NaN) {
 			Double val;
 			if (s.IsBad()) return defValue;
+			
 			return Double.TryParse(s, out val) ? val : defValue;
+		}
+
+		public static Double ParseDoubleEx(this String s, NumberStyles ns, IFormatProvider ifp, Double defValue = Double.NaN) {
+			Double val;
+			if (s.IsBad()) return defValue;
+
+			return Double.TryParse(s, ns, ifp, out val) ? val : defValue;
 		}
 
 		public static Boolean ParseBoolEx(this String s, Boolean defValue = false) {

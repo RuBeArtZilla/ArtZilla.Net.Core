@@ -16,7 +16,11 @@ namespace ArtZilla.Sharp.Lib.Extensions {
 		public static bool IsImplementIEnumerable(this Type type)
 				=> type.GetInterface("IEnumerable`1") != null;
 
+		/// <summary>
+		/// Return that null can be assigned to instance of this type.
+		/// </summary>
 		public static bool IsNullable(this Type type)
-				=> type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+			=> (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+			|| !type.IsValueType;
 	}
 }
