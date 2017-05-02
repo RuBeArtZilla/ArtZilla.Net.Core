@@ -56,6 +56,13 @@ namespace ArtZilla.Sharp.Lib.Serialization {
 			return res;
 		}
 
+		/// <summary>
+		/// Object serialization to file as XML
+		/// </summary>
+		/// <param name="file">Path to file</param>
+		/// <param name="item">Object to serialize</param>
+		/// <param name="append">Adding to end of file if true</param>
+		/// <returns>True if success</returns>
 		public static bool Save(string file, object item, bool append = false) {
 			var serializator = new XmlSerializer(item.GetType());
 
@@ -71,6 +78,13 @@ namespace ArtZilla.Sharp.Lib.Serialization {
 			}
 		}
 
+		/// <summary>
+		/// Object serialization to file as XML
+		/// </summary>
+		/// <param name="file">Path to file</param>
+		/// <param name="item">Object to serialize</param>
+		/// <param name="append">Adding to end of file if true</param>
+		/// <returns>True if success</returns>
 		public static bool Save<T>(string file, T item, bool append = false) where T : class {
 			var serializator = new XmlSerializer(typeof(T));
 

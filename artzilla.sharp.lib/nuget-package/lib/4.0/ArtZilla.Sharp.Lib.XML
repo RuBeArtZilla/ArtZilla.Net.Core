@@ -41,6 +41,80 @@
             <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
             <param name="action">The delegate that represents the code to repeat.</param>
         </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.InnerStop">
+            <summary>
+            Invoke this inside of repeated method to stop repeating 
+            </summary>
+        </member>
+        <member name="T:ArtZilla.Sharp.Lib.Extensions.Guard">
+            <summary>
+            Common methods for validating arguments
+            </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.Null``1(``0)">
+            <summary>
+            Check that parameter is null otherwise throw exception
+            </summary>
+            <param name="param"></param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter not null</exception>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.Null``1(``0,System.String)">
+            <summary>
+            Check that parameter is null otherwise throw exception
+            </summary>
+            <param name="param"></param>
+            <param name="paramName"></param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter not null</exception>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.NotNull``1(``0)">
+            <summary>
+            Check that parameter is not null otherwise throw exception
+            </summary>
+            <param name="param"></param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter is null</exception>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.NotNull``1(``0,System.String)">
+            <summary>
+            Check that parameter is not null otherwise throw exception
+            </summary>
+            <param name="param"></param>
+            <param name="paramName"></param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter is null</exception>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.HasAnyText(System.String)">
+            <summary>
+            Check that parameter has any text (not whitespace) symbol
+            </summary>
+            <param name="param"></param>
+            <exception cref="T:System.ArgumentException">Thrown when parameter don't contain any symbol exclude whitespace</exception>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.HasAnyText(System.String,System.String)">
+            <summary>
+            Check that parameter has any text (not whitespace) symbol
+            </summary>
+            <param name="param"></param>
+            <param name="paramName"></param>
+            <exception cref="T:System.ArgumentException">Thrown when parameter don't contain any symbol exclude whitespace</exception>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.NotEmpty``1(``0[])">
+            <summary>
+            Check that array contain any item
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="param"></param>
+            <exception cref="T:System.ArgumentException">Thrown when array is empty</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when array is null</exception>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.NotEmpty``1(``0[],System.String)">
+            <summary>
+            Check that array contain any item
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="param"></param>
+            <param name="paramName"></param>
+            <exception cref="T:System.ArgumentException">Thrown when array is empty</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when array is null</exception>
+        </member>
         <member name="M:ArtZilla.Sharp.Lib.Extensions.ObjectExtensions.IsNull``1(``0)">
             <summary>
             Simple check, that object is null
@@ -73,15 +147,59 @@
             Return that null can be assigned to instance of this type.
             </summary>
         </member>
+        <member name="T:ArtZilla.Sharp.Lib.Patterns.Disposable">
+            <summary>
+            Represent base IDisposable implementation
+            </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Patterns.Disposable.Finalize">
+            <summary>
+            Invoking Dispose method if needed
+            </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Patterns.Disposable.Dispose">
+            <summary>
+            Implementation of <see cref="T:System.IDisposable"/>
+            </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Patterns.Disposable.Dispose(System.Boolean)">
+            <summary>
+            Base Dispose method
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Patterns.Disposable.DisposeManaged">
+            <summary>
+            Disposing managed objects
+            </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Patterns.Disposable.DisposeUnmanaged">
+            <summary>
+            Disposing unmanaged objects and resources
+            </summary>
+        </member>
         <member name="T:ArtZilla.Sharp.Lib.PInvoke.ShowWindowCommand">
             <summary>
             Second argument for function <see cref="M:ArtZilla.Sharp.Lib.PInvoke.User32.ShowWindowAsync(System.IntPtr,System.Int32)"/> 
             </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Plugins.PluginDependency.#ctor(System.String,ArtZilla.Sharp.Lib.Plugins.VersionInfo)">
+        <member name="M:ArtZilla.Sharp.Lib.Serialization.SerXml.Save(System.String,System.Object,System.Boolean)">
             <summary>
-            Инициализирует новый экземпляр класса <see cref="T:System.Object"/>.
+            Object serialization to file as XML
             </summary>
+            <param name="file">Path to file</param>
+            <param name="item">Object to serialize</param>
+            <param name="append">Adding to end of file if true</param>
+            <returns>True if success</returns>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.Serialization.SerXml.Save``1(System.String,``0,System.Boolean)">
+            <summary>
+            Object serialization to file as XML
+            </summary>
+            <param name="file">Path to file</param>
+            <param name="item">Object to serialize</param>
+            <param name="append">Adding to end of file if true</param>
+            <returns>True if success</returns>
         </member>
     </members>
 </doc>

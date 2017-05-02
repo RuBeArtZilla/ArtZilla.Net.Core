@@ -85,6 +85,9 @@ namespace ArtZilla.Sharp.Lib {
 		public BackgroundRepeater(Action<CancellationToken> action)
 			=> _action = action ?? throw new ArgumentNullException();
 
+		/// <summary>
+		/// Invoke this inside of repeated method to stop repeating 
+		/// </summary>
 		public static void InnerStop() =>
 			throw new OperationCanceledException(StopGuid);
 

@@ -99,6 +99,10 @@
       <Project>{f6773f6a-3bf9-469e-8349-74a3e0ef18ff}</Project>
       <Name>Lib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DevLib\DevLib.csproj">
+      <Project>{cc069e8e-5344-446c-a58e-64c89436c2a2}</Project>
+      <Name>DevLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
