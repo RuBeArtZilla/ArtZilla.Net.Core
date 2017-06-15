@@ -2,13 +2,13 @@
 <package>
   <metadata>
     <id>ArtZilla.Sharp.Lib</id>
-    <version>1.1.0.2</version>
+    <version>1.1.0.3</version>
     <authors>Artyom Fomin (ArtZilla)</authors>
     <description>Common library</description>
     <language>en-US</language>
-    <licenseUrl>http://files.artzilla.name/ArtZilla.Sharp.Lib.License.txt</licenseUrl>
-    <projectUrl>http://files.artzilla.name/nuget/</projectUrl>
-    <iconUrl>http://files.artzilla.name/nuget/ArtZilla.Sharp.Lib.png</iconUrl>
+    <licenseUrl>https://files.artzilla.name/ArtZilla.Sharp.Lib/License.txt</licenseUrl>
+    <projectUrl>https://files.artzilla.name/ArtZilla.Sharp.Lib/</projectUrl>
+    <iconUrl>https://files.artzilla.name/ArtZilla.Sharp.Lib/Icon.png</iconUrl>
     <copyright>Copyright (c) 2016-2017 Artyom Fomin</copyright>
     <tags>Common, C#</tags>
   </metadata>

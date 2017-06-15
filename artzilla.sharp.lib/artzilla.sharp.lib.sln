@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.0
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "artzilla.sharp.lib\Lib.csproj", "{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}"
 EndProject
@@ -12,6 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "artzilla.sharp.lib.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CDBD91B8-A462-4693-AE43-85A9C6A21A9A}"
 	ProjectSection(SolutionItems) = preProject
+		nuget-package\ArtZilla.Net.nuspec = nuget-package\ArtZilla.Net.nuspec
 		nuget-package\ArtZilla.Sharp.Lib.nuspec = nuget-package\ArtZilla.Sharp.Lib.nuspec
 		..\LICENSE = ..\LICENSE
 		SolutionInfo.cs = SolutionInfo.cs

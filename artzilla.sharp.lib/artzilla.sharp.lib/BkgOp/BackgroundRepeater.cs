@@ -10,16 +10,71 @@ namespace ArtZilla.Sharp.Lib {
 		private const String StopGuid = "{B098C6A3-C478-4E2B-969A-36B5F6D0B780}";
 
 		/// <summary> Default value of <see cref="Cooldown"/> in milliseconds </summary>
-		public const Double DefaultCooldownMs = 1000D;
+		public const Double DefaultCooldownMsec = 1000D;
 
 		/// <summary> Default value of <see cref="IsCatchExceptions"/></summary>
 		public const Boolean DefaultIsCatchExceptions = true;
 
 		/// <summary> Period between repeating background operation </summary>
-		public TimeSpan Cooldown { get; set; } = TimeSpan.FromMilliseconds(DefaultCooldownMs);
+		public TimeSpan Cooldown {
+			get { return _cooldown; }
+			set { _cooldown = CheckCooldown(value) ? value : throw new ArgumentOutOfRangeException(nameof(Cooldown)); }
+		}
 
 		/// <summary> When true any exception from repeated operation will be ignored </summary>
 		public Boolean IsCatchExceptions { get; set; } = DefaultIsCatchExceptions;
+
+		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
+		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+		/// <param name="action">The delegate that represents the code to repeat.</param>
+		public BackgroundRepeater(Action action) : this(t => Cancelable(action, t)) {
+			if (action == null)
+				throw new ArgumentNullException(nameof(action));
+		}
+
+		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
+		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+		/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
+		/// <param name="action">The delegate that represents the code to repeat.</param>
+		/// <param name="cooldown">Period between repeating background operation.</param>
+		public BackgroundRepeater(Action action, TimeSpan cooldown) : this(t => Cancelable(action, t), cooldown) {
+			if (action == null)
+				throw new ArgumentNullException(nameof(action));
+		}
+
+		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
+		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+		/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
+		/// <param name="action">The delegate that represents the code to repeat.</param>
+		/// <param name="cooldown">Period between repeating background operation.</param>
+		/// <param name="isStarted">Initial state of the repeater</param>
+		public BackgroundRepeater(Action action, TimeSpan cooldown, bool isStarted) : this(t => Cancelable(action, t), cooldown, isStarted) {
+			if (action == null)
+				throw new ArgumentNullException(nameof(action));
+		}
+
+		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+		/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
+		/// <param name="action">The delegate that represents the code to repeat.</param>
+		/// <param name="cooldown">Period between repeating background operation.</param>
+		/// <param name="isStarted">Initial state of the repeater</param>
+		public BackgroundRepeater(Action<CancellationToken> action, TimeSpan cooldown, bool isStarted) : this(action, cooldown)
+			=> Enabled(isStarted);
+
+		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+		/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
+		/// <param name="action">The delegate that represents the code to repeat.</param>
+		/// <param name="cooldown">Period between repeating background operation.</param>
+		public BackgroundRepeater(Action<CancellationToken> action, TimeSpan cooldown) : this(action)
+			=> Cooldown = cooldown;
+
+		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+		/// <param name="action">The delegate that represents the code to repeat.</param>
+		public BackgroundRepeater(Action<CancellationToken> action)
+			=> _action = action ?? throw new ArgumentNullException(nameof(action));
 
 		/// <summary> Set repeater on/off </summary>
 		public void Enabled(Boolean value) { // todo: write test?
@@ -71,25 +126,11 @@ namespace ArtZilla.Sharp.Lib {
 				return _cts != null;
 		}
 
-		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
-		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
-		/// <param name="action">The delegate that represents the code to repeat.</param>
-		public BackgroundRepeater(Action action) : this(t => Cancelable(action, t)) {
-			if (action == null)
-				throw new ArgumentNullException();
-		}
-
-		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
-		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
-		/// <param name="action">The delegate that represents the code to repeat.</param>
-		public BackgroundRepeater(Action<CancellationToken> action)
-			=> _action = action ?? throw new ArgumentNullException();
-
-		/// <summary>
-		/// Invoke this inside of repeated method to stop repeating 
-		/// </summary>
+		/// <summary> Invoke this inside of repeated method to stop repeating </summary>
 		public static void InnerStop() =>
 			throw new OperationCanceledException(StopGuid);
+
+		private static bool CheckCooldown(TimeSpan cooldown) => cooldown >= TimeSpan.Zero;
 
 		private static void Cancelable(Action action, CancellationToken token) {
 			Debug.Assert(action != null, "action != null");
@@ -139,6 +180,7 @@ namespace ArtZilla.Sharp.Lib {
 		}
 
 		private Thread _thread;
+		private TimeSpan _cooldown = TimeSpan.FromMilliseconds(DefaultCooldownMsec);
 		private CancellationTokenSource _cts;
 		private readonly Object _sync = new Object();
 		private readonly Action<CancellationToken> _action;

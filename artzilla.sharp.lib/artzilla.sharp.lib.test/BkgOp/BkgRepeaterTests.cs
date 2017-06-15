@@ -48,27 +48,38 @@ namespace ArtZilla.Sharp.Lib.Test {
 
 		[TestMethod, Timeout(5000)]
 		public void WrongArguments() {
+			Action action = () => { };
+			Action nullAction = null;
+
+			Action<CancellationToken> cancellableAction = t => { };
+			Action<CancellationToken> nullCancellableAction = null;
+
+			ShouldFailOnCreate(() => new BackgroundRepeater(nullAction));
+			ShouldFailOnCreate(() => new BackgroundRepeater(nullCancellableAction));
+
+			ShouldFailOnCreate(() => new BackgroundRepeater(action, TimeSpan.FromSeconds(-1D)));
+			ShouldFailOnCreate(() => new BackgroundRepeater(cancellableAction, TimeSpan.FromSeconds(-1D)));
+
+			var shouldBeCreated = new[]{
+				new BackgroundRepeater(action, TimeSpan.Zero, true),
+				new BackgroundRepeater(action, TimeSpan.Zero, false),
+
+				new BackgroundRepeater(cancellableAction, TimeSpan.Zero, true),
+				new BackgroundRepeater(cancellableAction, TimeSpan.Zero, false),
+			};
+		}
+
+		private void ShouldFailOnCreate(Func<BackgroundRepeater> factory, string message = null){
+			var isFailed = false;
 			try {
-				Action a = null;
-				var bkg = new BackgroundRepeater(a);
-				Console.WriteLine("Wtf??");
-				bkg.Start();
-				Console.WriteLine("Wtf??!!!");
-				Assert.Fail("Where ArgumentNullException?");
-			} catch (ArgumentNullException) {
-				Console.WriteLine("OK: Action == null");
+				var repeater = factory();
+			} catch (Exception e) {
+				isFailed = true;
+				Console.WriteLine("Constructor's exception: " + e.Message);
 			}
 
-			try {
-				Action<CancellationToken> a = null;
-				var bkg = new BackgroundRepeater(a);
-				Console.WriteLine("Wtf?? (2)");
-				bkg.Start();
-				Console.WriteLine("Wtf??!!! (2)");
-				Assert.Fail("Where ArgumentNullException? (2)");
-			} catch (ArgumentNullException) {
-				Console.WriteLine("OK: Action<CancellationToken> == null");
-			}
+			if (!isFailed)
+				Assert.Fail(message ?? "Constructor successfully invoked with wrong arguments");
 		}
 
 

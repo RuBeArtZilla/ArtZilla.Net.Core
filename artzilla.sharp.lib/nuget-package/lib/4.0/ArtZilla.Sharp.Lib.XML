@@ -7,7 +7,7 @@
         <member name="T:ArtZilla.Sharp.Lib.BackgroundRepeater">
             <summary> Represent a background repeated action </summary>
         </member>
-        <member name="F:ArtZilla.Sharp.Lib.BackgroundRepeater.DefaultCooldownMs">
+        <member name="F:ArtZilla.Sharp.Lib.BackgroundRepeater.DefaultCooldownMsec">
             <summary> Default value of <see cref="P:ArtZilla.Sharp.Lib.BackgroundRepeater.Cooldown"/> in milliseconds </summary>
         </member>
         <member name="F:ArtZilla.Sharp.Lib.BackgroundRepeater.DefaultIsCatchExceptions">
@@ -18,6 +18,46 @@
         </member>
         <member name="P:ArtZilla.Sharp.Lib.BackgroundRepeater.IsCatchExceptions">
             <summary> When true any exception from repeated operation will be ignored </summary>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action)">
+            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified action to repeat. </summary>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+            <param name="action">The delegate that represents the code to repeat.</param>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action,System.TimeSpan)">
+            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified action to repeat. </summary>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
+            <param name="action">The delegate that represents the code to repeat.</param>
+            <param name="cooldown">Period between repeating background operation.</param>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action,System.TimeSpan,System.Boolean)">
+            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified action to repeat. </summary>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
+            <param name="action">The delegate that represents the code to repeat.</param>
+            <param name="cooldown">Period between repeating background operation.</param>
+            <param name="isStarted">Initial state of the repeater</param>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action{System.Threading.CancellationToken},System.TimeSpan,System.Boolean)">
+            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
+            <param name="action">The delegate that represents the code to repeat.</param>
+            <param name="cooldown">Period between repeating background operation.</param>
+            <param name="isStarted">Initial state of the repeater</param>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action{System.Threading.CancellationToken},System.TimeSpan)">
+            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
+            <param name="action">The delegate that represents the code to repeat.</param>
+            <param name="cooldown">Period between repeating background operation.</param>
+        </member>
+        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action{System.Threading.CancellationToken})">
+            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+            <param name="action">The delegate that represents the code to repeat.</param>
         </member>
         <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.Enabled(System.Boolean)">
             <summary> Set repeater on/off </summary>
@@ -31,20 +71,8 @@
         <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.IsStarted">
             <summary> Gets a value indicating the execution status of current <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action)">
-            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified action to repeat. </summary>
-            <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
-            <param name="action">The delegate that represents the code to repeat.</param>
-        </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action{System.Threading.CancellationToken})">
-            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
-            <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
-            <param name="action">The delegate that represents the code to repeat.</param>
-        </member>
         <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.InnerStop">
-            <summary>
-            Invoke this inside of repeated method to stop repeating 
-            </summary>
+            <summary> Invoke this inside of repeated method to stop repeating </summary>
         </member>
         <member name="T:ArtZilla.Sharp.Lib.Extensions.Guard">
             <summary>
@@ -146,6 +174,15 @@
             <summary>
             Return that null can be assigned to instance of this type.
             </summary>
+        </member>
+        <member name="T:ArtZilla.Sharp.Lib.Interfaces.IRunnable">
+            <summary>Запускаемый класс</summary>
+        </member>
+        <member name="T:ArtZilla.Sharp.Lib.Interfaces.Runnable">
+            <summary> Not ready for work. Untested. </summary>
+        </member>
+        <member name="T:ArtZilla.Sharp.Lib.Interfaces.RunnableAndPausable">
+            <summary> Not ready for work. Untested. </summary>
         </member>
         <member name="T:ArtZilla.Sharp.Lib.Patterns.Disposable">
             <summary>
