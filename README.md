@@ -1,3 +1,3 @@
-# artzilla.sharp.lib
-Common library for .NET C#
+# ArtZilla.Net.Core
+Common library for .NET 4.0
 
