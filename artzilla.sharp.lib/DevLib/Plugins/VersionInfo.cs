@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 
-namespace ArtZilla.Sharp.Lib.Plugins {
+namespace ArtZilla.Net.Core.Plugins {
 	[Serializable]
 	public class VersionInfo {
 		public const string Delimeter = ".";

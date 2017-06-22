@@ -1,7 +1,7 @@
-﻿using ArtZilla.Sharp.Lib.Experimental;
+﻿using ArtZilla.Net.Core.Experimental;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArtZilla.Sharp.Lib.Test.Plugins {
+namespace ArtZilla.Net.Core.Test.Plugins {
 	[TestClass]
 	public class VersionTest {
 		[TestMethod]

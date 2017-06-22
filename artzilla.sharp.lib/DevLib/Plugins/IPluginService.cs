@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ArtZilla.Sharp.Lib.Plugins {
+namespace ArtZilla.Net.Core.Plugins {
 	public interface IPluginService : IDisposable {
 		IEnumerable<IPlugin> Plugins { get; }
 

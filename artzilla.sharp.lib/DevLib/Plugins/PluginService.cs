@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using ArtZilla.Sharp.Lib.Extensions;
-using ArtZilla.Sharp.Lib.Patterns;
-using ArtZilla.Sharp.Lib.Serialization;
+using ArtZilla.Net.Core.Extensions;
+using ArtZilla.Net.Core.Patterns;
+using ArtZilla.Net.Core.Serialization;
 
-namespace ArtZilla.Sharp.Lib.Plugins {
+namespace ArtZilla.Net.Core.Plugins {
 	public class PluginService : Disposable, IPluginService {
 		public const string DefaultConfigPath = "configuration";
 		public const string DefaultPluginPath = "plugins";

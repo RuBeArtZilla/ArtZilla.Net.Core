@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArtZilla.Sharp.Lib.Patterns {
+namespace ArtZilla.Net.Core.Patterns {
 	/// <summary>
 	/// Represent base IDisposable implementation
 	/// </summary>

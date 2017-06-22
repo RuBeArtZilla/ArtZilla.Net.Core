@@ -1,7 +1,7 @@
 ﻿using System;
-using ArtZilla.Sharp.Lib.Patterns;
+using ArtZilla.Net.Core.Patterns;
 
-namespace ArtZilla.Sharp.Lib.Plugins {
+namespace ArtZilla.Net.Core.Plugins {
 	public abstract class APlugin : Disposable, IPlugin {
 		public virtual string Name { get; protected set; } = "Unknown";
 

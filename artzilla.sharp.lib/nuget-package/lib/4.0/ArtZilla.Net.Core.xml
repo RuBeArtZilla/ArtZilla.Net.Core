@@ -1,92 +1,92 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>ArtZilla.Sharp.Lib</name>
+        <name>ArtZilla.Net.Core</name>
     </assembly>
     <members>
-        <member name="T:ArtZilla.Sharp.Lib.BackgroundRepeater">
+        <member name="T:ArtZilla.Net.Core.BackgroundRepeater">
             <summary> Represent a background repeated action </summary>
         </member>
-        <member name="F:ArtZilla.Sharp.Lib.BackgroundRepeater.DefaultCooldownMsec">
-            <summary> Default value of <see cref="P:ArtZilla.Sharp.Lib.BackgroundRepeater.Cooldown"/> in milliseconds </summary>
+        <member name="F:ArtZilla.Net.Core.BackgroundRepeater.DefaultCooldownMsec">
+            <summary> Default value of <see cref="P:ArtZilla.Net.Core.BackgroundRepeater.Cooldown"/> in milliseconds </summary>
         </member>
-        <member name="F:ArtZilla.Sharp.Lib.BackgroundRepeater.DefaultIsCatchExceptions">
-            <summary> Default value of <see cref="P:ArtZilla.Sharp.Lib.BackgroundRepeater.IsCatchExceptions"/></summary>
+        <member name="F:ArtZilla.Net.Core.BackgroundRepeater.DefaultIsCatchExceptions">
+            <summary> Default value of <see cref="P:ArtZilla.Net.Core.BackgroundRepeater.IsCatchExceptions"/></summary>
         </member>
-        <member name="P:ArtZilla.Sharp.Lib.BackgroundRepeater.Cooldown">
+        <member name="P:ArtZilla.Net.Core.BackgroundRepeater.Cooldown">
             <summary> Period between repeating background operation </summary>
         </member>
-        <member name="P:ArtZilla.Sharp.Lib.BackgroundRepeater.IsCatchExceptions">
+        <member name="P:ArtZilla.Net.Core.BackgroundRepeater.IsCatchExceptions">
             <summary> When true any exception from repeated operation will be ignored </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action)">
-            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified action to repeat. </summary>
+        <member name="M:ArtZilla.Net.Core.BackgroundRepeater.#ctor(System.Action)">
+            <summary> Initializes a new <see cref="T:ArtZilla.Net.Core.BackgroundRepeater"/> with specified action to repeat. </summary>
             <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
             <param name="action">The delegate that represents the code to repeat.</param>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action,System.TimeSpan)">
-            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified action to repeat. </summary>
-            <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
-            <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
-            <param name="action">The delegate that represents the code to repeat.</param>
-            <param name="cooldown">Period between repeating background operation.</param>
-        </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action,System.TimeSpan,System.Boolean)">
-            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified action to repeat. </summary>
+        <member name="M:ArtZilla.Net.Core.BackgroundRepeater.#ctor(System.Action,System.TimeSpan)">
+            <summary> Initializes a new <see cref="T:ArtZilla.Net.Core.BackgroundRepeater"/> with specified action to repeat. </summary>
             <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
             <param name="action">The delegate that represents the code to repeat.</param>
             <param name="cooldown">Period between repeating background operation.</param>
-            <param name="isStarted">Initial state of the repeater</param>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action{System.Threading.CancellationToken},System.TimeSpan,System.Boolean)">
-            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+        <member name="M:ArtZilla.Net.Core.BackgroundRepeater.#ctor(System.Action,System.TimeSpan,System.Boolean)">
+            <summary> Initializes a new <see cref="T:ArtZilla.Net.Core.BackgroundRepeater"/> with specified action to repeat. </summary>
             <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
             <param name="action">The delegate that represents the code to repeat.</param>
             <param name="cooldown">Period between repeating background operation.</param>
             <param name="isStarted">Initial state of the repeater</param>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action{System.Threading.CancellationToken},System.TimeSpan)">
-            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+        <member name="M:ArtZilla.Net.Core.BackgroundRepeater.#ctor(System.Action{System.Threading.CancellationToken},System.TimeSpan,System.Boolean)">
+            <summary> Initializes a new <see cref="T:ArtZilla.Net.Core.BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
+            <param name="action">The delegate that represents the code to repeat.</param>
+            <param name="cooldown">Period between repeating background operation.</param>
+            <param name="isStarted">Initial state of the repeater</param>
+        </member>
+        <member name="M:ArtZilla.Net.Core.BackgroundRepeater.#ctor(System.Action{System.Threading.CancellationToken},System.TimeSpan)">
+            <summary> Initializes a new <see cref="T:ArtZilla.Net.Core.BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
             <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
             <param name="action">The delegate that represents the code to repeat.</param>
             <param name="cooldown">Period between repeating background operation.</param>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.#ctor(System.Action{System.Threading.CancellationToken})">
-            <summary> Initializes a new <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+        <member name="M:ArtZilla.Net.Core.BackgroundRepeater.#ctor(System.Action{System.Threading.CancellationToken})">
+            <summary> Initializes a new <see cref="T:ArtZilla.Net.Core.BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
             <exception cref="T:System.ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
             <param name="action">The delegate that represents the code to repeat.</param>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.Enabled(System.Boolean)">
+        <member name="M:ArtZilla.Net.Core.BackgroundRepeater.Enabled(System.Boolean)">
             <summary> Set repeater on/off </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.Start">
+        <member name="M:ArtZilla.Net.Core.BackgroundRepeater.Start">
             <summary> Start repeating </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.Stop">
+        <member name="M:ArtZilla.Net.Core.BackgroundRepeater.Stop">
             <summary> Stop repeating </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.IsStarted">
-            <summary> Gets a value indicating the execution status of current <see cref="T:ArtZilla.Sharp.Lib.BackgroundRepeater"/> </summary>
+        <member name="M:ArtZilla.Net.Core.BackgroundRepeater.IsStarted">
+            <summary> Gets a value indicating the execution status of current <see cref="T:ArtZilla.Net.Core.BackgroundRepeater"/> </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.BackgroundRepeater.InnerStop">
+        <member name="M:ArtZilla.Net.Core.BackgroundRepeater.InnerStop">
             <summary> Invoke this inside of repeated method to stop repeating </summary>
         </member>
-        <member name="T:ArtZilla.Sharp.Lib.Extensions.Guard">
+        <member name="T:ArtZilla.Net.Core.Extensions.Guard">
             <summary>
             Common methods for validating arguments
             </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.Null``1(``0)">
+        <member name="M:ArtZilla.Net.Core.Extensions.Guard.Null``1(``0)">
             <summary>
             Check that parameter is null otherwise throw exception
             </summary>
             <param name="param"></param>
             <exception cref="T:System.ArgumentNullException">Thrown when parameter not null</exception>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.Null``1(``0,System.String)">
+        <member name="M:ArtZilla.Net.Core.Extensions.Guard.Null``1(``0,System.String)">
             <summary>
             Check that parameter is null otherwise throw exception
             </summary>
@@ -94,14 +94,14 @@
             <param name="paramName"></param>
             <exception cref="T:System.ArgumentNullException">Thrown when parameter not null</exception>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.NotNull``1(``0)">
+        <member name="M:ArtZilla.Net.Core.Extensions.Guard.NotNull``1(``0)">
             <summary>
             Check that parameter is not null otherwise throw exception
             </summary>
             <param name="param"></param>
             <exception cref="T:System.ArgumentNullException">Thrown when parameter is null</exception>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.NotNull``1(``0,System.String)">
+        <member name="M:ArtZilla.Net.Core.Extensions.Guard.NotNull``1(``0,System.String)">
             <summary>
             Check that parameter is not null otherwise throw exception
             </summary>
@@ -109,14 +109,14 @@
             <param name="paramName"></param>
             <exception cref="T:System.ArgumentNullException">Thrown when parameter is null</exception>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.HasAnyText(System.String)">
+        <member name="M:ArtZilla.Net.Core.Extensions.Guard.HasAnyText(System.String)">
             <summary>
             Check that parameter has any text (not whitespace) symbol
             </summary>
             <param name="param"></param>
             <exception cref="T:System.ArgumentException">Thrown when parameter don't contain any symbol exclude whitespace</exception>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.HasAnyText(System.String,System.String)">
+        <member name="M:ArtZilla.Net.Core.Extensions.Guard.HasAnyText(System.String,System.String)">
             <summary>
             Check that parameter has any text (not whitespace) symbol
             </summary>
@@ -124,7 +124,7 @@
             <param name="paramName"></param>
             <exception cref="T:System.ArgumentException">Thrown when parameter don't contain any symbol exclude whitespace</exception>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.NotEmpty``1(``0[])">
+        <member name="M:ArtZilla.Net.Core.Extensions.Guard.NotEmpty``1(``0[])">
             <summary>
             Check that array contain any item
             </summary>
@@ -133,7 +133,7 @@
             <exception cref="T:System.ArgumentException">Thrown when array is empty</exception>
             <exception cref="T:System.ArgumentNullException">Thrown when array is null</exception>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.Guard.NotEmpty``1(``0[],System.String)">
+        <member name="M:ArtZilla.Net.Core.Extensions.Guard.NotEmpty``1(``0[],System.String)">
             <summary>
             Check that array contain any item
             </summary>
@@ -143,26 +143,26 @@
             <exception cref="T:System.ArgumentException">Thrown when array is empty</exception>
             <exception cref="T:System.ArgumentNullException">Thrown when array is null</exception>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.ObjectExtensions.IsNull``1(``0)">
+        <member name="M:ArtZilla.Net.Core.Extensions.ObjectExtensions.IsNull``1(``0)">
             <summary>
             Simple check, that object is null
             </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.ObjectExtensions.IsAnyOf``1(``0,``0[])">
+        <member name="M:ArtZilla.Net.Core.Extensions.ObjectExtensions.IsAnyOf``1(``0,``0[])">
             <summary>
             Simple check, that object is any of values by using the default equality comparer
             </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.StringExtensions.IsBad(System.String)">
+        <member name="M:ArtZilla.Net.Core.Extensions.StringExtensions.IsBad(System.String)">
             <summary> Wrapper for <see cref="M:System.String.IsNullOrWhiteSpace(System.String)"/> </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.StringExtensions.IsGood(System.String)">
+        <member name="M:ArtZilla.Net.Core.Extensions.StringExtensions.IsGood(System.String)">
             <summary> Wrapper for is not <see cref="M:System.String.IsNullOrWhiteSpace(System.String)"/> </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.StringExtensions.Like(System.String,System.String)">
+        <member name="M:ArtZilla.Net.Core.Extensions.StringExtensions.Like(System.String,System.String)">
             <summary> Wrapper for <see cref="M:System.String.Equals(System.String,System.StringComparison)"/> with OrdinalIgnoreCase </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.StringExtensions.ParseIntEx(System.String,System.Int32)">
+        <member name="M:ArtZilla.Net.Core.Extensions.StringExtensions.ParseIntEx(System.String,System.Int32)">
             <summary>
             	Converts the string representation of a number to its 32-bit signed integer equivalent, or default value
             </summary>
@@ -170,57 +170,57 @@
             <param name="defValue">Default value, returned if conversion failed. Default value <see cref="F:System.Int32.MinValue"/></param>
             <returns> When this method returns, result is the 32-bit signed integer value equivalent to the number contained in s, or defValue if can't parse number </returns>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Extensions.TypeExtensions.IsNullable(System.Type)">
+        <member name="M:ArtZilla.Net.Core.Extensions.TypeExtensions.IsNullable(System.Type)">
             <summary>
             Return that null can be assigned to instance of this type.
             </summary>
         </member>
-        <member name="T:ArtZilla.Sharp.Lib.Interfaces.IRunnable">
+        <member name="T:ArtZilla.Net.Core.Interfaces.IRunnable">
             <summary>Запускаемый класс</summary>
         </member>
-        <member name="T:ArtZilla.Sharp.Lib.Interfaces.Runnable">
+        <member name="T:ArtZilla.Net.Core.Interfaces.Runnable">
             <summary> Not ready for work. Untested. </summary>
         </member>
-        <member name="T:ArtZilla.Sharp.Lib.Interfaces.RunnableAndPausable">
+        <member name="T:ArtZilla.Net.Core.Interfaces.RunnableAndPausable">
             <summary> Not ready for work. Untested. </summary>
         </member>
-        <member name="T:ArtZilla.Sharp.Lib.Patterns.Disposable">
+        <member name="T:ArtZilla.Net.Core.Patterns.Disposable">
             <summary>
             Represent base IDisposable implementation
             </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Patterns.Disposable.Finalize">
+        <member name="M:ArtZilla.Net.Core.Patterns.Disposable.Finalize">
             <summary>
             Invoking Dispose method if needed
             </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Patterns.Disposable.Dispose">
+        <member name="M:ArtZilla.Net.Core.Patterns.Disposable.Dispose">
             <summary>
             Implementation of <see cref="T:System.IDisposable"/>
             </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Patterns.Disposable.Dispose(System.Boolean)">
+        <member name="M:ArtZilla.Net.Core.Patterns.Disposable.Dispose(System.Boolean)">
             <summary>
             Base Dispose method
             </summary>
             <param name="disposing"></param>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Patterns.Disposable.DisposeManaged">
+        <member name="M:ArtZilla.Net.Core.Patterns.Disposable.DisposeManaged">
             <summary>
             Disposing managed objects
             </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Patterns.Disposable.DisposeUnmanaged">
+        <member name="M:ArtZilla.Net.Core.Patterns.Disposable.DisposeUnmanaged">
             <summary>
             Disposing unmanaged objects and resources
             </summary>
         </member>
-        <member name="T:ArtZilla.Sharp.Lib.PInvoke.ShowWindowCommand">
+        <member name="T:ArtZilla.Net.Core.PInvoke.ShowWindowCommand">
             <summary>
-            Second argument for function <see cref="M:ArtZilla.Sharp.Lib.PInvoke.User32.ShowWindowAsync(System.IntPtr,System.Int32)"/> 
+            Second argument for function <see cref="M:ArtZilla.Net.Core.PInvoke.User32.ShowWindowAsync(System.IntPtr,System.Int32)"/> 
             </summary>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Serialization.SerXml.Save(System.String,System.Object,System.Boolean)">
+        <member name="M:ArtZilla.Net.Core.Serialization.SerXml.Save(System.String,System.Object,System.Boolean)">
             <summary>
             Object serialization to file as XML
             </summary>
@@ -229,7 +229,7 @@
             <param name="append">Adding to end of file if true</param>
             <returns>True if success</returns>
         </member>
-        <member name="M:ArtZilla.Sharp.Lib.Serialization.SerXml.Save``1(System.String,``0,System.Boolean)">
+        <member name="M:ArtZilla.Net.Core.Serialization.SerXml.Save``1(System.String,``0,System.Boolean)">
             <summary>
             Object serialization to file as XML
             </summary>

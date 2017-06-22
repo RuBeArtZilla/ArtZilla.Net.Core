@@ -1,5 +1,5 @@
 ﻿using System;
-using ArtZilla.Sharp.Lib.Plugins;
+using ArtZilla.Net.Core.Plugins;
 
 namespace Plugin {
 	public class TestType { }

@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace ArtZilla.Sharp.Lib.PInvoke {
+namespace ArtZilla.Net.Core.PInvoke {
 	public static class Kernel32 {
 		public const String DllName = "kernel32.dll";
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
-using ArtZilla.Sharp.Lib.Extensions;
+using ArtZilla.Net.Core.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArtZilla.Sharp.Lib.Test.Extensions {
+namespace ArtZilla.Net.Core.Test.Extensions {
 	[TestClass]
 	public class StringExtTest {
 		private static readonly String ExampleEmpty = String.Empty;

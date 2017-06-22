@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArtZilla.Sharp.Lib.Extensions {
+namespace ArtZilla.Net.Core.Extensions {
 	/// <summary>
 	/// Common methods for validating arguments
 	/// </summary>

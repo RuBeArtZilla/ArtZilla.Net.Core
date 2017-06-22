@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace ArtZilla.Sharp.Lib.PInvoke {
+namespace ArtZilla.Net.Core.PInvoke {
 
 	public class Advapi32 {
 		[Flags]

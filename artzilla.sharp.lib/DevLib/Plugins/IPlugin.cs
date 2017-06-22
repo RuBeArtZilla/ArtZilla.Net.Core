@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Management.Instrumentation;
 
-namespace ArtZilla.Sharp.Lib.Plugins {
+namespace ArtZilla.Net.Core.Plugins {
 	public interface IPlugin : IDisposable {
 		string Name { get; }
 

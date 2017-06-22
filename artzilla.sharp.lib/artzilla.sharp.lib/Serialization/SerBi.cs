@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using ArtZilla.Sharp.Lib.Extensions;
+using ArtZilla.Net.Core.Extensions;
 
-namespace ArtZilla.Sharp.Lib.Serialization {
+namespace ArtZilla.Net.Core.Serialization {
 	public class SerBi {
 		public static List<T> Load<T>(string file, bool clear = false) where T : class {
 			var serializator = new BinaryFormatter();

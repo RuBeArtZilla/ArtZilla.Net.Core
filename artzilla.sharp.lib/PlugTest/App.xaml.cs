@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
-using ArtZilla.Sharp.Lib.Plugins;
+using ArtZilla.Net.Core.Plugins;
 
 namespace PlugTest {
 	/// <summary>

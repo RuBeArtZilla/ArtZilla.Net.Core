@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ArtZilla.Sharp.Lib {
+namespace ArtZilla.Net.Core {
 	/// <summary> Represent a background repeated action </summary>
 	public class BackgroundRepeater {
 		private const String StopGuid = "{B098C6A3-C478-4E2B-969A-36B5F6D0B780}";

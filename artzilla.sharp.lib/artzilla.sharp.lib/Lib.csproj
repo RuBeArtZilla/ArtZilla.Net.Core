@@ -7,8 +7,8 @@
     <ProjectGuid>{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ArtZilla.Sharp.Lib</RootNamespace>
-    <AssemblyName>ArtZilla.Sharp.Lib</AssemblyName>
+    <RootNamespace>ArtZilla.Net.Core</RootNamespace>
+    <AssemblyName>ArtZilla.Net.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -28,7 +28,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\nuget-package\lib\4.0\ArtZilla.Sharp.Lib.XML</DocumentationFile>
+    <DocumentationFile>..\nuget-package\lib\4.0\ArtZilla.Net.Core.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

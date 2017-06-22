@@ -1,10 +1,10 @@
 ﻿using System;
-using ArtZilla.Sharp.Lib.Extensions;
-using ArtZilla.Sharp.Lib.Test.Common;
+using ArtZilla.Net.Core.Extensions;
+using ArtZilla.Net.Core.Test.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static ArtZilla.Sharp.Lib.Test.Common.Constants;
+using static ArtZilla.Net.Core.Test.Common.Constants;
 
-namespace ArtZilla.Sharp.Lib.Test.Extensions {
+namespace ArtZilla.Net.Core.Test.Extensions {
 	[TestClass]
 	public class GuardTests {
 		[TestMethod]

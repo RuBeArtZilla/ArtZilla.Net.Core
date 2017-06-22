@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArtZilla.Sharp.Lib.Plugins {
+namespace ArtZilla.Net.Core.Plugins {
 	[Serializable]
 	public class PluginConfig { }
 }

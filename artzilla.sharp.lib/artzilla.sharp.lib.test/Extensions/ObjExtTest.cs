@@ -1,8 +1,8 @@
 ﻿using System;
-using ArtZilla.Sharp.Lib.Extensions;
+using ArtZilla.Net.Core.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArtZilla.Sharp.Lib.Test.Extensions {
+namespace ArtZilla.Net.Core.Test.Extensions {
 	[TestClass]
 	public class ObjExtTest {
 		[TestMethod]

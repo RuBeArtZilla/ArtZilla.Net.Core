@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ArtZilla.Sharp.Lib.Experimental {
+namespace ArtZilla.Net.Core.Experimental {
 	public struct VersionInfo {
 		public const String Delimeter = ".";
 

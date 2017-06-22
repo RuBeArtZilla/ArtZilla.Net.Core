@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace ArtZilla.Sharp.Lib.Extensions {
+namespace ArtZilla.Net.Core.Extensions {
 	public static class ObjectExtensions {
 		/// <summary>
 		/// Simple check, that object is null

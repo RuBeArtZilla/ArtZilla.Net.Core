@@ -2,7 +2,7 @@
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArtZilla.Sharp.Lib.Test {
+namespace ArtZilla.Net.Core.Test {
 	[TestClass]
 	public class LibTests {
 		[TestMethod]

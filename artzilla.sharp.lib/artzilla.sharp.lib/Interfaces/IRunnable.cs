@@ -1,6 +1,6 @@
-﻿using ArtZilla.Sharp.Lib.Patterns;
+﻿using ArtZilla.Net.Core.Patterns;
 
-namespace ArtZilla.Sharp.Lib.Interfaces {
+namespace ArtZilla.Net.Core.Interfaces {
 	public enum State {
 		Stopped,
 		StartPending,

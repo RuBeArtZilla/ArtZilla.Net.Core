@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace ArtZilla.Sharp.Lib.PInvoke {
+namespace ArtZilla.Net.Core.PInvoke {
 	/// <summary>
 	/// Second argument for function <see cref="User32.ShowWindowAsync"/> 
 	/// </summary>

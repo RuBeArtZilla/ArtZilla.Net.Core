@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ArtZilla.Sharp.Lib.Test")]
+[assembly: AssemblyTitle("ArtZilla.Net.Core.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ArtZilla.Sharp.Lib.Test")]
+[assembly: AssemblyProduct("ArtZilla.Net.Core.Test")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

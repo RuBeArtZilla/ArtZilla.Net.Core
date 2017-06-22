@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
-using ArtZilla.Sharp.Lib.Extensions;
+using ArtZilla.Net.Core.Extensions;
 
-namespace ArtZilla.Sharp.Lib.Serialization {
+namespace ArtZilla.Net.Core.Serialization {
 	public static class SerXml {
 		public static object Load(Type type, string file, bool clear = false) {
 			// Будет исключение, если тип нельзя сериализовать в XML

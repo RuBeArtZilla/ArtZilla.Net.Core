@@ -1,4 +1,4 @@
-﻿namespace ArtZilla.Sharp.Lib.Plugins {
+﻿namespace ArtZilla.Net.Core.Plugins {
 	public class PluginDependency {
 		public readonly string Name;
 		public readonly VersionInfo MinVersion = null;

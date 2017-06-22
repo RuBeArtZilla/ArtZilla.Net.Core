@@ -2,14 +2,14 @@
 <package>
   <metadata>
     <id>ArtZilla.Net.Core</id>
-    <version>1.1.0.4</version>
+    <version>1.1.0.5</version>
     <authors>Artyom Fomin (ArtZilla)</authors>
-    <description>Common library</description>
+    <description>Common .Net library</description>
     <language>en-US</language>
     <licenseUrl>https://files.artzilla.name/ArtZilla.Net.Core/License.txt</licenseUrl>
     <projectUrl>https://files.artzilla.name/ArtZilla.Net.Core/</projectUrl>
     <iconUrl>https://files.artzilla.name/ArtZilla.Net.Core/Icon.png</iconUrl>
-    <copyright>Copyright (c) 2016-2017 Artyom Fomin</copyright>
-    <tags>Common, C#</tags>
+    <copyright>Copyright (c) 2017 Artyom Fomin</copyright>
+    <tags>.Net4.0, ArtZilla, Common</tags>
   </metadata>
 </package>

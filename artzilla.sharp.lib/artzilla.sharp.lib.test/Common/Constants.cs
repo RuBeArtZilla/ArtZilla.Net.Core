@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArtZilla.Sharp.Lib.Test.Common {
+namespace ArtZilla.Net.Core.Test.Common {
 	public static class Constants {
 		public const Int32 MagicNumber = 42;
 

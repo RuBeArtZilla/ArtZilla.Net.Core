@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ArtZilla.Sharp.Lib.ConsoleExt;
+using ArtZilla.Net.Core.ConsoleExt;
 
 namespace Debug.Con {
 	class Program {

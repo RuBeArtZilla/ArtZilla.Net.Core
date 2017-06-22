@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArtZilla.Sharp.Lib {
+namespace ArtZilla.Net.Core {
 	public struct ActionResult {
 		public Exception Exception { get; }
 		public Boolean IsOk => Exception == null;

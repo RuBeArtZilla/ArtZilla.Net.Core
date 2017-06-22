@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace ArtZilla.Sharp.Lib.Extensions {
+namespace ArtZilla.Net.Core.Extensions {
 	public static class StringExtensions {
 		/// <summary> Wrapper for <see cref="string.IsNullOrWhiteSpace"/> </summary>
 		public static Boolean IsBad(this String str)
