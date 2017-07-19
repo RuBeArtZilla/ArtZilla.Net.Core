@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace ArtZilla.Net.Core.Plugins {
 	[Serializable]
@@ -16,7 +17,7 @@ namespace ArtZilla.Net.Core.Plugins {
 		public ushort? Revision { get; set; } = null;
 
 		public VersionInfo() { }
-		
+
 		public VersionInfo(ushort major, ushort minor, ushort? build = null, ushort? revision = null) {
 			Major = major;
 			Minor = minor;
@@ -32,15 +33,15 @@ namespace ArtZilla.Net.Core.Plugins {
 		}
 
 		public override string ToString() {
-			var str = Major + Delimeter + Minor;
+			var str = new StringBuilder(Major + Delimeter + Minor);
 
 			if (Build.HasValue)
-				str += Delimeter + Build.Value;
+				str.Append(Delimeter + Build.Value);
 
 			if (Revision.HasValue)
-				str += Delimeter + Revision.Value;
+				str.Append(Delimeter + Revision.Value);
 
-			return str;
+			return str.ToString();
 		}
 
 		public ulong ToUlong()

@@ -44,9 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\artzilla.sharp.lib\Lib.csproj">
+    <ProjectReference Include="..\artzilla.sharp.lib\ArtZilla.Net.Core.csproj">
       <Project>{f6773f6a-3bf9-469e-8349-74a3e0ef18ff}</Project>
-      <Name>Lib</Name>
+      <Name>ArtZilla.Net.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\DevLib\DevLib.csproj">
       <Project>{cc069e8e-5344-446c-a58e-64c89436c2a2}</Project>

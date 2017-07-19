@@ -81,9 +81,9 @@
     <Compile Include="Tests\AssertExTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\artzilla.sharp.lib\Lib.csproj">
+    <ProjectReference Include="..\artzilla.sharp.lib\ArtZilla.Net.Core.csproj">
       <Project>{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}</Project>
-      <Name>Lib</Name>
+      <Name>ArtZilla.Net.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\DevLib\DevLib.csproj">
       <Project>{cc069e8e-5344-446c-a58e-64c89436c2a2}</Project>
