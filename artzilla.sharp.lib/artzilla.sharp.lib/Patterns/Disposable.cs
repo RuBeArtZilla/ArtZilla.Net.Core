@@ -5,7 +5,11 @@ namespace ArtZilla.Net.Core.Patterns {
 	/// Represent base IDisposable implementation
 	/// </summary>
 	public abstract class Disposable : IDisposable {
-		private bool _disposed = false;
+		/// <summary>
+		/// Gets a value indicating whether this <see cref="Disposable"/> is disposed.
+		/// </summary>
+		/// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
+		public bool Disposed => _disposed;
 
 		/// <summary>
 		/// Invoking Dispose method if needed
@@ -54,5 +58,7 @@ namespace ArtZilla.Net.Core.Patterns {
 		protected virtual void DisposeUnmanaged() {
 			// nothing to do
 		}
+
+		private bool _disposed = false;
 	}
 }

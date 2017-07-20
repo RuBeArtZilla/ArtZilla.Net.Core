@@ -189,6 +189,12 @@
             Represent base IDisposable implementation
             </summary>
         </member>
+        <member name="P:ArtZilla.Net.Core.Patterns.Disposable.Disposed">
+            <summary>
+            Gets a value indicating whether this <see cref="T:ArtZilla.Net.Core.Patterns.Disposable"/> is disposed.
+            </summary>
+            <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
+        </member>
         <member name="M:ArtZilla.Net.Core.Patterns.Disposable.Finalize">
             <summary>
             Invoking Dispose method if needed
