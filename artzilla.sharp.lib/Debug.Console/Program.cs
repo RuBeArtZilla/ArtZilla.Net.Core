@@ -2,7 +2,7 @@
 using ArtZilla.Net.Core.ConsoleExt;
 
 namespace Debug.Con {
-	class Program {
+	static class Program {
 		static void Main(string[] args) {
 			var conApp = new ConApp {
 				MainMenu = new ConMenu("Main menu", new List<ConMenuItem>{

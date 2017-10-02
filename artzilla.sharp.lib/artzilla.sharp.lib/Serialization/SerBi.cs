@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using ArtZilla.Net.Core.Extensions;
 
 namespace ArtZilla.Net.Core.Serialization {
-	public class SerBi {
+	public static class SerBi {
 		public static List<T> Load<T>(string file, bool clear = false) where T : class {
 			var serializator = new BinaryFormatter();
 			var res = new List<T>();
@@ -24,7 +24,7 @@ namespace ArtZilla.Net.Core.Serialization {
 
 					if (clear) fs.SetLength(0);
 				}
-			} catch (Exception ex) {
+			} catch {
 				// ignored
 			}
 
@@ -41,7 +41,7 @@ namespace ArtZilla.Net.Core.Serialization {
 						serializator.Serialize(fs, item);
 
 				return true;
-			} catch (Exception ex) {
+			} catch {
 				return false;
 			}
 		}
@@ -55,7 +55,7 @@ namespace ArtZilla.Net.Core.Serialization {
 					serializator.Serialize(fs, item);
 
 				return true;
-			} catch (Exception ex) {
+			} catch {
 				return false;
 			}
 		}
@@ -71,7 +71,7 @@ namespace ArtZilla.Net.Core.Serialization {
 
 				if (!Directory.Exists(path))
 					Directory.CreateDirectory(path);
-			} catch (Exception) {
+			} catch {
 				// ignored
 			}
 		}

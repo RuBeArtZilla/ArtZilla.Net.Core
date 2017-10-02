@@ -23,7 +23,7 @@ namespace ArtZilla.Net.Core.Serialization {
 					if (clear)
 						fs.SetLength(0);
 				}
-			} catch (Exception ex) {
+			} catch {
 				// ignored
 			}
 
@@ -49,7 +49,7 @@ namespace ArtZilla.Net.Core.Serialization {
 					if (clear)
 						fs.SetLength(0);
 				}
-			} catch (Exception ex) {
+			} catch {
 				// ignored
 			}
 
@@ -111,7 +111,7 @@ namespace ArtZilla.Net.Core.Serialization {
 
 				if (!Directory.Exists(path))
 					Directory.CreateDirectory(path);
-			} catch (Exception ex) {
+			} catch {
 				// ignored
 			}
 		}

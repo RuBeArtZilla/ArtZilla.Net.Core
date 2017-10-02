@@ -2,8 +2,7 @@
 using System.Runtime.InteropServices;
 
 namespace ArtZilla.Net.Core.PInvoke {
-
-	public class Advapi32 {
+	public static class Advapi32 {
 		[Flags]
 		public enum ContextFlags : long {
 			Newkeyset = 0x8,

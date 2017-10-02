@@ -4,8 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace ArtZilla.Net.Core {
-  /// <summary> Represent a background repeated action </summary>
-  public class BackgroundRepeater {
+	/// <summary> Represent a background repeated action </summary>
+	public class BackgroundRepeater {
 		public const string StopGuid = "{B098C6A3-C478-4E2B-969A-36B5F6D0B780}";
 
 		/// <summary> Default value of <see cref="Cooldown"/> in milliseconds </summary>

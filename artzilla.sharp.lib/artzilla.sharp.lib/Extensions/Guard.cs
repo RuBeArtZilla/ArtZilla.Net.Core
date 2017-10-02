@@ -21,7 +21,7 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// <param name="param"></param>
 		/// <param name="paramName"></param>
 		/// <exception cref="ArgumentNullException">Thrown when parameter not null</exception>
-		public static void Null<T>(T param, String paramName) {
+		public static void Null<T>(T param, string paramName) {
 			if (param != null)
 				throw new ArgumentNullException(paramName);
 		}
@@ -42,7 +42,7 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// <param name="param"></param>
 		/// <param name="paramName"></param>
 		/// <exception cref="ArgumentNullException">Thrown when parameter is null</exception>
-		public static void NotNull<T>(T param, String paramName) {
+		public static void NotNull<T>(T param, string paramName) {
 			if (param == null)
 				throw new ArgumentNullException(paramName);
 		}
@@ -52,8 +52,8 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// </summary>
 		/// <param name="param"></param>
 		/// <exception cref="ArgumentException">Thrown when parameter don't contain any symbol exclude whitespace</exception>
-		public static void HasAnyText(String param) {
-			if (String.IsNullOrWhiteSpace(param))
+		public static void HasAnyText(string param) {
+			if (string.IsNullOrWhiteSpace(param))
 				throw new ArgumentException();
 		}
 
@@ -63,8 +63,8 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// <param name="param"></param>
 		/// <param name="paramName"></param>
 		/// <exception cref="ArgumentException">Thrown when parameter don't contain any symbol exclude whitespace</exception>
-		public static void HasAnyText(String param, String paramName) {
-			if (String.IsNullOrWhiteSpace(param))
+		public static void HasAnyText(string param, string paramName) {
+			if (string.IsNullOrWhiteSpace(param))
 				throw new ArgumentException(paramName);
 		}
 
@@ -90,7 +90,7 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// <param name="paramName"></param>
 		/// <exception cref="ArgumentException">Thrown when array is empty</exception>
 		/// <exception cref="ArgumentNullException">Thrown when array is null</exception>
-		public static void NotEmpty<T>(T[] param, String paramName) {
+		public static void NotEmpty<T>(T[] param, string paramName) {
 			if (param == null)
 				throw new ArgumentNullException(paramName);
 			if (param.Length == 0)

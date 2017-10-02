@@ -62,7 +62,7 @@ namespace ArtZilla.Net.Core.Plugins {
 				var plugins = pluginTypes.Where(t => t.GetInterface(nameof(IPlugin)) != null).ToList();
 
 				plugins.ForEach(p => count += TryLoadPlugin(p) ? 1 : 0);
-			} catch (Exception e) {
+			} catch {
 				// throw; // todo: ?
 			}
 
@@ -81,7 +81,7 @@ namespace ArtZilla.Net.Core.Plugins {
 					_notInitedPlugins.Add(plug);
 
 				return true;
-			} catch (Exception e) {
+			} catch {
 				// throw; // todo: ?
 			}
 

@@ -1,70 +1,93 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x86;win7-x64</RuntimeIdentifiers>
+    <Authors>ArtZilla</Authors>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <ProjectGuid>{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ArtZilla.Net.Core</RootNamespace>
     <AssemblyName>ArtZilla.Net.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+
+    <Language>en-US</Language>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <AssemblyName>ArtZilla.Net.Core</AssemblyName>
+    <AssemblyTitle>ArtZilla.Net.Core</AssemblyTitle>
+    <PackageId>ArtZilla.Net.Core</PackageId>
+    <RootNamespace>ArtZilla.Net.Core</RootNamespace>
+    
+    <Description>Common .Net library.</Description>
+    <Summary>Common .Net library.</Summary>
+    <PackageCopyright>Copyright (c) 2017 Artyom Fomin</PackageCopyright>
+    <PackageTags>ArtZilla, .Net, Common</PackageTags>
+    <PackageReleaseNotes>Added support for .NET Core 2.0 (experimental)</PackageReleaseNotes>
+    <PackageIconUrl>https://files.artzilla.name/ArtZilla.Net.Core/Icon.png</PackageIconUrl>
+    <PackageProjectUrl>https://files.artzilla.name/ArtZilla.Net.Core</PackageProjectUrl>
+    <PackageLicenseUrl>https://files.artzilla.name/ArtZilla.Net.Core/License.txt</PackageLicenseUrl>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    
+    <Copyright>Copyright (c) 2017 Artyom Fomin</Copyright>
+    <RepositoryType>Github</RepositoryType>
+    <Company>ArtZilla's development</Company>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.1.0.7</Version>
+    <AssemblyVersion>1.1.0.7</AssemblyVersion>
+    <FileVersion>1.1.0.7</FileVersion>
+    <RepositoryUrl>https://github.com/RuBeArtZilla/ArtZilla.Net.Core</RepositoryUrl>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>TRACE;DEBUG;</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\nuget-package\lib\4.0\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\nuget-package\lib\4.0\ArtZilla.Net.Core.xml</DocumentationFile>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <NoWarn>$(NoWarn);CS1591;CS1572;CS1573</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <DefineConstants>RELEASE</DefineConstants>
   </PropertyGroup>
-  <ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\SolutionInfo.cs">
-      <Link>Properties\SolutionInfo.cs</Link>
-    </Compile>
-    <Compile Include="BkgOp\BackgroundRepeater.cs" />
-    <Compile Include="Extensions\Guard.cs" />
-    <Compile Include="Extensions\ObjectExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="Common\Lib.cs" />
-    <Compile Include="Interfaces\IRunnable.cs" />
-    <Compile Include="Patterns\ConcurrentDisposable.cs" />
-    <Compile Include="Patterns\Disposable.cs" />
-    <Compile Include="PInvoke\Advapi32.cs" />
-    <Compile Include="PInvoke\Kernel32.cs" />
-    <Compile Include="PInvoke\User32.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Serialization\SerBi.cs" />
-    <Compile Include="Serialization\SerXml.cs" />
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <DefineConstants>NET45;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <DefineConstants>NET40;NETFULL</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  
 </Project>

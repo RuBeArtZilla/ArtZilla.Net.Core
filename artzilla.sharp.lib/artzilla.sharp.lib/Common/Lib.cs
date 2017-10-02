@@ -3,13 +3,13 @@
 namespace ArtZilla.Net.Core {
 	public struct ActionResult {
 		public Exception Exception { get; }
-		public Boolean IsOk => Exception == null;
+		public bool IsOk => Exception == null;
 		public ActionResult(Exception exception = null) { Exception = exception; }
 	}
 
 	public struct FuncResult<T> {
 		public Exception Exception { get; }
-		public Boolean IsOk => Exception == null;
+		public bool IsOk => Exception == null;
 		public T Result { get; }
 
 		public FuncResult(T result) {

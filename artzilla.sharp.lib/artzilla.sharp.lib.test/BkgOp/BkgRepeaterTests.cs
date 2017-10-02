@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using ArtZilla.Net.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ArtZilla.Net.Core.Test {
