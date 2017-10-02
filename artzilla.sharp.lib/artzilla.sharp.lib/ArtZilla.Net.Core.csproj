@@ -23,7 +23,7 @@
     <Summary>Common .Net library.</Summary>
     <PackageCopyright>Copyright (c) 2017 Artyom Fomin</PackageCopyright>
     <PackageTags>ArtZilla, .Net, Common</PackageTags>
-    <PackageReleaseNotes>Added support for .NET Core 2.0 (experimental)</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support for .NET Standard 2.0 (experimental)</PackageReleaseNotes>
     <PackageIconUrl>https://files.artzilla.name/ArtZilla.Net.Core/Icon.png</PackageIconUrl>
     <PackageProjectUrl>https://files.artzilla.name/ArtZilla.Net.Core</PackageProjectUrl>
     <PackageLicenseUrl>https://files.artzilla.name/ArtZilla.Net.Core/License.txt</PackageLicenseUrl>
