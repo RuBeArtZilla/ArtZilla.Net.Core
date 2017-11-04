@@ -11,6 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ArtZilla.Net.Core</RootNamespace>
     <AssemblyName>ArtZilla.Net.Core</AssemblyName>
+    <LangVersion>latest</LangVersion>
 
     <Language>en-US</Language>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -33,9 +34,9 @@
     <RepositoryType>Github</RepositoryType>
     <Company>ArtZilla's development</Company>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.1.0.7</Version>
-    <AssemblyVersion>1.1.0.7</AssemblyVersion>
-    <FileVersion>1.1.0.7</FileVersion>
+    <Version>1.1.0.8</Version>
+    <FileVersion>1.1.0.8</FileVersion>
+    <AssemblyVersion>1.1.0.8</AssemblyVersion>
     <RepositoryUrl>https://github.com/RuBeArtZilla/ArtZilla.Net.Core</RepositoryUrl>
   </PropertyGroup>
 
@@ -86,8 +87,4 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net40'">
     <DefineConstants>NET40;NETFULL</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-  
 </Project>
