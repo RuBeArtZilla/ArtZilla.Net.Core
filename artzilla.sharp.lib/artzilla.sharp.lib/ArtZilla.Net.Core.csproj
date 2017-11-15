@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
@@ -34,12 +34,12 @@
     <RepositoryType>Github</RepositoryType>
     <Company>ArtZilla's development</Company>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.1.0.8</Version>
-    <FileVersion>1.1.0.8</FileVersion>
-    <AssemblyVersion>1.1.0.8</AssemblyVersion>
+    <Version>1.1.0.9</Version>
+    <FileVersion>1.1.0.9</FileVersion>
+    <AssemblyVersion>1.1.0.9</AssemblyVersion>
     <RepositoryUrl>https://github.com/RuBeArtZilla/ArtZilla.Net.Core</RepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
-
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <DefineConstants>TRACE;DEBUG;</DefineConstants>
@@ -48,7 +48,6 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <NoWarn>$(NoWarn);CS1591;CS1572;CS1573</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <IncludeSymbols>true</IncludeSymbols>
     <DefineConstants>RELEASE</DefineConstants>
   </PropertyGroup>
 

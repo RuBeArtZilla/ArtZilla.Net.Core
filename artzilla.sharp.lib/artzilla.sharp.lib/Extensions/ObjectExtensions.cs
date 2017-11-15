@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ArtZilla.Net.Core.Extensions {
 	public static class ObjectExtensions {
@@ -13,5 +14,15 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// </summary>
 		public static bool IsAnyOf<T>(this T self, params T[] values)
 			=> values.Contains(self);
+
+		/// <summary>
+		/// Return collection, that contain only <paramref name="item"/>
+		/// </summary>
+		/// <typeparam name="T">Type of the <paramref name="item"/></typeparam>
+		/// <param name="item">Element of result collection</param>
+		/// <returns>Collection that contain only <paramref name="item"/></returns>
+		public static IEnumerable<T> ToEnumerable<T>(this T item) {
+			yield return item;
+		}
 	}
 }
