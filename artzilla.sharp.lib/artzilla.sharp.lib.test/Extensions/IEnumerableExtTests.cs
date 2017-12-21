@@ -24,6 +24,7 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			var test2 = new int[] { 4, 8, 15, 16 };
 			var test3 = new int[] { 4, 8, 15 };
 
+			AssertSameEnumerables(ideal, ideal.Append());
 			AssertSameEnumerables(ideal, test1.Append(42));
 			AssertSameEnumerables(ideal, test2.Append(23, 42));
 			AssertSameEnumerables(ideal, test3.Append(16, 23, 42));

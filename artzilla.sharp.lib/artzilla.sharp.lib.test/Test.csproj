@@ -44,6 +44,7 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\LibTests.cs" />
     <Compile Include="Extensions\GuardTests.cs" />
+    <Compile Include="Extensions\IDicExtTests.cs" />
     <Compile Include="Extensions\IEnumerableExtTests.cs" />
     <Compile Include="Extensions\ObjExtTest.cs" />
     <Compile Include="Extensions\StringExtTest.cs" />
