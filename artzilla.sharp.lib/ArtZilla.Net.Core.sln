@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtZilla.Net.Core", "artzilla.sharp.lib\ArtZilla.Net.Core.csproj", "{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtZilla.Net.Core", "artzilla.sharp.lib\ArtZilla.Net.Core.csproj", "{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "artzilla.sharp.lib.test\Test.csproj", "{811D45C2-F507-461E-8334-E0399BC6541D}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -28,38 +28,31 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		net40|Any CPU = net40|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}.net40|Any CPU.ActiveCfg = Release|Any CPU
 		{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{811D45C2-F507-461E-8334-E0399BC6541D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{811D45C2-F507-461E-8334-E0399BC6541D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{811D45C2-F507-461E-8334-E0399BC6541D}.net40|Any CPU.ActiveCfg = Release|Any CPU
 		{811D45C2-F507-461E-8334-E0399BC6541D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{811D45C2-F507-461E-8334-E0399BC6541D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B4757519-C671-4460-86EA-BF1BC65B63CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B4757519-C671-4460-86EA-BF1BC65B63CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4757519-C671-4460-86EA-BF1BC65B63CF}.net40|Any CPU.ActiveCfg = Release|Any CPU
 		{B4757519-C671-4460-86EA-BF1BC65B63CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4757519-C671-4460-86EA-BF1BC65B63CF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B253ADA-F7C1-44A3-8748-8A36DBC23E5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B253ADA-F7C1-44A3-8748-8A36DBC23E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B253ADA-F7C1-44A3-8748-8A36DBC23E5B}.net40|Any CPU.ActiveCfg = Release|Any CPU
 		{3B253ADA-F7C1-44A3-8748-8A36DBC23E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B253ADA-F7C1-44A3-8748-8A36DBC23E5B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8ECA6C6F-CB7D-4EF4-B9BC-1A644C3DCB50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8ECA6C6F-CB7D-4EF4-B9BC-1A644C3DCB50}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8ECA6C6F-CB7D-4EF4-B9BC-1A644C3DCB50}.net40|Any CPU.ActiveCfg = Release|Any CPU
 		{8ECA6C6F-CB7D-4EF4-B9BC-1A644C3DCB50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ECA6C6F-CB7D-4EF4-B9BC-1A644C3DCB50}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CC069E8E-5344-446C-A58E-64C89436C2A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CC069E8E-5344-446C-A58E-64C89436C2A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC069E8E-5344-446C-A58E-64C89436C2A2}.net40|Any CPU.ActiveCfg = Release|Any CPU
 		{CC069E8E-5344-446C-A58E-64C89436C2A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC069E8E-5344-446C-A58E-64C89436C2A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

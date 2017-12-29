@@ -34,9 +34,9 @@
     <RepositoryType>Github</RepositoryType>
     <Company>ArtZilla's development</Company>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.1.0.10</Version>
-    <FileVersion>1.1.0.10</FileVersion>
-    <AssemblyVersion>1.1.0.10</AssemblyVersion>
+    <Version>1.1.0.11</Version>
+    <FileVersion>1.1.0.11</FileVersion>
+    <AssemblyVersion>1.1.0.11</AssemblyVersion>
     <RepositoryUrl>https://github.com/RuBeArtZilla/ArtZilla.Net.Core</RepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>

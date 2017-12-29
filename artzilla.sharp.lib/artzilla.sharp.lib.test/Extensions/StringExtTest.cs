@@ -61,6 +61,40 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 			TestParseDouble(0.1D.ToString(), 0.1D);
 		}
 
+		[TestMethod]
+		public void CombineTests() {
+			const string a = "abc";
+			const string b = "def";
+			const string c = "g";
+			const string x = "...";
+			const string axb = a + x + b;
+			const string axbxc = a + x + b + x + c;
+			const string sn = null;
+			const string se = "";
+			const string sw = "   ";
+
+			Assert.AreEqual(a, a.Combine(x, sn));
+			Assert.AreEqual(a, a.Combine(x, se));
+			Assert.AreEqual(a, a.Combine(x, sw));
+
+			Assert.AreEqual(a, sn.Combine(x, a));
+			Assert.AreEqual(a, se.Combine(x, a));
+			Assert.AreEqual(a, sw.Combine(x, a));
+
+			Assert.AreEqual(axb, a.Combine(x, b));
+			Assert.AreEqual(axb, a.Combine(x, sn, b));
+			Assert.AreEqual(axb, a.Combine(x, b, sn));
+
+			Assert.AreEqual(axb, a.Combine(x, sw, b));
+			Assert.AreEqual(axb, a.Combine(x, b, sw));
+
+			Assert.AreEqual(axb, sn.Combine(x, se, a, sw, b, sn));
+			Assert.AreEqual(axb, sn.Combine(x, se, a, sw, b, sn));
+
+			Assert.AreEqual(axbxc, a.Combine(x, b, c));
+			Assert.AreEqual(axbxc, sn.Combine(x, se, a, sw, b, sn, sw, c));
+		}
+
 		private static void TestParseInt(String s, Int32 t) {
 			var r = s.ParseIntEx();
 			Console.WriteLine($"Compare [{s}] parsed as [{r}] with [{t}]: {r == t}");
