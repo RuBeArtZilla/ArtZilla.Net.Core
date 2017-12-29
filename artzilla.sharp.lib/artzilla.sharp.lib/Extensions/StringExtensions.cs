@@ -107,5 +107,8 @@ namespace ArtZilla.Net.Core.Extensions {
 				}
 			}
 		}
+
+		public static string EnframeGood(this string whatToEnframe, string prefix = "", string postfix = "")
+			=> whatToEnframe.IsBad() ? whatToEnframe : prefix + whatToEnframe + postfix;
 	}
 }
