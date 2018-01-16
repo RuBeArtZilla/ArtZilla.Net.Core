@@ -22,8 +22,8 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 			Assert.IsFalse("Luke".IsAnyOf("Jedi", "Sith"));
 
 			var comparer = new FirstCharOfStringCustomEqualityComparer();
-			Assert.IsTrue("Luke".IsAnyOf(comparer,"Jedi", "Sith", "Luke"));
-			Assert.IsTrue("Luke".IsAnyOf(comparer,"Jedi", "Sith", "Leia"));
+			Assert.IsTrue("Luke".IsAnyOf(comparer, "Jedi", "Sith", "Luke"));
+			Assert.IsTrue("Luke".IsAnyOf(comparer, "Jedi", "Sith", "Leia"));
 			Assert.IsFalse("Luke".IsAnyOf(comparer, "Jedi", "Sith"));
 			Assert.IsFalse("Luke".IsAnyOf(comparer, "Jedi", "Sith", "leia"));
 		}
@@ -33,6 +33,62 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 			Assert.IsTrue(42.ToEnumerable().Any());
 			Assert.IsTrue(42.ToEnumerable().First() == 42);
 			Assert.IsTrue(42.ToEnumerable().ToArray().Length == 1);
+		}
+
+		[TestMethod]
+		public void TestIsInOpenInterval() {
+			Assert.IsTrue(42.IsInOpenInterval(-100, 100));
+			Assert.IsTrue(42.IsInOpenInterval(41, 43));
+			Assert.IsTrue(42.IsInOpenInterval(43, 41));
+			Assert.IsTrue(42.IsInOpenInterval(43));
+
+			Assert.IsFalse(42.IsInOpenInterval(42, 43));
+			Assert.IsFalse(42.IsInOpenInterval(41, 42));
+			Assert.IsFalse(42.IsInOpenInterval(-43, -41));
+			Assert.IsFalse(42.IsInOpenInterval(-41, -43));
+			Assert.IsFalse(42.IsInOpenInterval(42, 42));
+		}
+
+		[TestMethod]
+		public void TestIsInClosedInterval() {
+			Assert.IsTrue(42.IsInClosedInterval(-100, 100));
+			Assert.IsTrue(42.IsInClosedInterval(41, 43));
+			Assert.IsTrue(42.IsInClosedInterval(43, 41));
+			Assert.IsTrue(42.IsInClosedInterval(42, 43));
+			Assert.IsTrue(42.IsInClosedInterval(41, 42));
+			Assert.IsTrue(42.IsInClosedInterval(42, 42));
+			Assert.IsTrue(42.IsInClosedInterval(43));
+			Assert.IsTrue(42.IsInClosedInterval(42));
+
+			Assert.IsFalse(42.IsInClosedInterval(-43, -41));
+			Assert.IsFalse(42.IsInClosedInterval(-41, -43));
+			Assert.IsFalse(42.IsInClosedInterval(41));
+		}
+
+		[TestMethod]
+		public void TestInClosedInterval() {
+			Assert.AreEqual(42, 42.InClosedInterval(0, 100));
+			Assert.AreEqual(42, 42.InClosedInterval(100, 0));
+
+			Assert.AreEqual(42, 42.InClosedInterval(0, 42));
+			Assert.AreEqual(42, 42.InClosedInterval(42, 0));
+
+			Assert.AreEqual(42, 42.InClosedInterval(42, 42));
+
+			Assert.AreEqual(42, 0.InClosedInterval(42, 100));
+			Assert.AreEqual(42, 0.InClosedInterval(42, 42));
+			Assert.AreEqual(42, 0.InClosedInterval(100, 42));
+
+			Assert.AreEqual(42, 100.InClosedInterval(0, 42));
+			Assert.AreEqual(42, 100.InClosedInterval(42, 42));
+			Assert.AreEqual(42, 100.InClosedInterval(42, 0));
+
+			Assert.AreEqual(42, 100.InClosedInterval(42));
+			Assert.AreEqual(default, default(int).InClosedInterval(default));
+
+			Assert.AreEqual('b', 'b'.InClosedInterval('a', 'c'));
+			Assert.AreEqual('b', 'a'.InClosedInterval('b', 'c'));
+			Assert.AreEqual('b', 'c'.InClosedInterval('a', 'b'));
 		}
 
 		class FirstCharOfStringCustomEqualityComparer: IEqualityComparer<string> {

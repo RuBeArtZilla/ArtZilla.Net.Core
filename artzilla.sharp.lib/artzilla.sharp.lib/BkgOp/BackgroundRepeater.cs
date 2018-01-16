@@ -23,6 +23,13 @@ namespace ArtZilla.Net.Core {
 		/// <summary> When true any exception from repeated operation will be ignored </summary>
 		public bool IsCatchExceptions { get; set; } = DefaultIsCatchExceptions;
 
+		public ExceptionHandlerDelegate ExceptionHandler {
+			get => _exceptionHandler;
+			set => _exceptionHandler = value;
+		}
+
+		public delegate void ExceptionHandlerDelegate(BackgroundRepeater sender, Exception exception);
+
 		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
 		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 		/// <param name="action">The delegate that represents the code to repeat.</param>
@@ -31,6 +38,12 @@ namespace ArtZilla.Net.Core {
 			if (action == null)
 				throw new ArgumentNullException(nameof(action));
 		}
+
+		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+		/// <param name="action">The delegate that represents the code to repeat.</param>
+		public BackgroundRepeater(Action<CancellationToken> action)
+			=> _action = action ?? throw new ArgumentNullException(nameof(action));
 
 		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
 		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
@@ -43,14 +56,23 @@ namespace ArtZilla.Net.Core {
 				throw new ArgumentNullException(nameof(action));
 		}
 
+		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+		/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
+		/// <param name="action">The delegate that represents the code to repeat.</param>
+		/// <param name="cooldown">Period between repeating background operation.</param>
+		public BackgroundRepeater(Action<CancellationToken> action, TimeSpan cooldown)
+			: this(action)
+			=> Cooldown = cooldown;
+
 		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
 		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 		/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 		/// <param name="action">The delegate that represents the code to repeat.</param>
 		/// <param name="cooldown">Period between repeating background operation.</param>
 		/// <param name="isStarted">Initial state of the repeater</param>
-		public BackgroundRepeater(Action action, TimeSpan cooldown, bool isStarted)
-      : this(t => Cancelable(action, t), cooldown, isStarted) {
+		public BackgroundRepeater(Action action, TimeSpan cooldown, bool isStarted, ExceptionHandlerDelegate exceptionHandler = null)
+      : this(t => Cancelable(action, t), cooldown, isStarted, exceptionHandler) {
 			if (action == null)
 				throw new ArgumentNullException(nameof(action));
 		}
@@ -61,24 +83,11 @@ namespace ArtZilla.Net.Core {
 		/// <param name="action">The delegate that represents the code to repeat.</param>
 		/// <param name="cooldown">Period between repeating background operation.</param>
 		/// <param name="isStarted">Initial state of the repeater</param>
-		public BackgroundRepeater(Action<CancellationToken> action, TimeSpan cooldown, bool isStarted)
-      : this(action, cooldown)
-			=> Enabled(isStarted);
-
-		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
-		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
-		/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
-		/// <param name="action">The delegate that represents the code to repeat.</param>
-		/// <param name="cooldown">Period between repeating background operation.</param>
-		public BackgroundRepeater(Action<CancellationToken> action, TimeSpan cooldown)
-      : this(action)
-			=> Cooldown = cooldown;
-
-		/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
-		/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
-		/// <param name="action">The delegate that represents the code to repeat.</param>
-		public BackgroundRepeater(Action<CancellationToken> action)
-			=> _action = action ?? throw new ArgumentNullException(nameof(action));
+		public BackgroundRepeater(Action<CancellationToken> action, TimeSpan cooldown, bool isStarted, ExceptionHandlerDelegate exceptionHandler = null)
+			: this(action, cooldown) {
+			_exceptionHandler = exceptionHandler;
+			Enabled(isStarted);
+		}
 
 		/// <summary> Set repeater on/off </summary>
 		public void Enabled(bool value) { // todo: write test?
@@ -155,8 +164,8 @@ namespace ArtZilla.Net.Core {
 						} catch (OperationCanceledException e) {
 							if (e.Message.Equals(StopGuid))
 								throw; // Must exit when recieve this
-						} catch {
-							// ignored
+						} catch (Exception e){
+							_exceptionHandler?.Invoke(this, e); // Test this line
 						}
 					} else {
 						action.Invoke(t);
@@ -176,6 +185,7 @@ namespace ArtZilla.Net.Core {
 		private Thread _thread;
 		private TimeSpan _cooldown = TimeSpan.FromMilliseconds(DefaultCooldownMsec);
 		private CancellationTokenSource _cts;
+		private ExceptionHandlerDelegate _exceptionHandler;
 		private readonly object _sync = new object();
 		private readonly Action<CancellationToken> _action;
 	}

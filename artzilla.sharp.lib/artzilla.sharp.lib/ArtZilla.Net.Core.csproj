@@ -9,8 +9,6 @@
     <ProjectGuid>{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ArtZilla.Net.Core</RootNamespace>
-    <AssemblyName>ArtZilla.Net.Core</AssemblyName>
     <LangVersion>latest</LangVersion>
 
     <Language>en-US</Language>
@@ -22,37 +20,36 @@
     
     <Description>Common .Net library.</Description>
     <Summary>Common .Net library.</Summary>
-    <PackageCopyright>Copyright (c) 2017 Artyom Fomin</PackageCopyright>
+    <PackageCopyright>Copyright (c) 2017-2018 Artyom Fomin</PackageCopyright>
     <PackageTags>ArtZilla, .Net, Common</PackageTags>
     <PackageReleaseNotes>Added support for .NET Standard 2.0 (experimental)</PackageReleaseNotes>
-    <PackageIconUrl>https://files.artzilla.name/ArtZilla.Net.Core/Icon.png</PackageIconUrl>
-    <PackageProjectUrl>https://files.artzilla.name/ArtZilla.Net.Core</PackageProjectUrl>
-    <PackageLicenseUrl>https://files.artzilla.name/ArtZilla.Net.Core/License.txt</PackageLicenseUrl>
+    <PackageIconUrl>https://artzilla.name/ArtZilla.Net.Core/Icon.png</PackageIconUrl>
+    <PackageProjectUrl>https://artzilla.name/ArtZilla.Net.Core</PackageProjectUrl>
+    <PackageLicenseUrl>https://artzilla.name/ArtZilla.Net.Core/License.txt</PackageLicenseUrl>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     
-    <Copyright>Copyright (c) 2017 Artyom Fomin</Copyright>
+    <Copyright>Copyright (c) 2017-2018 Artyom Fomin</Copyright>
     <RepositoryType>Github</RepositoryType>
     <Company>ArtZilla's development</Company>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.1.0.12</Version>
-    <FileVersion>1.1.0.12</FileVersion>
-    <AssemblyVersion>1.1.0.12</AssemblyVersion>
+    <Version>1.1.0.16</Version>
+    <FileVersion>1.1.0.16</FileVersion>
+    <AssemblyVersion>1.1.0.16</AssemblyVersion>
     <RepositoryUrl>https://github.com/RuBeArtZilla/ArtZilla.Net.Core</RepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
-    <DefineConstants>TRACE;DEBUG;</DefineConstants>
+    <DefineConstants>$(DefineConstants);TRACE;DEBUG;</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <NoWarn>$(NoWarn);CS1591;CS1572;CS1573</NoWarn>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <DefineConstants>RELEASE</DefineConstants>
+    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
-    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+    <DefineConstants>$(DefineConstants);NETSTANDARD;NETSTANDARD2_0</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">

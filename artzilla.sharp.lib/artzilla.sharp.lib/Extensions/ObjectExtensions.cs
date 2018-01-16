@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ArtZilla.Net.Core.Extensions {
@@ -29,6 +30,41 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// <returns>Collection that contain only <paramref name="item"/></returns>
 		public static IEnumerable<T> ToEnumerable<T>(this T item) {
 			yield return item;
+		}
+
+		public static bool IsInOpenInterval<T>(this T value, T bound1, T bound2 = default) where T : IComparable<T> {
+			var c1 = value.CompareTo(bound1);
+			var c2 = value.CompareTo(bound2);
+
+			return (c1 > 0 && c2 < 0) || (c1 < 0 && c2 > 0);
+		}
+
+		public static bool IsInClosedInterval<T>(this T value, T bound1, T bound2 = default) where T : IComparable<T> {
+			var c1 = value.CompareTo(bound1);
+			var c2 = value.CompareTo(bound2);
+
+			return (c1 >= 0 && c2 <= 0) || (c1 <= 0 && c2 >= 0);
+		}
+
+		public static T InClosedInterval<T>(this T value, T bound1, T bound2 = default) where T : IComparable<T> {
+			var c1 = value.CompareTo(bound1);
+			if (c1 == 0)
+				return bound1;
+
+			var c2 = value.CompareTo(bound2);
+			if (c2 == 0)
+				return bound2;
+
+			var c3 = bound1.CompareTo(bound2);
+			if (c3 == 0)
+				return bound1;
+
+			var b = c3 > 0;
+			if (b ^ c1 < 0)
+				return bound1;
+			if (b ^ c2 > 0)
+				return bound2;
+			return value;
 		}
 	}
 }
