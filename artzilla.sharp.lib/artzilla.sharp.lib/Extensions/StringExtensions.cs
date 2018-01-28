@@ -108,7 +108,14 @@ namespace ArtZilla.Net.Core.Extensions {
 			}
 		}
 
+		/// <summary>
+		/// Add <paramref name="prefix"/> and <paramref name="postfix"/> if <paramref name="whatToEnframe"/> is <see cref="IsGood(string)"/> otherwise returns empty string.
+		/// </summary>
+		/// <param name="whatToEnframe">the source string</param>
+		/// <param name="prefix">prefix string, can be empty</param>
+		/// <param name="postfix">postfix string, can be empty</param>
+		/// <returns></returns>
 		public static string EnframeGood(this string whatToEnframe, string prefix = "", string postfix = "")
-			=> whatToEnframe.IsBad() ? whatToEnframe : prefix + whatToEnframe + postfix;
+			=> whatToEnframe.IsBad() ? "" : prefix + whatToEnframe + postfix;
 	}
 }
