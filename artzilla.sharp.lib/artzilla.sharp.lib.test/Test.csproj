@@ -49,6 +49,7 @@
     <Compile Include="Extensions\ObjExtTest.cs" />
     <Compile Include="Extensions\StringExtTest.cs" />
     <Compile Include="Extensions\TypeExtTest.cs" />
+    <Compile Include="Plugins\UnitTest1.cs" />
     <Compile Include="Plugins\VersionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\AssertExTests.cs" />
