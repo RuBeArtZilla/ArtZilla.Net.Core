@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace ArtZilla.Net.Core.Extensions {
-	public static class IListExtensions {
+	public static class ListExtensions {
 		/// <summary>
 		/// Adds an <paramref name="item"/> to the <paramref name="list"/> and return it.
 		/// </summary>

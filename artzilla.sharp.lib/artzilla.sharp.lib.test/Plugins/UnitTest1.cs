@@ -53,12 +53,12 @@ namespace ArtZilla.Net.Core.Tests.Plugins {
 				Assert.IsFalse(p2.IsLoaded, "p2 not unloaded");
 				Assert.AreEqual(2, c.Plugins.Count, "p2 not removed");
 
-				Assert.IsTrue(p3.IsLoaded);
+				Assert.IsTrue(p3.IsLoaded, "p3 is not loaded");
 			}
 
-			Assert.IsFalse(p1.IsLoaded);
-			Assert.IsFalse(p2.IsLoaded);
-			Assert.IsFalse(p3.IsLoaded);
+			Assert.IsFalse(p1.IsLoaded, "p1 not unloaded after dispose");
+			Assert.IsFalse(p2.IsLoaded, "p2 not unloaded after dispose");
+			Assert.IsFalse(p3.IsLoaded, "p3 not unloaded after dispose");
 		}
 	}
 }

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ArtZilla.Net.Core.Extensions {
-	public static class IEnumerableExtensions {
+	public static class EnumerableExtensions {
 		/// <summary>
 		/// Performs the specified action on each element in <see cref="IEnumerable{T}"/> and return collection.
 		/// <para>Invoke action only if result was enumerated!</para>
@@ -25,7 +24,6 @@ namespace ArtZilla.Net.Core.Extensions {
 
 			Guard.NotNull(items, nameof(items));
 			Guard.NotNull(action, nameof(action));
-
 			return InnerForEvery();
 		}
 
@@ -46,7 +44,6 @@ namespace ArtZilla.Net.Core.Extensions {
 			}
 
 			Guard.NotNull(items, nameof(items));
-
 			return InnerAppend();
 		}
 

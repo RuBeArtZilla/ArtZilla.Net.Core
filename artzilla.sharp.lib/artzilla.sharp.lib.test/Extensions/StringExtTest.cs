@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using ArtZilla.Net.Core.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
