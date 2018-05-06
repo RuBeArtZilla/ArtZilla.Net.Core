@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ArtZilla.Net.Core.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArtZilla.Net.Core.Test.Extensions {
+namespace ArtZilla.Net.Core.Tests.Extensions {
 	[TestClass]
 	public class ObjExtTest {
 		[TestMethod]
 		public void TestIsNull() {
-			Object o = null;
+			object o = null;
 			Assert.IsTrue(o.IsNull());
 			o = new { In = 128, Out = 256 };
 			Assert.IsFalse(o.IsNull());
@@ -94,6 +93,30 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 		class FirstCharOfStringCustomEqualityComparer: IEqualityComparer<string> {
 			public bool Equals(string x, string y) => x[0] == y[0]; // skip null check!
 			public int GetHashCode(string obj) => obj[0].GetHashCode();
+		}
+
+		private struct ExampleStruct {
+			public int Value;
+			public bool Flag;
+
+			public ExampleStruct(int value, bool flag) {
+				Value = value;
+				Flag = flag;
+			}
+		}
+		
+		[TestMethod]
+		public void TestWith() {
+			var x = new ExampleStruct(0, false);
+			
+			Assert.IsFalse(x.Flag);
+			Assert.AreEqual(0, x.Value);
+			
+			x.With((ref ExampleStruct s) => s.Flag = true)
+			 .With((ref ExampleStruct s) => s.Value = 42);
+			
+			Assert.IsTrue(x.Flag);
+			Assert.AreEqual(42, x.Value);
 		}
 	}
 }

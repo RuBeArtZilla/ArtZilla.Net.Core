@@ -7,7 +7,7 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// <summary>
 		/// Simple check, that object is null
 		/// </summary>
-		public static bool IsNull<T>(this T self)
+		public static bool IsNull<T>(this T self) where T : class
 			=> self == null;
 
 		/// <summary>
@@ -65,6 +65,21 @@ namespace ArtZilla.Net.Core.Extensions {
 			if (b ^ c2 > 0)
 				return bound2;
 			return value;
+		}
+
+		// todo: add description
+		public delegate void ActionRef<T>(ref T structure) where T : struct;
+		
+		// todo: add description
+		public static ref T With<T>(ref this T structure, ActionRef<T> initializer) where T : struct {
+			initializer(ref structure);
+			return ref structure;
+		}
+
+		// todo: add description
+		public static T With<T>(this T obj, Action<T> initializer) where T : class {
+			initializer(obj);
+			return obj;
 		}
 	}
 }
