@@ -5,13 +5,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ArtZilla.Net.Core.Test.Extensions {
 	[TestClass]
 	public class StringExtTest {
-		private static readonly String ExampleEmpty = String.Empty;
-		private const String ExampleEnBase = "Hello World!";
-		private const String ExampleEnDown = "hello world!";
-		private const String ExampleEnUp = "HELLO WORLD!";
-		private const String ExampleNull = null;
-		private const String ExampleWhitespace = " ";
-		private const String ExampleWhitespaces = "     ";
+		private static readonly string ExampleEmpty = string.Empty;
+		private const string ExampleEnBase = "Hello World!";
+		private const string ExampleEnDown = "hello world!";
+		private const string ExampleEnUp = "HELLO WORLD!";
+		private const string ExampleShort = "Hello";
+		private const string ExampleLarge = "Hello World!Hello World!Hello World!";
+		private const string ExampleNull = null;
+		private const string ExampleWhitespace = " ";
+		private const string ExampleWhitespaces = "     ";
 
 		[TestMethod]
 		public void LikeTest() {
@@ -21,7 +23,13 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 
 			Assert.IsFalse(ExampleEnBase.Like(ExampleNull));
 			Assert.IsFalse(ExampleNull.Like(ExampleEnBase));
-			Assert.IsFalse(ExampleNull.Like(ExampleNull));
+			Assert.IsFalse(ExampleNull.Like(ExampleNull)); // should be false!
+
+			Assert.IsFalse(ExampleEnBase.Like(ExampleShort));
+			Assert.IsFalse(ExampleEnBase.Like(ExampleLarge));
+
+			Assert.IsFalse(ExampleShort.Like(ExampleEnBase));
+			Assert.IsFalse(ExampleLarge.Like(ExampleEnBase));
 		}
 
 		[TestMethod]
@@ -43,15 +51,51 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 		}
 
 		[TestMethod]
+		public void IsNullOrEmptyTest() {
+			Assert.IsTrue(ExampleNull.IsNullOrEmpty());
+			Assert.IsTrue(ExampleEmpty.IsNullOrEmpty());
+			Assert.IsFalse(ExampleWhitespace.IsNullOrEmpty());
+			Assert.IsFalse(ExampleWhitespaces.IsNullOrEmpty());
+			Assert.IsFalse(ExampleEnBase.IsNullOrEmpty());
+		}
+
+		[TestMethod]
+		public void IsNotNullOrEmptyTest() {
+			Assert.IsFalse(ExampleNull.IsNotNullOrEmpty());
+			Assert.IsFalse(ExampleEmpty.IsNotNullOrEmpty());
+			Assert.IsTrue(ExampleWhitespace.IsNotNullOrEmpty());
+			Assert.IsTrue(ExampleWhitespaces.IsNotNullOrEmpty());
+			Assert.IsTrue(ExampleEnBase.IsNotNullOrEmpty());
+		}
+
+		[TestMethod]
+		public void IsNullOrWhiteSpaceTest() {
+			Assert.IsTrue(ExampleNull.IsNullOrWhiteSpace());
+			Assert.IsTrue(ExampleEmpty.IsNullOrWhiteSpace());
+			Assert.IsTrue(ExampleWhitespace.IsNullOrWhiteSpace());
+			Assert.IsTrue(ExampleWhitespaces.IsNullOrWhiteSpace());
+			Assert.IsFalse(ExampleEnBase.IsNullOrWhiteSpace());
+		}
+
+		[TestMethod]
+		public void IsNotNullOrWhiteSpaceTest() {
+			Assert.IsFalse(ExampleNull.IsNotNullOrWhiteSpace());
+			Assert.IsFalse(ExampleEmpty.IsNotNullOrWhiteSpace());
+			Assert.IsFalse(ExampleWhitespace.IsNotNullOrWhiteSpace());
+			Assert.IsFalse(ExampleWhitespaces.IsNotNullOrWhiteSpace());
+			Assert.IsTrue(ExampleEnBase.IsNotNullOrWhiteSpace());
+		}
+
+		[TestMethod]
 		public void ConvertTest() {
-			TestParseInt("", Int32.MinValue);
+			TestParseInt("", int.MinValue);
 			TestParseInt("-1", -1);
 			TestParseInt("0", 0);
 			TestParseInt("1", 1);
 			TestParseInt(" 1 ", 1);
 			TestParseInt("     9777     ", 9777);
-			TestParseInt(Int32.MaxValue.ToString(), Int32.MaxValue);
-			TestParseInt(Int32.MinValue.ToString(), Int32.MinValue);
+			TestParseInt(int.MaxValue.ToString(), int.MaxValue);
+			TestParseInt(int.MinValue.ToString(), int.MinValue);
 
 			TestParseBool(true.ToString(), true);
 			TestParseBool("false", false);
@@ -94,19 +138,19 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 			Assert.AreEqual(axbxc, sn.Combine(x, se, a, sw, b, sn, sw, c));
 		}
 
-		private static void TestParseInt(String s, Int32 t) {
+		private static void TestParseInt(string s, int t) {
 			var r = s.ParseIntEx();
 			Console.WriteLine($"Compare [{s}] parsed as [{r}] with [{t}]: {r == t}");
 			Assert.IsTrue(r == t);
 		}
 
-		private static void TestParseBool(String s, Boolean t) {
+		private static void TestParseBool(string s, bool t) {
 			var r = s.ParseBoolEx();
 			Console.WriteLine($"Compare [{s}] parsed as [{r}] with [{t}]: {r == t}");
 			Assert.IsTrue(r == t);
 		}
 
-		private static void TestParseDouble(String s, Double t) {
+		private static void TestParseDouble(string s, double t) {
 			var r = s.ParseDoubleEx();
 			Console.WriteLine($"Compare [{s}] parsed as [{r}] with [{t}]: {r == t}");
 			Assert.IsTrue(r == t);

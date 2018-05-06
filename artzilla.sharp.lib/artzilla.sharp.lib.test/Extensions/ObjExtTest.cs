@@ -104,17 +104,41 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 				Flag = flag;
 			}
 		}
-		
+
+		private class ExampleClass {
+			public int Value;
+			public bool Flag;
+
+			public ExampleClass(int value, bool flag) {
+				Value = value;
+				Flag = flag;
+			}
+		}
+
 		[TestMethod]
-		public void TestWith() {
+		public void TestWithStruct() {
 			var x = new ExampleStruct(0, false);
-			
+
 			Assert.IsFalse(x.Flag);
 			Assert.AreEqual(0, x.Value);
-			
+
 			x.With((ref ExampleStruct s) => s.Flag = true)
 			 .With((ref ExampleStruct s) => s.Value = 42);
-			
+
+			Assert.IsTrue(x.Flag);
+			Assert.AreEqual(42, x.Value);
+		}
+
+		[TestMethod]
+		public void TestWithClass() {
+			var x = new ExampleClass(0, false);
+
+			Assert.IsFalse(x.Flag);
+			Assert.AreEqual(0, x.Value);
+
+			x.With(s => s.Flag = true)
+			 .With(s => s.Value = 42);
+
 			Assert.IsTrue(x.Flag);
 			Assert.AreEqual(42, x.Value);
 		}
