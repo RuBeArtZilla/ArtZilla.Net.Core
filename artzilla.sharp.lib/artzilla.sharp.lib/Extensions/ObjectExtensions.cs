@@ -73,5 +73,10 @@ namespace ArtZilla.Net.Core.Extensions {
 			initializer(obj);
 			return obj;
 		}
+
+		// todo: add description
+		public static TResult Use<TResult, TSource>(this TSource source, Func<TSource, TResult> useMethod) 
+			where TResult : class where TSource : class 
+			=> useMethod(source);
 	}
 }
