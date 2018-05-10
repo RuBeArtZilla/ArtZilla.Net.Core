@@ -61,6 +61,7 @@ namespace ArtZilla.Net.Core.Extensions {
 
 		// todo: add description
 		public delegate void ActionRef<T>(ref T structure) where T : struct;
+		public delegate TResult FuncRef<T, out TResult>(ref T structure) where T : struct;
 
 		// todo: add description
 		public static ref T With<T>(ref this T structure, ActionRef<T> initializer) where T : struct {
@@ -75,8 +76,7 @@ namespace ArtZilla.Net.Core.Extensions {
 		}
 
 		// todo: add description
-		public static TResult Use<TResult, TSource>(this TSource source, Func<TSource, TResult> useMethod) 
-			where TResult : class where TSource : class 
+		public static TResult Use<TResult, TSource>(this TSource source, Func<TSource, TResult> useMethod)
 			=> useMethod(source);
 	}
 }
