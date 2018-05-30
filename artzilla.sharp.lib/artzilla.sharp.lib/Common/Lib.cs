@@ -40,5 +40,25 @@ namespace ArtZilla.Net.Core {
 				return new FuncResult<T>(e);
 			}
 		}
+
+		public static bool TryDo<T>(Func<T> func, out T result) {
+			try {
+				result = func();
+				return true;
+			} catch {
+				result = default;
+				return false;
+			}
+		}
+
+		public static bool TryDo<TWith, TResult>(this TWith with, Func<TWith, TResult> whatToDo, out TResult result) {
+			try {
+				result = whatToDo.Invoke(with);
+				return true;
+			} catch {
+				result = default;
+				return false;
+			}
+		}
 	}
 }

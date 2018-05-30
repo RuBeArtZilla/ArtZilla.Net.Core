@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace ArtZilla.Net.Core.Extensions {
 	public static class ObjectExtensions {
@@ -54,13 +55,17 @@ namespace ArtZilla.Net.Core.Extensions {
 			var b = c3 > 0;
 			if (b ^ c1 < 0)
 				return bound1;
+
 			if (b ^ c2 > 0)
 				return bound2;
+
 			return value;
 		}
 
 		// todo: add description
 		public delegate void ActionRef<T>(ref T structure) where T : struct;
+
+		// todo: add description
 		public delegate TResult FuncRef<T, out TResult>(ref T structure) where T : struct;
 
 		// todo: add description
