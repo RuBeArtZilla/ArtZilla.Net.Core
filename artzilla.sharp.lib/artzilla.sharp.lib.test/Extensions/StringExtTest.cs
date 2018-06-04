@@ -138,6 +138,33 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 			Assert.AreEqual(axbxc, sn.Combine(x, se, a, sw, b, sn, sw, c));
 		}
 
+		[TestMethod]
+		public void ExtractTest() {
+			const string example = "-+zXzxYXYiXI[(abc)][(cba)]*/";
+
+			Assert.AreEqual("abc", example.Extract("(", ")"));
+			Assert.AreEqual("abc", example.Extract("[(", ")"));
+			Assert.AreEqual("abc", example.Extract("(", ")]"));
+			Assert.AreEqual("", example.Extract("-", "+"));
+			Assert.AreEqual("", example.Extract("*", "/"));
+			Assert.AreEqual(null, example.Extract("hello", ""));
+			Assert.AreEqual(null, example.Extract("", "hello"));
+
+			Assert.AreEqual("X", example.Extract("z", "z"));
+			Assert.AreEqual("z", example.Extract("X", "x"));
+			Assert.AreEqual("z", example.Extract("x", "X", StringComparison.OrdinalIgnoreCase));
+
+			Assert.AreEqual("X", example.Extract("i", "I"));
+			Assert.AreEqual("X", example.Extract("i", "i", StringComparison.OrdinalIgnoreCase));
+
+			// todo:...
+		}
+
+		[TestMethod]
+		public void ExtractLastTest() {
+			// todo: ...
+		}
+
 		private static void TestParseInt(string s, int t) {
 			var r = s.ParseIntEx();
 			Console.WriteLine($"Compare [{s}] parsed as [{r}] with [{t}]: {r == t}");

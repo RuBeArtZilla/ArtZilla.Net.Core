@@ -137,5 +137,66 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// <returns></returns>
 		public static string EnframeGood(this string whatToEnframe, string prefix = "", string postfix = "")
 			=> whatToEnframe.IsBad() ? "" : prefix + whatToEnframe + postfix;
+
+		public static string Extract(this string input, string op, string ed, StringComparison comparison = StringComparison.Ordinal) {
+			if (op is null) throw new ArgumentNullException(op);
+			if (ed is null) throw new ArgumentNullException(ed);
+			if (input is null) return input;
+
+			if (input.Length < op.Length + ed.Length) return default;
+			var nop = input.IndexOf(op, comparison);
+			if (nop < 0) return default;
+			nop += op.Length;
+
+			var ned = input.IndexOf(ed, nop, comparison);
+			if (ned < 0) return default;
+			return input.Substring(nop, ned - nop);
+		}
+
+
+		public static string Extract(this string input, string border, StringComparison comparison = StringComparison.Ordinal) {
+			if (border is null) throw new ArgumentNullException(border);
+			if (input is null) return input;
+
+			if (input.Length < border.Length << 1) return default;
+			var nop = input.IndexOf(border, comparison);
+			if (nop < 0) return default;
+			nop += border.Length;
+
+			var ned = input.IndexOf(border, nop, comparison);
+			if (ned < 0) return default;
+			return input.Substring(nop, ned - nop);
+		}
+
+		public static string ExtractLast(this string input, string border, StringComparison comparison = StringComparison.Ordinal) {
+			if (border is null) throw new ArgumentNullException(border);
+			if (input is null) return input;
+
+			if (input.Length < border.Length << 1) return default;
+			var ned = input.LastIndexOf(border, comparison);
+			if (ned < border.Length) return default;
+
+			var nop = input.LastIndexOf(border, ned, comparison);
+			if (nop < 0) return default;
+
+			nop += border.Length;
+			return input.Substring(nop, ned - nop);
+		}
+
+		public static string ExtractLast(this string input, string op, string ed, StringComparison comparison = StringComparison.Ordinal) {
+			if (op is null) throw new ArgumentNullException(op);
+			if (ed is null) throw new ArgumentNullException(ed);
+			if (input is null) return input;
+
+			if (input.Length < op.Length + ed.Length) return default;
+			var ned = input.LastIndexOf(ed, comparison);
+			if (ned < op.Length) return default;
+
+			var nop = input.LastIndexOf(op, ned, comparison);
+			if (nop < 0) return default;
+			nop += op.Length;
+
+			return input.Substring(nop, ned - nop);
+		}
 	}
 }
