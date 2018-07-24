@@ -10,14 +10,12 @@
 		<OutputType>Library</OutputType>
 		<AppDesignerFolder>Properties</AppDesignerFolder>
 		<LangVersion>latest</LangVersion>
-
 		<Language>en-US</Language>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<AssemblyName>ArtZilla.Net.Core</AssemblyName>
 		<AssemblyTitle>ArtZilla.Net.Core</AssemblyTitle>
 		<PackageId>ArtZilla.Net.Core</PackageId>
 		<RootNamespace>ArtZilla.Net.Core</RootNamespace>
-
 		<Description>Common .Net library.</Description>
 		<Summary>Common .Net library.</Summary>
 		<PackageCopyright>Copyright (c) 2017-2018 Artyom Fomin</PackageCopyright>
@@ -27,32 +25,26 @@
 		<PackageProjectUrl>https://artzilla.name/ArtZilla.Net.Core</PackageProjectUrl>
 		<PackageLicenseUrl>https://artzilla.name/ArtZilla.Net.Core/License.txt</PackageLicenseUrl>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
 		<Copyright>Copyright (c) 2017-2018 Artyom Fomin</Copyright>
 		<RepositoryType>Github</RepositoryType>
 		<Company>ArtZilla's development</Company>
-
 		<PackageVersion>1.1.0.18-pre1014</PackageVersion>
 		<AssemblyVersion>1.1.0.18</AssemblyVersion>
-
 		<RepositoryUrl>https://github.com/RuBeArtZilla/ArtZilla.Net.Core</RepositoryUrl>
-		<IncludeSymbols>true</IncludeSymbols>
+		<IncludeSymbols>false</IncludeSymbols>
+		<IncludeSource>false</IncludeSource>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
-
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
 		<DefineConstants>$(DefineConstants);TRACE;DEBUG;</DefineConstants>
 	</PropertyGroup>
-
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
 		<DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
 	</PropertyGroup>
-
 	<PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
 		<DefineConstants>$(DefineConstants);NETSTANDARD;NETSTANDARD2_0</DefineConstants>
 	</PropertyGroup>
-
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
 		<Reference Include="mscorlib" />
 		<Reference Include="System" />
@@ -68,7 +60,6 @@
 	<PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
 		<DefineConstants>NET45;NETFULL</DefineConstants>
 	</PropertyGroup>
-
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
 		<Reference Include="mscorlib" />
 		<Reference Include="System" />
