@@ -96,7 +96,7 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// </param>
 		/// <returns></returns>
 		[DllImport(DllName)]
-		internal static extern bool GetMessage(
+		public static extern bool GetMessage(
 			out MSG lpMsg,
 			IntPtr hWnd,
 			uint wMsgFilterMin,
@@ -111,7 +111,7 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// <param name="lpMsg"></param>
 		/// <returns></returns>
 		[DllImport(DllName)]
-		internal static extern bool TranslateMessage([In] ref MSG lpMsg);
+		public static extern bool TranslateMessage([In] ref MSG lpMsg);
 
 		/// <summary>
 		/// The DispatchMessage function dispatches a message to a window 
@@ -121,7 +121,7 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// <param name="lpMsg"></param>
 		/// <returns></returns>
 		[DllImport(DllName)]
-		internal static extern IntPtr DispatchMessage([In] ref MSG lpMsg);
+		public static extern IntPtr DispatchMessage([In] ref MSG lpMsg);
 
 		/// <summary>
 		/// The PostThreadMessage function posts a message to the message queue 
@@ -140,7 +140,7 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// </param>
 		/// <returns></returns>
 		[DllImport(DllName)]
-		internal static extern bool PostThreadMessage(
+		public static extern bool PostThreadMessage(
 			uint idThread,
 			uint msg,
 			UIntPtr wParam,
