@@ -30,6 +30,12 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			AssertSameEnumerables(ideal, test3.Append(16, 23, 42));
 		}
 
+		[TestMethod]
+		public void CombineTest() {
+			Assert.AreEqual("4 8 15 16 23 42", new[] { 4, 8, 15, 16, 23, 42 }.Combine(" "));
+			Assert.AreEqual("", new[] { null, "", "   ", null }.Combine());
+		}
+
 		public static void AssertSameEnumerables<T>(IEnumerable<T> first, IEnumerable<T> second) {
 			var i1 = first.GetEnumerator();
 			var i2 = second.GetEnumerator();
@@ -37,7 +43,7 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			while (true) {
 				hasNext = i1.MoveNext();
 				Assert.AreEqual(hasNext, i2.MoveNext());
-				if (!hasNext)	return;
+				if (!hasNext) return;
 				Assert.AreEqual(i1.Current, i2.Current);
 			}
 		}
