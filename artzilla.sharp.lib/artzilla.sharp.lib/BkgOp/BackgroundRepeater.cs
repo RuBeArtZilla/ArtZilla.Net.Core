@@ -71,6 +71,7 @@ namespace ArtZilla.Net.Core {
 		/// <param name="action">The delegate that represents the code to repeat.</param>
 		/// <param name="cooldown">Period between repeating background operation.</param>
 		/// <param name="isStarted">Initial state of the repeater</param>
+		/// <param name="exceptionHandler">todo...</param>
 		public BackgroundRepeater(Action action, TimeSpan cooldown, bool isStarted, ExceptionHandlerDelegate exceptionHandler = null)
       : this(t => Cancelable(action, t), cooldown, isStarted, exceptionHandler) {
 			if (action == null)
@@ -83,6 +84,7 @@ namespace ArtZilla.Net.Core {
 		/// <param name="action">The delegate that represents the code to repeat.</param>
 		/// <param name="cooldown">Period between repeating background operation.</param>
 		/// <param name="isStarted">Initial state of the repeater</param>
+		/// <param name="exceptionHandler">todo...</param>
 		public BackgroundRepeater(Action<CancellationToken> action, TimeSpan cooldown, bool isStarted, ExceptionHandlerDelegate exceptionHandler = null)
 			: this(action, cooldown) {
 			_exceptionHandler = exceptionHandler;
@@ -90,6 +92,7 @@ namespace ArtZilla.Net.Core {
 		}
 
 		/// <summary> Set repeater on/off </summary>
+		/// <param name="value">todo</param>
 		public void Enabled(bool value) { // todo: write test?
 			if (value) Start();
 			else Stop();
@@ -153,7 +156,7 @@ namespace ArtZilla.Net.Core {
 			}
 		}
 
-		private void Repeater(Action<CancellationToken> action, Object token) {
+		private void Repeater(Action<CancellationToken> action, object token) {
 			var t = (CancellationToken) token;
 
 			try {

@@ -47,6 +47,29 @@ namespace ArtZilla.Net.Core.Extensions {
 				throw new ArgumentNullException(paramName);
 		}
 
+		/// <summary> Check that array contain any item </summary>
+		/// <param name="param"></param>
+		/// <exception cref="ArgumentException">Thrown when string is empty</exception>
+		/// <exception cref="ArgumentNullException">Thrown when string is null</exception>
+		public static void NotNullOrEmpty(string param) {
+			if (param == null)
+				throw new ArgumentNullException();
+			if (param.Length == 0)
+				throw new ArgumentException();
+		}
+
+		/// <summary> Check that array contain any item </summary>
+		/// <param name="param"></param>
+		/// <param name="paramName"></param>
+		/// <exception cref="ArgumentException">Thrown when string is empty</exception>
+		/// <exception cref="ArgumentNullException">Thrown when string is null</exception>
+		public static void NotNullOrEmpty(string param, string paramName) {
+			if (param == null)
+				throw new ArgumentNullException(paramName);
+			if (param.Length == 0)
+				throw new ArgumentException("Zero Length", paramName);
+		}
+
 		/// <summary>
 		/// Check that parameter has any text (not whitespace) symbol
 		/// </summary>

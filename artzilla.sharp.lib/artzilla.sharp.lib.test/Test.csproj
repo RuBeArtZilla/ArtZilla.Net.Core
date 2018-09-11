@@ -43,14 +43,18 @@
     <Compile Include="Common\AssertEx.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\LibTests.cs" />
+    <Compile Include="Extensions\EnumTraitsTests.cs" />
     <Compile Include="Extensions\GuardTests.cs" />
     <Compile Include="Extensions\IDicExtTests.cs" />
     <Compile Include="Extensions\IEnumerableExtTests.cs" />
     <Compile Include="Extensions\ObjExtTest.cs" />
     <Compile Include="Extensions\StringExtTest.cs" />
     <Compile Include="Extensions\TypeExtTest.cs" />
+    <Compile Include="Plugins\PluginsTest.cs" />
     <Compile Include="Plugins\VersionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\SpecialSerializerTests.cs" />
+    <Compile Include="Serialization\UnitTest1.cs" />
     <Compile Include="Tests\AssertExTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +66,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

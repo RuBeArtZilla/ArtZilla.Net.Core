@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
@@ -12,39 +14,29 @@ namespace ArtZilla.Net.Core.Extensions {
 		public static bool IsGood(this string value)
 			=> !string.IsNullOrWhiteSpace(value);
 
-		/// <summary> Wrapper for <see cref="string.Equals(string, System.StringComparison)"/> with OrdinalIgnoreCase </summary>
-		public static bool Like(this string left, string right)
-			=> left?.Equals(right, StringComparison.OrdinalIgnoreCase) ?? false;
+		/// <summary> Wrapper for <see cref="string.IsNullOrEmpty"/> </summary>
+		public static bool IsNullOrEmpty(this string value)
+			=> string.IsNullOrEmpty(value);
+
+		/// <summary> Negation of <see cref="string.IsNullOrWhiteSpace"/> </summary>
+		public static bool IsNotNullOrEmpty(this string value)
+			=> !string.IsNullOrEmpty(value);
+
+		/// <summary> Wrapper for <see cref="string.IsNullOrWhiteSpace"/> </summary>
+		public static bool IsNullOrWhiteSpace(this string value)
+			=> string.IsNullOrWhiteSpace(value);
+
+		/// <summary> Negation of <see cref="string.IsNullOrWhiteSpace"/> </summary>
+		public static bool IsNotNullOrWhiteSpace(this string value)
+			=> !string.IsNullOrWhiteSpace(value);
 
 		/// <summary>
-		///	Converts the string representation of a number to its 32-bit signed integer equivalent, or default value
+		/// Wrapper for <see cref="string.Equals(string, System.StringComparison)"/> with OrdinalIgnoreCase.
+		/// Null values always returns false.
 		/// </summary>
-		/// <param name="source">A string containing a number to convert.</param>
-		/// <param name="defValue">Default value, returned if conversion failed. Default value <see cref="Int32.MinValue"/></param>
-		/// <returns> When this method returns, result is the 32-bit signed integer value equivalent to the number contained in s, or defValue if can't parse number </returns>
-		public static int ParseIntEx(this string source, int defValue = Int32.MinValue) {
-			if (source.IsBad())
-				return defValue;
-			return Int32.TryParse(source, out var val) ? val : defValue;
-		}
-
-		public static double ParseDoubleEx(this string source, double defValue = Double.NaN) {
-			if (source.IsBad())
-				return defValue;
-			return Double.TryParse(source, out var val) ? val : defValue;
-		}
-
-		public static double ParseDoubleEx(this string source, NumberStyles ns, IFormatProvider ifp, double defValue = Double.NaN) {
-			if (source.IsBad())
-				return defValue;
-			return Double.TryParse(source, ns, ifp, out var val) ? val : defValue;
-		}
-
-		public static bool ParseBoolEx(this string source, bool defValue = false) {
-			if (source.IsBad())
-				return defValue;
-			return Boolean.TryParse(source, out var val) ? val : defValue;
-		}
+		/// <returns> True if left string equals other string (IgnoreCase), otherwise false. </returns>
+		public static bool Like(this string left, string right)
+			=> left?.Equals(right, StringComparison.OrdinalIgnoreCase) ?? false;
 
 		/// <summary>
 		/// <TODO>add description, that method return combined strings with delimeter, or any not bad string, or empty string.</TODO>
@@ -117,5 +109,232 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// <returns></returns>
 		public static string EnframeGood(this string whatToEnframe, string prefix = "", string postfix = "")
 			=> whatToEnframe.IsBad() ? "" : prefix + whatToEnframe + postfix;
+
+		#region Parse methods
+
+		/// <summary>
+		///	Converts the string representation of a number to its 32-bit signed integer equivalent, or default value
+		/// </summary>
+		/// <param name="source">A string containing a number to convert.</param>
+		/// <param name="defValue">Default value, returned if conversion failed. Default value <see cref="Int32.MinValue"/></param>
+		/// <returns> When this method returns, result is the 32-bit signed integer value equivalent to the number contained in s, or defValue if can't parse number </returns>
+		public static int ParseIntEx(this string source, int defValue = int.MinValue) {
+			if (source.IsBad())
+				return defValue;
+			return int.TryParse(source, out var val) ? val : defValue;
+		}
+
+		public static double ParseDoubleEx(this string source, double defValue = double.NaN) {
+			if (source.IsBad())
+				return defValue;
+			return double.TryParse(source, out var val) ? val : defValue;
+		}
+
+		public static double ParseDoubleEx(this string source, NumberStyles ns, IFormatProvider ifp, double defValue = double.NaN) {
+			if (source.IsBad())
+				return defValue;
+			return double.TryParse(source, ns, ifp, out var val) ? val : defValue;
+		}
+
+		public static bool ParseBoolEx(this string source, bool defValue = false) {
+			if (source.IsBad())
+				return defValue;
+			return bool.TryParse(source, out var val) ? val : defValue;
+		}
+		
+		#endregion
+
+		#region Extract methods
+
+		public static string Extract(this string input, out string remainder, string op, string ed, StringComparison comparison = StringComparison.Ordinal) {
+			Guard.NotNullOrEmpty(op, nameof(op));
+			Guard.NotNullOrEmpty(ed, nameof(ed));
+
+			remainder = input;
+			if (input is null)
+				return default;
+
+			if (input.Length < op.Length + ed.Length)
+				return default;
+
+			var nop = input.IndexOf(op, comparison);
+			if (nop < 0)
+				return default;
+
+			var ned = input.IndexOf(ed, nop + op.Length, comparison);
+			if (ned < 0)
+				return default;
+
+			remainder = input.Remove(nop, ned - nop + ed.Length);
+
+			nop += op.Length;
+			return input.Substring(nop, ned - nop);
+		}
+
+		public static string Extract(this string input, out string remainder, string border, StringComparison comparison = StringComparison.Ordinal) {
+			Guard.NotNullOrEmpty(border, nameof(border));
+
+			remainder = input;
+			if (input is null)
+				return default;
+
+			if (input.Length < border.Length << 1)
+				return default;
+
+			var nop = input.IndexOf(border, comparison);
+			if (nop < 0)
+				return default;
+
+			nop += border.Length;
+
+			var ned = input.IndexOf(border, nop, comparison);
+			if (ned < 0)
+				return default;
+
+			remainder = input.Remove(nop - border.Length, ned + (border.Length << 1));
+			return input.Substring(nop, ned - nop);
+		}
+
+		public static string Extract(this string input, string op, string ed, StringComparison comparison = StringComparison.Ordinal) {
+			Guard.NotNullOrEmpty(op, nameof(op));
+			Guard.NotNullOrEmpty(ed, nameof(ed));
+
+			if (input is null)
+				return default;
+
+			if (input.Length < op.Length + ed.Length)
+				return default;
+
+			var nop = input.IndexOf(op, comparison);
+			if (nop < 0)
+				return default;
+
+			nop += op.Length;
+			var ned = input.IndexOf(ed, nop, comparison);
+			if (ned < 0)
+				return default;
+
+			return input.Substring(nop, ned - nop);
+		}
+
+		public static string Extract(this string input, string border, StringComparison comparison = StringComparison.Ordinal) {
+			Guard.NotNullOrEmpty(border, nameof(border));
+
+			if (input is null)
+				return default;
+
+			if (input.Length < border.Length << 1)
+				return default;
+
+			var nop = input.IndexOf(border, comparison);
+			if (nop < 0)
+				return default;
+
+			nop += border.Length;
+			var ned = input.IndexOf(border, nop, comparison);
+			if (ned < 0)
+				return default;
+
+			return input.Substring(nop, ned - nop);
+		}
+
+		#endregion
+
+		#region ExtractLast methods
+
+		public static string ExtractLast(this string input, out string remainder, string op, string ed, StringComparison comparison = StringComparison.Ordinal) {
+			Guard.NotNullOrEmpty(op, nameof(op));
+			Guard.NotNullOrEmpty(ed, nameof(ed));
+
+			remainder = input;
+			if (input is null)
+				return default;
+
+			if (input.Length < op.Length + ed.Length)
+				return default;
+
+			var ned = input.LastIndexOf(ed, comparison);
+			if (ned < op.Length)
+				return default;
+
+			var nop = input.LastIndexOf(op, ned - 1, comparison);
+			if (nop < 0)
+				return default;
+
+			remainder = input.Remove(nop, ned - nop + ed.Length);
+			nop += op.Length;
+
+			return input.Substring(nop, ned - nop);
+		}
+
+		public static string ExtractLast(this string input, out string remainder, string border, StringComparison comparison = StringComparison.Ordinal) {
+			Guard.NotNullOrEmpty(border, nameof(border));
+
+			remainder = input;
+			if (input is null)
+				return default;
+
+			if (input.Length < border.Length << 1)
+				return default;
+
+			var ned = input.LastIndexOf(border, comparison);
+			if (ned < border.Length)
+				return default;
+
+			var nop = input.LastIndexOf(border, ned - 1, comparison);
+			if (nop < 0)
+				return default;
+
+			remainder = input.Remove(nop, ned - nop + border.Length);
+			nop += border.Length;
+
+			return input.Substring(nop, ned - nop);
+		}
+
+		public static string ExtractLast(this string input, string op, string ed, StringComparison comparison = StringComparison.Ordinal) {
+			Guard.NotNullOrEmpty(op, nameof(op));
+			Guard.NotNullOrEmpty(ed, nameof(ed));
+
+			if (input is null)
+				return default;
+
+			if (input.Length < op.Length + ed.Length)
+				return default;
+
+			var ned = input.LastIndexOf(ed, comparison);
+			if (ned < op.Length)
+				return default;
+
+			var nop = input.LastIndexOf(op, ned - 1, comparison);
+			if (nop < 0)
+				return default;
+
+			nop += op.Length;
+
+			return input.Substring(nop, ned - nop);
+		}
+
+		public static string ExtractLast(this string input, string border, StringComparison comparison = StringComparison.Ordinal) {
+			Guard.NotNullOrEmpty(border, nameof(border));
+
+			if (input is null)
+				return default;
+
+			if (input.Length < border.Length << 1)
+				return default;
+
+			var ned = input.LastIndexOf(border, comparison);
+			if (ned < border.Length)
+				return default;
+
+			var nop = input.LastIndexOf(border, ned - 1, comparison);
+			if (nop < 0)
+				return default;
+
+			nop += border.Length;
+			return input.Substring(nop, ned - nop);
+		}
+
+		#endregion
 	}
 }

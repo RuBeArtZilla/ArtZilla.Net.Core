@@ -1,30 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace ArtZilla.Net.Core.Extensions {
 	public static class ObjectExtensions {
-		/// <summary>
-		/// Simple check, that object is null
-		/// </summary>
-		public static bool IsNull<T>(this T self)
+		/// <summary> Simple check, that object is null </summary>
+		public static bool IsNull<T>(this T self) where T : class
 			=> self == null;
 
-		/// <summary>
-		/// Simple check, that object is any of values by using the default equality comparer
-		/// </summary>
+		/// <summary> Simple check, that object is any of values by using the default equality comparer </summary>
 		public static bool IsAnyOf<T>(this T self, params T[] values)
 			=> values.Contains(self);
 
-		/// <summary>
-		/// Simple check, that <paramref name="value"/> is any of <paramref name="values"/> by using a specified <see cref="IEqualityComparer{T}"/>
-		/// </summary>
+		/// <summary> Simple check, that <paramref name="value"/> is any of <paramref name="values"/> by using a specified <see cref="IEqualityComparer{T}"/> </summary>
 		public static bool IsAnyOf<T>(this T value, IEqualityComparer<T> comparer, params T[] values)
 			=> values.Contains(value, comparer);
 
-		/// <summary>
-		/// Return collection, that contain only <paramref name="item"/>
-		/// </summary>
+		/// <summary> Return collection, that contain only <paramref name="item"/> </summary>
 		/// <typeparam name="T">Type of the <paramref name="item"/></typeparam>
 		/// <param name="item">Element of result collection</param>
 		/// <returns>Collection that contain only <paramref name="item"/></returns>
@@ -62,9 +55,33 @@ namespace ArtZilla.Net.Core.Extensions {
 			var b = c3 > 0;
 			if (b ^ c1 < 0)
 				return bound1;
+
 			if (b ^ c2 > 0)
 				return bound2;
+
 			return value;
 		}
+
+		// todo: add description
+		public delegate void ActionRef<T>(ref T structure) where T : struct;
+
+		// todo: add description
+		public delegate TResult FuncRef<T, out TResult>(ref T structure) where T : struct;
+
+		// todo: add description
+		public static ref T With<T>(ref this T structure, ActionRef<T> initializer) where T : struct {
+			initializer(ref structure);
+			return ref structure;
+		}
+
+		// todo: add description
+		public static T With<T>(this T obj, Action<T> initializer) where T : class {
+			initializer(obj);
+			return obj;
+		}
+
+		// todo: add description
+		public static TResult Use<TResult, TSource>(this TSource source, Func<TSource, TResult> useMethod)
+			=> useMethod(source);
 	}
 }

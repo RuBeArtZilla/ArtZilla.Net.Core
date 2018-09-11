@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace ArtZilla.Net.Core.Extensions {
-	public static class IEnumerableExtensions {
+	public static class EnumerableExtensions {
 		/// <summary>
 		/// Performs the specified action on each element in <see cref="IEnumerable{T}"/> and return collection.
 		/// <para>Invoke action only if result was enumerated!</para>
@@ -25,7 +25,6 @@ namespace ArtZilla.Net.Core.Extensions {
 
 			Guard.NotNull(items, nameof(items));
 			Guard.NotNull(action, nameof(action));
-
 			return InnerForEvery();
 		}
 
@@ -46,7 +45,6 @@ namespace ArtZilla.Net.Core.Extensions {
 			}
 
 			Guard.NotNull(items, nameof(items));
-
 			return InnerAppend();
 		}
 
@@ -97,6 +95,23 @@ namespace ArtZilla.Net.Core.Extensions {
 			return InnerAppend();	*/
 
 			return items.Concat(args);
+		}
+
+		public static string Combine<T>(this IEnumerable<T> items, string delimeter = ", ") {
+			if (items is null)
+				throw new ArgumentNullException(nameof(items));
+
+			var sb = new StringBuilder();
+			foreach (var item in items) {
+				var str = item?.ToString();
+				if (str.IsNullOrWhiteSpace())
+					continue;
+				if (sb.Length > 0)
+					sb.Append(delimeter);
+				sb.Append(item);
+			}
+
+			return sb.ToString();
 		}
 	}
 }

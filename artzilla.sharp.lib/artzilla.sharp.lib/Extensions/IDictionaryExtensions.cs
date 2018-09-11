@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ArtZilla.Net.Core.Extensions {
-	public static class IDictionaryExtensions {
+	public static class DictionaryExtensions {
 		/// <summary>
 		/// Gets the value associated with the specified key or default value if key not exist
 		/// </summary>

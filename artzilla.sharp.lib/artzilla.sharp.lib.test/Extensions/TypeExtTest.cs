@@ -4,7 +4,7 @@ using System.Linq;
 using ArtZilla.Net.Core.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArtZilla.Net.Core.Test.Extensions {
+namespace ArtZilla.Net.Core.Tests.Extensions {
 	[TestClass]
 	public class TypeExtTest {
 		interface ITest1 { }
@@ -13,12 +13,6 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 			public string Property0 { get; set; } // +
 			public string Property1 { get; } // +
 			public string Property2 { private get; set; } // +
-			string Property3 { get; } // -
-
-			[System.Runtime.CompilerServices.IndexerName("TheItem")]
-			public int this[int index] { get => 0; }
-
-			public string Field0;
 		}
 
 		private struct TestStruct { }
