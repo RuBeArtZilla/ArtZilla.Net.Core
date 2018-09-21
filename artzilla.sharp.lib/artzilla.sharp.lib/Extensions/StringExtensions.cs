@@ -110,6 +110,11 @@ namespace ArtZilla.Net.Core.Extensions {
 		public static string EnframeGood(this string whatToEnframe, string prefix = "", string postfix = "")
 			=> whatToEnframe.IsBad() ? "" : prefix + whatToEnframe + postfix;
 
+		public static string TrimSuffix(this string source, string suffix, StringComparison comparisonType = StringComparison.Ordinal)
+			=> source?.EndsWith(suffix, comparisonType) ?? false
+				? source.Remove(source.Length - suffix.Length)
+				: source ?? string.Empty;
+
 		#region Parse methods
 
 		/// <summary>

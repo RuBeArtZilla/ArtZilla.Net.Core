@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ArtZilla.Net.Core.Test.Extensions {
 	[TestClass]
 	public class StringExtTest {
-		private static readonly string ExampleEmpty = string.Empty;
+		private const string ExampleEmpty = "";
 		private const string ExampleEnBase = "Hello World!";
 		private const string ExampleEnDown = "hello world!";
 		private const string ExampleEnUp = "HELLO WORLD!";
@@ -136,6 +136,23 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 
 			Assert.AreEqual(axbxc, a.Combine(x, b, c));
 			Assert.AreEqual(axbxc, sn.Combine(x, se, a, sw, b, sn, sw, c));
+		}
+
+		[TestMethod]
+		public void EnframeTests() {
+			Assert.AreEqual("Hello world!", "world".EnframeGood("Hello ", "!"));
+			Assert.AreEqual("", "".EnframeGood("Hello ", "!"));
+			Assert.AreEqual("", ExampleNull.EnframeGood("Hello ", "!"));
+		}
+
+		[TestMethod]
+		public void TrimSuffixTests() {
+			Assert.AreEqual("Hello world!", "Hello world!WTF?".TrimSuffix("WTF?"));
+			Assert.AreEqual("Hello world!", "Hello world!WTF?".TrimSuffix("wtf?", StringComparison.OrdinalIgnoreCase));
+			Assert.AreEqual("Hello world!", "Hello world!".TrimSuffix("world"));
+			Assert.AreEqual("", "".TrimSuffix("world"));
+			Assert.AreEqual("", ExampleNull.TrimSuffix("world"));
+			Assert.AreEqual("", ExampleNull.TrimSuffix(ExampleNull));
 		}
 
 		// TODO: finish extract tests
