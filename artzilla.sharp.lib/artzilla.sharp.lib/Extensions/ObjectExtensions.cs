@@ -7,7 +7,7 @@ namespace ArtZilla.Net.Core.Extensions {
 	public static class ObjectExtensions {
 		/// <summary> Simple check, that object is null </summary>
 		public static bool IsNull<T>(this T self) where T : class
-			=> self == null;
+			=> self is null;
 
 		/// <summary> Simple check, that object is any of values by using the default equality comparer </summary>
 		public static bool IsAnyOf<T>(this T self, params T[] values)

@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ArtZilla.Net.Core.Tests.Extensions {
 	[TestClass]
-	public class ObjExtTest {
+	public class ObjExtTests {
 		[TestMethod]
 		public void TestIsNull() {
 			object o = null;

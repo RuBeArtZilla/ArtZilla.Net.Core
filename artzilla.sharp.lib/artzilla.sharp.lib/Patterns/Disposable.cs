@@ -4,6 +4,7 @@ namespace ArtZilla.Net.Core.Patterns {
 	/// <summary>
 	/// Represent base IDisposable implementation
 	/// </summary>
+	[Obsolete("Anti-pattern. Keep unmanaged and managed resources separated")]
 	public abstract class Disposable : IDisposable {
 		/// <summary>
 		/// Gets a value indicating whether this <see cref="Disposable"/> is disposed.
