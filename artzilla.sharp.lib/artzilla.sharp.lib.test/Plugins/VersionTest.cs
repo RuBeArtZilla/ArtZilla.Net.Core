@@ -1,7 +1,6 @@
 ﻿// using ArtZilla.Net.Core.Experimental;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArtZilla.Net.Core.Test.Plugins {
+namespace ArtZilla.Net.Core.Tests.Plugins {
 	/*
 	[TestClass]
 	public class VersionTest {

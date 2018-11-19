@@ -1,7 +1,8 @@
 ﻿using System;
+using ArtZilla.Net.Core.Tests.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArtZilla.Net.Core.Test.Tests {
+namespace ArtZilla.Net.Core.Tests.Tests {
 	[TestClass]
 	public class AssertExTests {
 		[TestMethod]

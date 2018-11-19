@@ -95,6 +95,7 @@ namespace ArtZilla.Net.Core.Extensions {
 							b.Append(delimeter);
 						b.Append(item);
 					}
+
 					return b.ToString();
 				}
 			}
@@ -110,13 +111,36 @@ namespace ArtZilla.Net.Core.Extensions {
 		public static string EnframeGood(this string whatToEnframe, string prefix = "", string postfix = "")
 			=> whatToEnframe.IsBad() ? "" : prefix + whatToEnframe + postfix;
 
+		/// <summary> Method remove prefix if exist </summary>
+		/// <param name="source">Source string</param>
+		/// <param name="prefix">Prefix string</param>
+		/// <param name="comparisonType"></param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentNullException">prefix </exception>
+		public static string TrimPrefix(this string source, string prefix,
+			StringComparison comparisonType = StringComparison.Ordinal)
+			=> source?.StartsWith(prefix, comparisonType) == true
+				? source.Substring(prefix.Length)
+				: source ?? string.Empty;
+
+		/// <summary> Method remove suffix if exist </summary>
+		/// <param name="source">Source string</param>
+		/// <param name="suffix">Suffix string</param>
+		/// <param name="comparisonType"></param>
+		/// <returns></returns>
+		public static string TrimSuffix(this string source, string suffix,
+			StringComparison comparisonType = StringComparison.Ordinal)
+			=> source?.EndsWith(suffix, comparisonType) == true
+				? source.Remove(source.Length - suffix.Length)
+				: source ?? string.Empty;
+
 		#region Parse methods
 
 		/// <summary>
 		///	Converts the string representation of a number to its 32-bit signed integer equivalent, or default value
 		/// </summary>
 		/// <param name="source">A string containing a number to convert.</param>
-		/// <param name="defValue">Default value, returned if conversion failed. Default value <see cref="Int32.MinValue"/></param>
+		/// <param name="defValue">Default value, returned if conversion failed. Default value <see cref="int.MinValue"/></param>
 		/// <returns> When this method returns, result is the 32-bit signed integer value equivalent to the number contained in s, or defValue if can't parse number </returns>
 		public static int ParseIntEx(this string source, int defValue = int.MinValue) {
 			if (source.IsBad())
@@ -130,7 +154,8 @@ namespace ArtZilla.Net.Core.Extensions {
 			return double.TryParse(source, out var val) ? val : defValue;
 		}
 
-		public static double ParseDoubleEx(this string source, NumberStyles ns, IFormatProvider ifp, double defValue = double.NaN) {
+		public static double ParseDoubleEx(this string source, NumberStyles ns, IFormatProvider ifp,
+			double defValue = double.NaN) {
 			if (source.IsBad())
 				return defValue;
 			return double.TryParse(source, ns, ifp, out var val) ? val : defValue;
@@ -141,12 +166,13 @@ namespace ArtZilla.Net.Core.Extensions {
 				return defValue;
 			return bool.TryParse(source, out var val) ? val : defValue;
 		}
-		
+
 		#endregion
 
 		#region Extract methods
 
-		public static string Extract(this string input, out string remainder, string op, string ed, StringComparison comparison = StringComparison.Ordinal) {
+		public static string Extract(this string input, out string remainder, string op, string ed,
+			StringComparison comparison = StringComparison.Ordinal) {
 			Guard.NotNullOrEmpty(op, nameof(op));
 			Guard.NotNullOrEmpty(ed, nameof(ed));
 
@@ -171,7 +197,8 @@ namespace ArtZilla.Net.Core.Extensions {
 			return input.Substring(nop, ned - nop);
 		}
 
-		public static string Extract(this string input, out string remainder, string border, StringComparison comparison = StringComparison.Ordinal) {
+		public static string Extract(this string input, out string remainder, string border,
+			StringComparison comparison = StringComparison.Ordinal) {
 			Guard.NotNullOrEmpty(border, nameof(border));
 
 			remainder = input;
@@ -195,7 +222,8 @@ namespace ArtZilla.Net.Core.Extensions {
 			return input.Substring(nop, ned - nop);
 		}
 
-		public static string Extract(this string input, string op, string ed, StringComparison comparison = StringComparison.Ordinal) {
+		public static string Extract(this string input, string op, string ed,
+			StringComparison comparison = StringComparison.Ordinal) {
 			Guard.NotNullOrEmpty(op, nameof(op));
 			Guard.NotNullOrEmpty(ed, nameof(ed));
 
@@ -217,7 +245,8 @@ namespace ArtZilla.Net.Core.Extensions {
 			return input.Substring(nop, ned - nop);
 		}
 
-		public static string Extract(this string input, string border, StringComparison comparison = StringComparison.Ordinal) {
+		public static string Extract(this string input, string border,
+			StringComparison comparison = StringComparison.Ordinal) {
 			Guard.NotNullOrEmpty(border, nameof(border));
 
 			if (input is null)
@@ -242,7 +271,8 @@ namespace ArtZilla.Net.Core.Extensions {
 
 		#region ExtractLast methods
 
-		public static string ExtractLast(this string input, out string remainder, string op, string ed, StringComparison comparison = StringComparison.Ordinal) {
+		public static string ExtractLast(this string input, out string remainder, string op, string ed,
+			StringComparison comparison = StringComparison.Ordinal) {
 			Guard.NotNullOrEmpty(op, nameof(op));
 			Guard.NotNullOrEmpty(ed, nameof(ed));
 
@@ -267,7 +297,8 @@ namespace ArtZilla.Net.Core.Extensions {
 			return input.Substring(nop, ned - nop);
 		}
 
-		public static string ExtractLast(this string input, out string remainder, string border, StringComparison comparison = StringComparison.Ordinal) {
+		public static string ExtractLast(this string input, out string remainder, string border,
+			StringComparison comparison = StringComparison.Ordinal) {
 			Guard.NotNullOrEmpty(border, nameof(border));
 
 			remainder = input;
@@ -291,7 +322,8 @@ namespace ArtZilla.Net.Core.Extensions {
 			return input.Substring(nop, ned - nop);
 		}
 
-		public static string ExtractLast(this string input, string op, string ed, StringComparison comparison = StringComparison.Ordinal) {
+		public static string ExtractLast(this string input, string op, string ed,
+			StringComparison comparison = StringComparison.Ordinal) {
 			Guard.NotNullOrEmpty(op, nameof(op));
 			Guard.NotNullOrEmpty(ed, nameof(ed));
 
@@ -314,7 +346,8 @@ namespace ArtZilla.Net.Core.Extensions {
 			return input.Substring(nop, ned - nop);
 		}
 
-		public static string ExtractLast(this string input, string border, StringComparison comparison = StringComparison.Ordinal) {
+		public static string ExtractLast(this string input, string border,
+			StringComparison comparison = StringComparison.Ordinal) {
 			Guard.NotNullOrEmpty(border, nameof(border));
 
 			if (input is null)
@@ -333,6 +366,59 @@ namespace ArtZilla.Net.Core.Extensions {
 
 			nop += border.Length;
 			return input.Substring(nop, ned - nop);
+		}
+
+		#endregion
+
+		#region Extract_Word methods
+
+		/// <summary> Extract first word (part of the string before first delimeter). </summary>
+		/// <param name="source"></param>
+		/// <param name="remainder">Part of source after first delimeter</param>
+		/// <param name="delimeter"></param>
+		/// <returns></returns>
+		public static string ExtractFirstWord(this string source, out string remainder, string delimeter = " ") {
+			remainder = string.Empty;
+			if (delimeter is null || delimeter.Length == 0)
+				throw new ArgumentNullException(nameof(delimeter));
+
+			if (source is null)
+				return string.Empty;
+
+			if (source.Length < delimeter.Length)
+				return source;
+
+			var i = source.IndexOf(delimeter, StringComparison.Ordinal);
+			if (i < 0)
+				return source;
+
+			remainder = source.Substring(i + delimeter.Length, source.Length - delimeter.Length - i);
+			return source.Remove(i);
+		}
+
+		/// <summary> Extract last word (part of the string after last delimeter). </summary>
+		/// <param name="source"></param>
+		/// <param name="remainder">Part of source before last delimeter</param>
+		/// <param name="delimeter"></param>
+		/// <returns></returns>
+		public static string ExtractLastWord(this string source, out string remainder, string delimeter = " ") {
+			remainder = string.Empty;
+			if (delimeter is null || delimeter.Length == 0)
+				throw new ArgumentNullException(nameof(delimeter));
+
+			if (source is null)
+				return string.Empty;
+
+			if (source.Length < delimeter.Length)
+				return source;
+
+			var i = source.LastIndexOf(delimeter, StringComparison.Ordinal);
+			if (i < 0)
+				return source;
+
+			var result = source.Substring(i + delimeter.Length, source.Length - delimeter.Length - i);
+			remainder = source.Remove(i);
+			return result;
 		}
 
 		#endregion
