@@ -1,10 +1,9 @@
 ﻿using System;
 using ArtZilla.Net.Core.Extensions;
-using ArtZilla.Net.Core.Test.Common;
+using ArtZilla.Net.Core.Tests.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static ArtZilla.Net.Core.Test.Common.Constants;
 
-namespace ArtZilla.Net.Core.Test.Extensions {
+namespace ArtZilla.Net.Core.Tests.Extensions {
 	[TestClass]
 	public class GuardTests {
 		[TestMethod]
@@ -13,7 +12,7 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 			AssertEx.IsFailWith<ArgumentNullException>(() => Guard.NotNull(x));
 			AssertEx.IsFailWith<ArgumentNullException>(() => Guard.NotNull(x, nameof(x)));
 
-			x = MagicNumber;
+			x = Constants.MagicNumber;
 			Guard.NotNull(x);
 			Guard.NotNull(x, nameof(x));
 		}
@@ -24,39 +23,39 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 			Guard.Null(x);
 			Guard.Null(x, nameof(x));
 
-			x = MagicNumber;
+			x = Constants.MagicNumber;
 			AssertEx.IsFailWith<ArgumentNullException>(() => Guard.Null(x));
 			AssertEx.IsFailWith<ArgumentNullException>(() => Guard.Null(x, nameof(x)));
 		}
 
 		[TestMethod]
 		public void TestIsAnyText() {
-			Guard.HasAnyText(TestString);
-			Guard.HasAnyText(TestString, nameof(TestString));
+			Guard.HasAnyText(Constants.TestString);
+			Guard.HasAnyText(Constants.TestString, nameof(Constants.TestString));
 
-			Guard.HasAnyText(TestStringEx);
-			Guard.HasAnyText(TestStringEx, nameof(TestStringEx));
+			Guard.HasAnyText(Constants.TestStringEx);
+			Guard.HasAnyText(Constants.TestStringEx, nameof(Constants.TestStringEx));
 
-			AssertEx.IsFailWith<ArgumentException>(() => Guard.HasAnyText(NullString));
-			AssertEx.IsFailWith<ArgumentException>(() => Guard.HasAnyText(NullString, nameof(NullString)));
+			AssertEx.IsFailWith<ArgumentException>(() => Guard.HasAnyText(Constants.NullString));
+			AssertEx.IsFailWith<ArgumentException>(() => Guard.HasAnyText(Constants.NullString, nameof(Constants.NullString)));
 
-			AssertEx.IsFailWith<ArgumentException>(() => Guard.HasAnyText(EmptyString));
-			AssertEx.IsFailWith<ArgumentException>(() => Guard.HasAnyText(EmptyString, nameof(EmptyString)));
+			AssertEx.IsFailWith<ArgumentException>(() => Guard.HasAnyText(Constants.EmptyString));
+			AssertEx.IsFailWith<ArgumentException>(() => Guard.HasAnyText(Constants.EmptyString, nameof(Constants.EmptyString)));
 
-			AssertEx.IsFailWith<ArgumentException>(() => Guard.HasAnyText(WhitespacesString));
-			AssertEx.IsFailWith<ArgumentException>(() => Guard.HasAnyText(WhitespacesString, nameof(WhitespacesString)));
+			AssertEx.IsFailWith<ArgumentException>(() => Guard.HasAnyText(Constants.WhitespacesString));
+			AssertEx.IsFailWith<ArgumentException>(() => Guard.HasAnyText(Constants.WhitespacesString, nameof(Constants.WhitespacesString)));
 		}
 
 		[TestMethod]
 		public void TestIsNotEmpty() {
-			Guard.NotEmpty(MagicArray);
-			Guard.NotEmpty(MagicArray, nameof(MagicArray));
+			Guard.NotEmpty(Constants.MagicArray);
+			Guard.NotEmpty(Constants.MagicArray, nameof(Constants.MagicArray));
 
-			AssertEx.IsFailWith<ArgumentException>(() => Guard.NotEmpty(EmptyArray));
-			AssertEx.IsFailWith<ArgumentException>(() => Guard.NotEmpty(EmptyArray, nameof(EmptyArray)));
+			AssertEx.IsFailWith<ArgumentException>(() => Guard.NotEmpty(Constants.EmptyArray));
+			AssertEx.IsFailWith<ArgumentException>(() => Guard.NotEmpty(Constants.EmptyArray, nameof(Constants.EmptyArray)));
 
-			AssertEx.IsFailWith<ArgumentNullException>(() => Guard.NotEmpty(NullArray));
-			AssertEx.IsFailWith<ArgumentNullException>(() => Guard.NotEmpty(NullArray, nameof(NullArray)));
+			AssertEx.IsFailWith<ArgumentNullException>(() => Guard.NotEmpty(Constants.NullArray));
+			AssertEx.IsFailWith<ArgumentNullException>(() => Guard.NotEmpty(Constants.NullArray, nameof(Constants.NullArray)));
 		}
 
 		[TestMethod]

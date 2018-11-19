@@ -1,8 +1,9 @@
 ﻿using System;
 using ArtZilla.Net.Core.Extensions;
+using ArtZilla.Net.Core.Tests.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArtZilla.Net.Core.Test.Extensions {
+namespace ArtZilla.Net.Core.Tests.Extensions {
 	[TestClass]
 	public class StringExtTest {
 		private const string ExampleEmpty = "";
@@ -147,228 +148,42 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 
 		[TestMethod]
 		public void TrimSuffixTests() {
-			Assert.AreEqual("Hello world!", "Hello world!WTF?".TrimSuffix("WTF?"));
-			Assert.AreEqual("Hello world!", "Hello world!WTF?".TrimSuffix("wtf?", StringComparison.OrdinalIgnoreCase));
-			Assert.AreEqual("Hello world!", "Hello world!".TrimSuffix("world"));
-			Assert.AreEqual("", "".TrimSuffix("world"));
-			Assert.AreEqual("", ExampleNull.TrimSuffix("world"));
-			Assert.AreEqual("", ExampleNull.TrimSuffix(ExampleNull));
-		}
+			const string partL = "Homura";
+			const string partR = "Akemi";
+			const string delim = " ";
+			const string example = partL + delim + partR;
+			const string add = "★Mahou Shoujo";
+			var addU = add.ToUpper();
+			
+			Assert.AreEqual(example, (example + add).TrimSuffix(add));
+			Assert.AreEqual(example, (example + add).TrimSuffix(addU, StringComparison.OrdinalIgnoreCase));
+			Assert.AreEqual(example, example.TrimSuffix(partL));
+			Assert.AreEqual(example, example.TrimSuffix(delim));
+			Assert.AreEqual(string.Empty, ExampleNull.TrimSuffix(add));
+			Assert.AreEqual(string.Empty, ExampleNull.TrimSuffix(ExampleNull));
 
-		// TODO: finish extract tests
-		[TestMethod]
-		public void ExtractsArgumentsTest() {
-			// null border throw exception
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".Extract(null));
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".Extract(out var r, null));
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".ExtractLast(null));
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".ExtractLast(out var r, null));
-
-			// empty border throw exception
-			AssertEx.IsFailWith<ArgumentException>(() => "x".Extract(""));
-			AssertEx.IsFailWith<ArgumentException>(() => "x".Extract(out var r, ""));
-			AssertEx.IsFailWith<ArgumentException>(() => "x".ExtractLast(""));
-			AssertEx.IsFailWith<ArgumentException>(() => "x".ExtractLast(out var r, ""));
-
-			// null op throw exception
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".Extract(null, "("));
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".Extract(out var r, null, "("));
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".ExtractLast(null, "("));
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".ExtractLast(out var r, null, "("));
-
-			// null ed throw exception
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".Extract("(", null));
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".Extract(out var r, "(", null));
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".ExtractLast("(", null));
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".ExtractLast(out var r, "(", null));
-
-			// null input throw exception
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".Extract(null, null));
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".Extract(out var r, null, null));
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".ExtractLast(null, null));
-			AssertEx.IsFailWith<ArgumentNullException>(() => "x".ExtractLast(out var r, null, null));
-
-			// empty op throw exception
-			AssertEx.IsFailWith<ArgumentException>(() => "x".Extract("", "a"));
-			AssertEx.IsFailWith<ArgumentException>(() => "x".Extract(out var r, "", "a"));
-			AssertEx.IsFailWith<ArgumentException>(() => "x".ExtractLast("", "a"));
-			AssertEx.IsFailWith<ArgumentException>(() => "x".ExtractLast(out var r, "", "a"));
-
-			// empty ed throw exception
-			AssertEx.IsFailWith<ArgumentException>(() => "x".Extract("a", ""));
-			AssertEx.IsFailWith<ArgumentException>(() => "x".Extract(out var r, "a", ""));
-			AssertEx.IsFailWith<ArgumentException>(() => "x".ExtractLast("a", ""));
-			AssertEx.IsFailWith<ArgumentException>(() => "x".ExtractLast(out var r, "a", ""));
-
-			// empty input throw exception
-			AssertEx.IsFailWith<ArgumentException>(() => "x".Extract("", ""));
-			AssertEx.IsFailWith<ArgumentException>(() => "x".Extract(out var r, "", ""));
-			AssertEx.IsFailWith<ArgumentException>(() => "x".ExtractLast("", ""));
-			AssertEx.IsFailWith<ArgumentException>(() => "x".ExtractLast(out var r, "", ""));
-
-			// null input return default string.
-			const string def = default;
-			string x;
-
-			Assert.AreEqual(def, ((string)null).Extract("("));
-			Assert.AreEqual(def, ((string)null).Extract("(", ")"));
-
-			Assert.AreEqual(def, ((string)null).Extract(out x, "("));
-			Assert.AreEqual(null, x); // should be same as input
-
-			Assert.AreEqual(def, ((string)null).Extract(out x, "(", ")"));
-			Assert.AreEqual(null, x); // should be same as input
-
-			Assert.AreEqual(def, ((string)null).ExtractLast("("));
-			Assert.AreEqual(def, ((string)null).ExtractLast("(", ")"));
-
-			Assert.AreEqual(def, ((string)null).ExtractLast(out x, "("));
-			Assert.AreEqual(null, x); // should be same as input
-
-			Assert.AreEqual(def, ((string)null).ExtractLast(out x, "(", ")"));
-			Assert.AreEqual(null, x); // should be same as input
+			AssertEx.IsFailWith<ArgumentNullException>(() => example.TrimSuffix(ExampleNull));
 		}
 
 		[TestMethod]
-		public void ExtractTest() {
-			const string def = default;
+		public void TrimPrefixTests() {
+			const string partL = "Homura";
+			const string partR = "Akemi";
+			const string delim = " ";
+			const string example = partL + delim + partR;
+			const string add = "★Mahou Shoujo";
+			var addU = add.ToUpper();
+			
+			Assert.AreEqual(example, (add + example).TrimPrefix(add));
+			Assert.AreEqual(example, (add + example).TrimPrefix(addU, StringComparison.OrdinalIgnoreCase));
+			Assert.AreEqual(example, example.TrimPrefix(delim));
+			Assert.AreEqual(example, example.TrimPrefix(partR));
+			Assert.AreEqual(string.Empty, ExampleNull.TrimPrefix(add));
+			Assert.AreEqual(string.Empty, ExampleNull.TrimPrefix(ExampleNull));
 
-			Assert.AreEqual("yes", "(yes)".Extract("(", ")")); // typical usage
-			Assert.AreEqual("yes", ")))(yes)(((a)))(((".Extract("(", ")")); // op ed repeated
-			Assert.AreEqual("", ")()(".Extract("(", ")")); // empty substring
-
-			Assert.AreEqual(def, ")(no".Extract("(", ")")); // ed before op at begin
-			Assert.AreEqual(def, "(no".Extract("(", ")"));  // only op at begin
-			Assert.AreEqual(def, "no)".Extract("(", ")"));  // only op at end
-			Assert.AreEqual(def, "(".Extract("(", ")"));     // only op
-
-			Assert.AreEqual(def, "no)(".Extract("(", ")")); // ed before op at end
-			Assert.AreEqual(def, "no)".Extract("(", ")"));  // only ed at end
-			Assert.AreEqual(def, ")no".Extract("(", ")"));  // only ed at begin
-			Assert.AreEqual(def, ")".Extract("(", ")"));     // only ed
-
-			Assert.AreEqual("yes", "ayesc".Extract("a", "c"));     // 
-			Assert.AreEqual("yes", "nooyeson".Extract("noo", "on"));  // with op & ed where lenght > 1
-			Assert.AreEqual("yes", "nooyesoo".Extract("noo", "oo")); // where op has ed as substring
-
-			Assert.AreEqual("yes", "XxyesXx".Extract("x", "X")); // casing
-			Assert.AreEqual("yes", "XyesxXx".Extract("x", "X", StringComparison.OrdinalIgnoreCase)); // casing
+			AssertEx.IsFailWith<ArgumentNullException>(() => example.TrimPrefix(ExampleNull));
 		}
-
-		[TestMethod]
-		public void ExtractOutTest() {
-			const string def = default;
-			string x;
-
-			Assert.AreEqual("yes", "☆(yes)★".Extract(out x, "(", ")")); // typical usage
-			Assert.AreEqual("☆★", x);
-
-			Assert.AreEqual("yes", ")))(yes)(((a)))(((".Extract(out x, "(", ")")); // op ed repeated
-			Assert.AreEqual(")))(((a)))(((", x);
-
-			// remove this ↓
-
-			Assert.AreEqual("", ")()(".Extract(out x, "(", ")")); // empty substring
-
-			Assert.AreEqual(def, ")(no".Extract(out x, "(", ")")); // ed before op at begin
-			Assert.AreEqual(def, "(no".Extract(out x, "(", ")"));  // only op at begin
-			Assert.AreEqual(def, "no)".Extract(out x, "(", ")"));  // only op at end
-			Assert.AreEqual(def, "(".Extract(out x, "(", ")"));     // only op
-
-			Assert.AreEqual(def, "no)(".Extract(out x, "(", ")")); // ed before op at end
-			Assert.AreEqual(def, "no)".Extract(out x, "(", ")"));  // only ed at end
-			Assert.AreEqual(def, ")no".Extract(out x, "(", ")"));  // only ed at begin
-			Assert.AreEqual(def, ")".Extract(out x, "(", ")"));     // only ed
-
-			Assert.AreEqual("yes", "ayesc".Extract(out x, "a", "c"));     // 
-			Assert.AreEqual("yes", "nooyeson".Extract(out x, "noo", "on"));  // with op & ed where lenght > 1
-			Assert.AreEqual("yes", "nooyesoo".Extract(out x, "noo", "oo")); // where op has ed as substring
-
-			Assert.AreEqual("yes", "XxyesXx".Extract(out x, "x", "X")); // casing
-			Assert.AreEqual("yes", "XyesxXx".Extract(out x, "x", "X", StringComparison.OrdinalIgnoreCase)); // casing
-		}
-
-		[TestMethod]
-		public void ExtractLastTest() {
-			const string def = default;
-
-			Assert.AreEqual("yes", "(yes)".ExtractLast("(", ")")); // typical usage
-			Assert.AreEqual("yes", ")))(no)(((yes)(((".ExtractLast("(", ")")); // op ed repeated
-			Assert.AreEqual("", ")()(".ExtractLast("(", ")")); // empty substring
-
-			Assert.AreEqual(def, ")(no".ExtractLast("(", ")")); // ed before op at begin
-			Assert.AreEqual(def, "(no".ExtractLast("(", ")"));  // only op at begin
-			Assert.AreEqual(def, "no)".ExtractLast("(", ")"));  // only op at end
-			Assert.AreEqual(def, "(".ExtractLast("(", ")"));     // only op
-
-			Assert.AreEqual(def, "no)(".ExtractLast("(", ")")); // ed before op at end
-			Assert.AreEqual(def, "no)".ExtractLast("(", ")"));  // only ed at end
-			Assert.AreEqual(def, ")no".ExtractLast("(", ")"));  // only ed at begin
-			Assert.AreEqual(def, ")".ExtractLast("(", ")"));     // only ed
-
-			Assert.AreEqual("yes", "ayesc".ExtractLast("a", "c"));     // 
-			Assert.AreEqual("yes", "nooyeson".ExtractLast("noo", "on"));  // with op & ed where lenght > 1
-			Assert.AreEqual("yes", "nooyesoo".ExtractLast("noo", "oo")); // where op has ed as substring
-
-			Assert.AreEqual("yes", "XxyesXx".ExtractLast("x", "X")); // casing
-			Assert.AreEqual("yes", "xXxyesX".ExtractLast("x", "X", StringComparison.OrdinalIgnoreCase));
-		}
-
-		[TestMethod]
-		public void ExtractLastOpEdTest() {
-			const string def = default;
-			string x;
-
-			Test("☆(yes)★", "(", ")", "yes", "☆★"); // typical usage
-			Test(")))(no)(((yes)(((", "(", ")", "yes", ")))(no)((((("); // op ed repeated
-			Test(")()(", "(", ")", "", ")("); // empty substring
-			Test("()", "(", ")", "", ""); // empty substring and remainder
-
-			Test(")(no", "(", ")", def, ")(no"); // ed before op at begin
-			Test("(no", "(", ")", def, "(no"); // only op at begin
-			Test("no)", "(", ")", def, "no)"); // only op at end
-			Test("(", "(", ")", def, "(");     // only op
-
-			Test("nooyeson", "noo", "on", "yes", ""); // with op & ed where lenght > 1
-			Test("nooyesoo", "noo", "oo", "yes", ""); // where op has ed as substring
-			Test("ooyesnoo", "oo", "noo", "yes", ""); // where ed has op as substring
-
-			// casing
-			Test("XxyesXx", "x", "X", "yes", "Xx"); // where ed has op as substring
-			Test("xXxyesX", "x", "X", "yes", "xX", StringComparison.OrdinalIgnoreCase); // where ed has op as substring
-
-			void Test(string source, string op, string ed, string result, string remainder, StringComparison comp = StringComparison.Ordinal) {
-				Assert.AreEqual(result, source.ExtractLast(op, ed, comp));
-				Assert.AreEqual(result, source.ExtractLast(out var z, op, ed, comp));
-				Assert.AreEqual(remainder, z);
-			}
-		}
-
-		[TestMethod]
-		public void ExtractLastBrdTest() {
-			const string def = default;
-			string x;
-
-			Test("☆''yes''★", "''", "yes", "☆★"); // typical usage
-			Test(")''no''((''yes''('", "''", "yes", ")''no''((('"); // br repeated
-			Test("★☆☆★", "☆", "", "★★"); // empty substring
-			Test("☆☆", "☆", "", ""); // empty substring and remainder
-
-			Test("☆no", "☆", def, "☆no"); // only op at begin
-			Test("no☆", "☆", def, "no☆"); // only op at end
-			Test("☆", "☆", def, "☆");     // only op
-
-			// casing
-			Test("XXyesXx", "X", "yes", "Xx"); // where ed has op as substring
-			Test("xXxyesX", "X", "yes", "xX", StringComparison.OrdinalIgnoreCase); // where ed has op as substring
-
-			void Test(string source, string br, string result, string remainder, StringComparison comp = StringComparison.Ordinal) {
-				Assert.AreEqual(result, source.ExtractLast(br, comp));
-				Assert.AreEqual(result, source.ExtractLast(out var z, br, comp));
-				Assert.AreEqual(remainder, z);
-			}
-		}
-
+		
 		private static void TestParseInt(string s, int t) {
 			var r = s.ParseIntEx();
 			Console.WriteLine($"Compare [{s}] parsed as [{r}] with [{t}]: {r == t}");
@@ -383,7 +198,7 @@ namespace ArtZilla.Net.Core.Test.Extensions {
 
 		private static void TestParseDouble(string s, double t) {
 			var r = s.ParseDoubleEx();
-			Console.WriteLine($"Compare [{s}] parsed as [{r}] with [{t}]: {r == t}");
+			Console.WriteLine($"Compare [{s}] parsed as [{r}] with [{t}]: {Math.Abs(r - t) < double.Epsilon}");
 			Assert.AreEqual(t, r, double.Epsilon);
 		}
 	}

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArtZilla.Net.Core.Test {
+namespace ArtZilla.Net.Core.Tests.Common {
 		public static class AssertEx {
 			public static void IsFail(Action a) {
 				try {

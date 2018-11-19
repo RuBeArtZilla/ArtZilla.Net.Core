@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
+using ArtZilla.Net.Core.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArtZilla.Net.Core.Serialization {
+namespace ArtZilla.Net.Core.Tests.Serialization {
 	public static class TestUtils {
 		public const string SampleString = "<!--<\"'Hello World\"'>-->";
 		public const int SampleNumber = 42;
