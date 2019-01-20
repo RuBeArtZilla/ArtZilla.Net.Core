@@ -201,5 +201,58 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			Console.WriteLine($"Compare [{s}] parsed as [{r}] with [{t}]: {Math.Abs(r - t) < double.Epsilon}");
 			Assert.AreEqual(t, r, double.Epsilon);
 		}
+
+		
+		[TestMethod]
+		public void ReplaceLeftTest() {
+			string local(string s) => s.ToLowerInvariant() + s.ToUpperInvariant();
+			string dot(string s) => ".";
+
+			AssertEx.IsFailWith<ArgumentNullException>(() => default(string).ReplaceLeft(".", ".", local));
+			AssertEx.IsFailWith<ArgumentNullException>(() => "".ReplaceLeft(null, ".", local));
+			AssertEx.IsFailWith<ArgumentNullException>(() => "".ReplaceLeft(".", null, local));
+			AssertEx.IsFailWith<ArgumentNullException>(() => "".ReplaceLeft(".", ".", null));
+			AssertEx.IsFailWith<ArgumentException>(() => "".ReplaceLeft("", ".", local));
+			AssertEx.IsFailWith<ArgumentException>(() => "".ReplaceLeft(".", "", local));
+
+			Assert.AreEqual(")(", ")(".ReplaceLeft("(", ")", local));
+			Assert.AreEqual("", "()".ReplaceLeft("(", ")", local));
+			Assert.AreEqual("hiHI", "(Hi)".ReplaceLeft("(", ")", local));
+			Assert.AreEqual("aAzZ", ".A..Z.".ReplaceLeft(".", local));
+			Assert.AreEqual(" aA zZ ", " .A. .Z. ".ReplaceLeft(".", local));
+			Assert.AreEqual("aA zZ", "(A) (Z)".ReplaceLeft("(", ")", local));
+			Assert.AreEqual(". .))", "(((A) (Z)))".ReplaceLeft("(", ")", dot));
+			Assert.AreEqual(". .))", "((((A)) ((Z))))".ReplaceLeft("((", "))", dot));
+			Assert.AreEqual("..", "....".ReplaceLeft(".", dot));
+			Assert.AreEqual(" .. ", " ........ ".ReplaceLeft("..", dot));
+
+			// todo: add tests with comparisonType argument
+		}
+
+		[TestMethod]
+		public void ReplaceRightTest() {
+			string local(string s) => s.ToLowerInvariant() + s.ToUpperInvariant();
+			string dot(string s) => ".";
+
+			AssertEx.IsFailWith<ArgumentNullException>(() => default(string).ReplaceRight(".", ".", local));
+			AssertEx.IsFailWith<ArgumentNullException>(() => "".ReplaceRight(null, ".", local));
+			AssertEx.IsFailWith<ArgumentNullException>(() => "".ReplaceRight(".", null, local));
+			AssertEx.IsFailWith<ArgumentNullException>(() => "".ReplaceRight(".", ".", null));
+			AssertEx.IsFailWith<ArgumentException>(() => "".ReplaceRight("", ".", local));
+			AssertEx.IsFailWith<ArgumentException>(() => "".ReplaceRight(".", "", local));
+
+			Assert.AreEqual(")(", ")(".ReplaceRight("(", ")", local));
+			Assert.AreEqual("", "()".ReplaceRight("(", ")", local));
+			Assert.AreEqual("hiHI", "(Hi)".ReplaceRight("(", ")", local));
+			Assert.AreEqual("aAzZ", ".A..Z.".ReplaceRight(".", local));
+			Assert.AreEqual(" aA zZ ", " .A. .Z. ".ReplaceRight(".", local));
+			Assert.AreEqual("aA zZ", "(A) (Z)".ReplaceRight("(", ")", local));
+			Assert.AreEqual("((. .", "(((A) (Z)))".ReplaceRight("(", ")", dot));
+			Assert.AreEqual("((. .", "((((A)) ((Z))))".ReplaceRight("((", "))", dot));
+			Assert.AreEqual("..", "....".ReplaceRight(".", dot));
+			Assert.AreEqual(" .. ", " ........ ".ReplaceRight("..", dot));
+			
+			// todo: add tests with comparisonType argument
+		}
 	}
 }
