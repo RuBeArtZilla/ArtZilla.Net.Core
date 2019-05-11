@@ -49,6 +49,7 @@
     <Compile Include="Extensions\IEnumerableExtTests.cs" />
     <Compile Include="Extensions\NumExtTests.cs" />
     <Compile Include="Extensions\ObjExtTest.cs" />
+    <Compile Include="Extensions\StringEnframeTests.cs" />
     <Compile Include="Extensions\StringExtractTests.cs" />
     <Compile Include="Extensions\StringExtTest.cs" />
     <Compile Include="Extensions\TypeExtTest.cs" />

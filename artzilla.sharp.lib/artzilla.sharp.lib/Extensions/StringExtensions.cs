@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
 namespace ArtZilla.Net.Core.Extensions {
+	/// <summary> Some useless string extensions </summary>
 	public static class StringExtensions {
 		/// <summary> Wrapper for <see cref="string.IsNullOrWhiteSpace"/> </summary>
 		public static bool IsBad(this string value)
@@ -101,15 +100,77 @@ namespace ArtZilla.Net.Core.Extensions {
 			}
 		}
 
+		#region Enframe methods
+
 		/// <summary>
-		/// Add <paramref name="prefix"/> and <paramref name="postfix"/> if <paramref name="whatToEnframe"/> is <see cref="IsGood(string)"/> otherwise returns empty string.
+		/// Add <paramref name="prefix"/> and <paramref name="postfix"/> to <paramref name="source"/>
+		/// if statement is true otherwise returns empty string.
 		/// </summary>
-		/// <param name="whatToEnframe">the source string</param>
+		/// <param name="source">the source string</param>
+		/// <param name="condition"></param>
 		/// <param name="prefix">prefix string, can be empty</param>
 		/// <param name="postfix">postfix string, can be empty</param>
 		/// <returns></returns>
-		public static string EnframeGood(this string whatToEnframe, string prefix = "", string postfix = "")
-			=> whatToEnframe.IsBad() ? "" : prefix + whatToEnframe + postfix;
+		public static string EnframeIf(
+			this string source,
+			Func<string, bool> condition,
+			string prefix = "",
+			string postfix = ""
+		) {
+			Guard.NotNull(condition);
+
+			return condition(source) ? prefix + source + postfix : "";
+		}
+
+		/// <summary>
+		/// Add <paramref name="prefix"/> and <paramref name="postfix"/> if <paramref name="source"/>
+		/// is <see cref="IsGood(string)"/> otherwise returns empty string.
+		/// </summary>
+		/// <param name="source">the source string</param>
+		/// <param name="prefix">prefix string, can be empty</param>
+		/// <param name="postfix">postfix string, can be empty</param>
+		/// <returns></returns>
+		[Obsolete("Renamed to StringExtensions.EnframeText, will be deleted in future release")]
+		public static string EnframeGood(this string source, string prefix = "", string postfix = "")
+			=> source.IsGood() ? prefix + source + postfix : "";
+
+		/// <summary>
+		/// Add <paramref name="prefix"/> and <paramref name="postfix"/> to <paramref name="source"/>
+		/// if statement is not <see langword="null" /> otherwise returns empty string.
+		/// </summary>
+		/// <param name="source">the source string</param>
+		/// <param name="prefix">prefix string, can be empty</param>
+		/// <param name="postfix">postfix string, can be empty</param>
+		/// <returns></returns>
+		public static string EnframeNotNull(this string source, string prefix = "", string postfix = "")
+			=> source is null ? "" : prefix + source + postfix;
+
+		/// <summary>
+		/// Add <paramref name="prefix"/> and <paramref name="postfix"/> to <paramref name="source"/>
+		/// if source is not <see langword="null" /> or empty otherwise returns empty string.
+		/// </summary>
+		/// <param name="source">the source string</param>
+		/// <param name="prefix">prefix string, can be empty</param>
+		/// <param name="postfix">postfix string, can be empty</param>
+		/// <returns></returns>
+		public static string EnframeNotEmpty(this string source, string prefix = "", string postfix = "")
+			=> string.IsNullOrEmpty(source) ? "" : prefix + source + postfix;
+
+		/// <summary>
+		/// Add <paramref name="prefix"/> and <paramref name="postfix"/> to <paramref name="source"/>
+		/// if source is not <see langword="null" />, empty, or consists only of white-space characters
+		/// otherwise returns empty string.
+		/// </summary>
+		/// <param name="source">the source string</param>
+		/// <param name="prefix">prefix string, can be empty</param>
+		/// <param name="postfix">postfix string, can be empty</param>
+		/// <returns></returns>
+		public static string EnframeText(this string source, string prefix = "", string postfix = "")
+			=> string.IsNullOrWhiteSpace(source) ? "" : prefix + source + postfix;
+
+		#endregion
+
+		#region Trim methods
 
 		/// <summary> Method remove prefix if exist </summary>
 		/// <param name="source">Source string</param>
@@ -133,6 +194,8 @@ namespace ArtZilla.Net.Core.Extensions {
 			=> source?.EndsWith(suffix, comparisonType) == true
 				? source.Remove(source.Length - suffix.Length)
 				: source ?? string.Empty;
+
+		#endregion
 
 		#region Parse methods
 
@@ -171,8 +234,13 @@ namespace ArtZilla.Net.Core.Extensions {
 
 		#region Extract methods
 
-		public static string Extract(this string input, out string remainder, string op, string ed,
-			StringComparison comparison = StringComparison.Ordinal) {
+		public static string Extract(
+			this string input, 
+			out string remainder, 
+			string op, 
+			string ed,
+			StringComparison comparison = StringComparison.Ordinal
+		) {
 			Guard.NotNullOrEmpty(op, nameof(op));
 			Guard.NotNullOrEmpty(ed, nameof(ed));
 
@@ -197,8 +265,12 @@ namespace ArtZilla.Net.Core.Extensions {
 			return input.Substring(nop, ned - nop);
 		}
 
-		public static string Extract(this string input, out string remainder, string border,
-			StringComparison comparison = StringComparison.Ordinal) {
+		public static string Extract(
+			this string input, 
+			out string remainder, 
+			string border,
+			StringComparison comparison = StringComparison.Ordinal
+		) {
 			Guard.NotNullOrEmpty(border, nameof(border));
 
 			remainder = input;
@@ -222,8 +294,12 @@ namespace ArtZilla.Net.Core.Extensions {
 			return input.Substring(nop, ned - nop);
 		}
 
-		public static string Extract(this string input, string op, string ed,
-			StringComparison comparison = StringComparison.Ordinal) {
+		public static string Extract(
+			this string input, 
+			string op, 
+			string ed, 
+			StringComparison comparison = StringComparison.Ordinal
+		) {
 			Guard.NotNullOrEmpty(op, nameof(op));
 			Guard.NotNullOrEmpty(ed, nameof(ed));
 
@@ -245,8 +321,11 @@ namespace ArtZilla.Net.Core.Extensions {
 			return input.Substring(nop, ned - nop);
 		}
 
-		public static string Extract(this string input, string border,
-			StringComparison comparison = StringComparison.Ordinal) {
+		public static string Extract(
+			this string input, 
+			string border, 
+			StringComparison comparison = StringComparison.Ordinal
+		) {
 			Guard.NotNullOrEmpty(border, nameof(border));
 
 			if (input is null)
@@ -422,5 +501,224 @@ namespace ArtZilla.Net.Core.Extensions {
 		}
 
 		#endregion
+
+		#region Replace methods
+
+		public static string ReplaceLeft(
+			this string source,
+			string br,
+			Func<string, string> replaceFunc,
+			StringComparison comparisonType = StringComparison.OrdinalIgnoreCase
+		) => ReplaceLeft(source, br, br, replaceFunc, comparisonType);
+
+		public static string ReplaceLeft(
+			this string source,
+			string op,
+			string ed,
+			Func<string, string> replaceFunc,
+			StringComparison comparisonType = StringComparison.OrdinalIgnoreCase
+		) {
+			Guard.NotNull(source, nameof(source));
+			Guard.NotNullOrEmpty(op, nameof(op));
+			Guard.NotNullOrEmpty(ed, nameof(ed));
+			Guard.NotNull(replaceFunc, nameof(replaceFunc));
+
+			var sb = new StringBuilder(source);
+			var edPos = 0;
+			while (edPos < sb.Length) {
+				var opPos = sb.IndexOf(op, edPos, comparisonType);
+				if (opPos < 0 || opPos + op.Length > sb.Length)
+					return sb.ToString();
+
+				edPos = sb.IndexOf(ed, opPos + op.Length, comparisonType);
+				if (edPos < 0)
+					return sb.ToString();
+
+				var oldValue = sb.ToString(opPos + op.Length, edPos - opPos - op.Length);
+				var newValue = replaceFunc(oldValue);
+
+				sb.Remove(opPos, edPos - opPos + ed.Length);
+				sb.Insert(opPos, newValue);
+				edPos = opPos + newValue.Length;
+			}
+
+			return sb.ToString();
+		}
+
+		public static string ReplaceRight(
+			this string source,
+			string br,
+			Func<string, string> replaceFunc,
+			StringComparison comparisonType = StringComparison.OrdinalIgnoreCase
+		) => ReplaceRight(source, br, br, replaceFunc, comparisonType);
+
+		public static string ReplaceRight(
+			this string source,
+			string op,
+			string ed,
+			Func<string, string> replaceFunc,
+			StringComparison comparisonType = StringComparison.OrdinalIgnoreCase
+		) {
+			Guard.NotNull(source, nameof(source));
+			Guard.NotNullOrEmpty(op, nameof(op));
+			Guard.NotNullOrEmpty(ed, nameof(ed));
+			Guard.NotNull(replaceFunc, nameof(replaceFunc));
+
+			var sb = new StringBuilder(source);
+			var end1 = op.Length + ed.Length - 1;
+			var end2 = op.Length - 1;
+
+			var opPos = sb.Length - 1;
+			while (opPos >= end1) {
+				var edPos = sb.LastIndexOf(ed, opPos, comparisonType);
+				if (edPos < end2)
+					return sb.ToString();
+
+				opPos = sb.LastIndexOf(op, edPos - 1, comparisonType);
+				if (opPos < 0)
+					return sb.ToString();
+
+				var oldValue = sb.ToString(opPos + op.Length, edPos - opPos - op.Length);
+				var newValue = replaceFunc(oldValue);
+
+				sb.Remove(opPos, edPos - opPos + ed.Length);
+				sb.Insert(opPos, newValue);
+
+				--opPos;
+			}
+			
+			return sb.ToString();
+		}
+
+		#endregion
+
+		private static int IndexOf(
+			this StringBuilder sb,
+			string value,
+			int startIndex,
+			StringComparison comparisonType = StringComparison.OrdinalIgnoreCase
+		) {
+			int index;
+			var length = value.Length;
+			var maxSearchLength = (sb.Length - length) + 1;
+
+			switch (comparisonType) {
+				case StringComparison.Ordinal:
+				case StringComparison.CurrentCulture:
+				case StringComparison.InvariantCulture: {
+					for (var i = startIndex; i < maxSearchLength; ++i) {
+						if (sb[i].Equals(value[0])) {
+							index = 1;
+							while (index < length && sb[i + index] == value[index])
+								++index;
+
+							if (index == length)
+								return i;
+						}
+					}
+
+					return -1;
+				}
+
+				case StringComparison.OrdinalIgnoreCase:
+				case StringComparison.CurrentCultureIgnoreCase: {
+					var culture = CultureInfo.CurrentCulture;
+					for (var i = startIndex; i < maxSearchLength; ++i) {
+						if (char.ToUpper(sb[i], culture) == char.ToUpper(value[0], culture)) {
+							index = 1;
+							while (index < length && char.ToUpper(sb[i + index], culture) == char.ToUpper(value[index], culture))
+								++index;
+
+							if (index == length)
+								return i;
+						}
+					}
+
+					return -1;
+				}
+
+				case StringComparison.InvariantCultureIgnoreCase: {
+					for (var i = startIndex; i < maxSearchLength; ++i) {
+						if (char.ToUpperInvariant(sb[i]) == char.ToUpperInvariant(value[0])) {
+							index = 1;
+							while (index < length && char.ToUpperInvariant(sb[i + index]) == char.ToUpperInvariant(value[index]))
+								++index;
+
+							if (index == length)
+								return i;
+						}
+					}
+
+					return -1;
+				}
+
+				default:
+					throw new ArgumentOutOfRangeException(nameof(comparisonType), comparisonType, null);
+			}
+		}
+
+		private static int LastIndexOf(
+			this StringBuilder sb,
+			string value,
+			int startIndex,
+			StringComparison comparisonType = StringComparison.OrdinalIgnoreCase
+		) {
+			int count;
+			var index = value.Length - 1;
+
+			switch (comparisonType) {
+				case StringComparison.Ordinal:
+				case StringComparison.CurrentCulture:
+				case StringComparison.InvariantCulture: {
+					for (var i = startIndex; i >= index; --i) {
+						if (sb[i].Equals(value[index])) {
+							count = 1;
+							while (count <= index && sb[i - count] == value[index - count])
+								++count;
+
+							if (count >= index)
+								return i - index;
+						}
+					}
+
+					return -1;
+				}
+
+				case StringComparison.OrdinalIgnoreCase:
+				case StringComparison.CurrentCultureIgnoreCase: {
+					var culture = CultureInfo.CurrentCulture;
+					for (var i = startIndex; i >= index; --i) {
+						if (char.ToUpper(sb[i], culture) == char.ToUpper(value[index], culture)) {
+							count = 1;
+							while (count <= index && char.ToUpper(sb[i - count], culture) == char.ToUpper(value[index - count], culture))
+								++count;
+
+							if (count >= index)
+								return i - index;
+						}
+					}
+
+					return -1;
+				}
+
+				case StringComparison.InvariantCultureIgnoreCase: {
+					for (var i = startIndex; i >= index; --i) {
+						if (char.ToUpperInvariant(sb[i]) == char.ToUpperInvariant(value[index])) {
+							count = 1;
+							while (count <= index && char.ToUpperInvariant(sb[i - count]) == char.ToUpperInvariant(value[index - count]))
+								++count;
+
+							if (count >= index)
+								return i - index;
+						}
+					}
+
+					return -1;
+				}
+
+				default:
+					throw new ArgumentOutOfRangeException(nameof(comparisonType), comparisonType, null);
+			}
+		}
 	}
 }

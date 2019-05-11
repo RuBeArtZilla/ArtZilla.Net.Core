@@ -63,22 +63,22 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			// null input return default string.
 			const string def = default;
 
-			Assert.AreEqual(def, ((string)null).Extract("("));
-			Assert.AreEqual(def, ((string)null).Extract("(", ")"));
+			Assert.AreEqual(def, ((string) null).Extract("("));
+			Assert.AreEqual(def, ((string) null).Extract("(", ")"));
 
-			Assert.AreEqual(def, ((string)null).Extract(out var x, "("));
+			Assert.AreEqual(def, ((string) null).Extract(out var x, "("));
 			Assert.AreEqual(null, x); // should be same as input
 
-			Assert.AreEqual(def, ((string)null).Extract(out x, "(", ")"));
+			Assert.AreEqual(def, ((string) null).Extract(out x, "(", ")"));
 			Assert.AreEqual(null, x); // should be same as input
 
-			Assert.AreEqual(def, ((string)null).ExtractLast("("));
-			Assert.AreEqual(def, ((string)null).ExtractLast("(", ")"));
+			Assert.AreEqual(def, ((string) null).ExtractLast("("));
+			Assert.AreEqual(def, ((string) null).ExtractLast("(", ")"));
 
-			Assert.AreEqual(def, ((string)null).ExtractLast(out x, "("));
+			Assert.AreEqual(def, ((string) null).ExtractLast(out x, "("));
 			Assert.AreEqual(null, x); // should be same as input
 
-			Assert.AreEqual(def, ((string)null).ExtractLast(out x, "(", ")"));
+			Assert.AreEqual(def, ((string) null).ExtractLast(out x, "(", ")"));
 			Assert.AreEqual(null, x); // should be same as input
 		}
 
@@ -91,17 +91,17 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			Assert.AreEqual("", ")()(".Extract("(", ")")); // empty substring
 
 			Assert.AreEqual(def, ")(no".Extract("(", ")")); // ed before op at begin
-			Assert.AreEqual(def, "(no".Extract("(", ")"));  // only op at begin
-			Assert.AreEqual(def, "no)".Extract("(", ")"));  // only op at end
-			Assert.AreEqual(def, "(".Extract("(", ")"));     // only op
+			Assert.AreEqual(def, "(no".Extract("(", ")")); // only op at begin
+			Assert.AreEqual(def, "no)".Extract("(", ")")); // only op at end
+			Assert.AreEqual(def, "(".Extract("(", ")")); // only op
 
 			Assert.AreEqual(def, "no)(".Extract("(", ")")); // ed before op at end
-			Assert.AreEqual(def, "no)".Extract("(", ")"));  // only ed at end
-			Assert.AreEqual(def, ")no".Extract("(", ")"));  // only ed at begin
-			Assert.AreEqual(def, ")".Extract("(", ")"));     // only ed
+			Assert.AreEqual(def, "no)".Extract("(", ")")); // only ed at end
+			Assert.AreEqual(def, ")no".Extract("(", ")")); // only ed at begin
+			Assert.AreEqual(def, ")".Extract("(", ")")); // only ed
 
-			Assert.AreEqual("yes", "ayesc".Extract("a", "c"));     // 
-			Assert.AreEqual("yes", "nooyeson".Extract("noo", "on"));  // with op & ed where lenght > 1
+			Assert.AreEqual("yes", "ayesc".Extract("a", "c")); // 
+			Assert.AreEqual("yes", "nooyeson".Extract("noo", "on")); // with op & ed where lenght > 1
 			Assert.AreEqual("yes", "nooyesoo".Extract("noo", "oo")); // where op has ed as substring
 
 			Assert.AreEqual("yes", "XxyesXx".Extract("x", "X")); // casing
@@ -123,17 +123,17 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			Assert.AreEqual("", ")()(".Extract(out x, "(", ")")); // empty substring
 
 			Assert.AreEqual(def, ")(no".Extract(out x, "(", ")")); // ed before op at begin
-			Assert.AreEqual(def, "(no".Extract(out x, "(", ")"));  // only op at begin
-			Assert.AreEqual(def, "no)".Extract(out x, "(", ")"));  // only op at end
-			Assert.AreEqual(def, "(".Extract(out x, "(", ")"));     // only op
+			Assert.AreEqual(def, "(no".Extract(out x, "(", ")")); // only op at begin
+			Assert.AreEqual(def, "no)".Extract(out x, "(", ")")); // only op at end
+			Assert.AreEqual(def, "(".Extract(out x, "(", ")")); // only op
 
 			Assert.AreEqual(def, "no)(".Extract(out x, "(", ")")); // ed before op at end
-			Assert.AreEqual(def, "no)".Extract(out x, "(", ")"));  // only ed at end
-			Assert.AreEqual(def, ")no".Extract(out x, "(", ")"));  // only ed at begin
-			Assert.AreEqual(def, ")".Extract(out x, "(", ")"));     // only ed
+			Assert.AreEqual(def, "no)".Extract(out x, "(", ")")); // only ed at end
+			Assert.AreEqual(def, ")no".Extract(out x, "(", ")")); // only ed at begin
+			Assert.AreEqual(def, ")".Extract(out x, "(", ")")); // only ed
 
-			Assert.AreEqual("yes", "ayesc".Extract(out x, "a", "c"));     // 
-			Assert.AreEqual("yes", "nooyeson".Extract(out x, "noo", "on"));  // with op & ed where lenght > 1
+			Assert.AreEqual("yes", "ayesc".Extract(out x, "a", "c")); // 
+			Assert.AreEqual("yes", "nooyeson".Extract(out x, "noo", "on")); // with op & ed where lenght > 1
 			Assert.AreEqual("yes", "nooyesoo".Extract(out x, "noo", "oo")); // where op has ed as substring
 
 			Assert.AreEqual("yes", "XxyesXx".Extract(out x, "x", "X")); // casing
@@ -149,17 +149,17 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			Assert.AreEqual("", ")()(".ExtractLast("(", ")")); // empty substring
 
 			Assert.AreEqual(def, ")(no".ExtractLast("(", ")")); // ed before op at begin
-			Assert.AreEqual(def, "(no".ExtractLast("(", ")"));  // only op at begin
-			Assert.AreEqual(def, "no)".ExtractLast("(", ")"));  // only op at end
-			Assert.AreEqual(def, "(".ExtractLast("(", ")"));     // only op
+			Assert.AreEqual(def, "(no".ExtractLast("(", ")")); // only op at begin
+			Assert.AreEqual(def, "no)".ExtractLast("(", ")")); // only op at end
+			Assert.AreEqual(def, "(".ExtractLast("(", ")")); // only op
 
 			Assert.AreEqual(def, "no)(".ExtractLast("(", ")")); // ed before op at end
-			Assert.AreEqual(def, "no)".ExtractLast("(", ")"));  // only ed at end
-			Assert.AreEqual(def, ")no".ExtractLast("(", ")"));  // only ed at begin
-			Assert.AreEqual(def, ")".ExtractLast("(", ")"));     // only ed
+			Assert.AreEqual(def, "no)".ExtractLast("(", ")")); // only ed at end
+			Assert.AreEqual(def, ")no".ExtractLast("(", ")")); // only ed at begin
+			Assert.AreEqual(def, ")".ExtractLast("(", ")")); // only ed
 
-			Assert.AreEqual("yes", "ayesc".ExtractLast("a", "c"));     // 
-			Assert.AreEqual("yes", "nooyeson".ExtractLast("noo", "on"));  // with op & ed where lenght > 1
+			Assert.AreEqual("yes", "ayesc".ExtractLast("a", "c")); // 
+			Assert.AreEqual("yes", "nooyeson".ExtractLast("noo", "on")); // with op & ed where lenght > 1
 			Assert.AreEqual("yes", "nooyesoo".ExtractLast("noo", "oo")); // where op has ed as substring
 
 			Assert.AreEqual("yes", "XxyesXx".ExtractLast("x", "X")); // casing
@@ -178,7 +178,7 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			Test(")(no", "(", ")", def, ")(no"); // ed before op at begin
 			Test("(no", "(", ")", def, "(no"); // only op at begin
 			Test("no)", "(", ")", def, "no)"); // only op at end
-			Test("(", "(", ")", def, "(");     // only op
+			Test("(", "(", ")", def, "("); // only op
 
 			Test("nooyeson", "noo", "on", "yes", ""); // with op & ed where lenght > 1
 			Test("nooyesoo", "noo", "oo", "yes", ""); // where op has ed as substring
@@ -188,7 +188,8 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			Test("XxyesXx", "x", "X", "yes", "Xx"); // where ed has op as substring
 			Test("xXxyesX", "x", "X", "yes", "xX", StringComparison.OrdinalIgnoreCase); // where ed has op as substring
 
-			void Test(string source, string op, string ed, string result, string remainder, StringComparison comp = StringComparison.Ordinal) {
+			void Test(string source, string op, string ed, string result, string remainder,
+				StringComparison comp = StringComparison.Ordinal) {
 				Assert.AreEqual(result, source.ExtractLast(op, ed, comp));
 				Assert.AreEqual(result, source.ExtractLast(out var z, op, ed, comp));
 				Assert.AreEqual(remainder, z);
@@ -206,13 +207,14 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 
 			Test("☆no", "☆", def, "☆no"); // only op at begin
 			Test("no☆", "☆", def, "no☆"); // only op at end
-			Test("☆", "☆", def, "☆");     // only op
+			Test("☆", "☆", def, "☆"); // only op
 
 			// casing
 			Test("XXyesXx", "X", "yes", "Xx"); // where ed has op as substring
 			Test("xXxyesX", "X", "yes", "xX", StringComparison.OrdinalIgnoreCase); // where ed has op as substring
 
-			void Test(string source, string br, string result, string remainder, StringComparison comp = StringComparison.Ordinal) {
+			void Test(string source, string br, string result, string remainder,
+				StringComparison comp = StringComparison.Ordinal) {
 				Assert.AreEqual(result, source.ExtractLast(br, comp));
 				Assert.AreEqual(result, source.ExtractLast(out var z, br, comp));
 				Assert.AreEqual(remainder, z);
@@ -228,10 +230,10 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			const string lDelimeter = partL + delimeter;
 			const string rDelimeter = delimeter + partR;
 			const string withoutDelimeter = partL + partR;
-			
+
 			const string noResult = "";
 			const string noRemainder = "";
-			
+
 			Assert.AreEqual(partL, withDelimeter.ExtractFirstWord(out var remainder));
 			Assert.AreEqual(partR, remainder);
 
@@ -260,10 +262,10 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			const string lDelimeter = partL + delimeter;
 			const string rDelimeter = delimeter + partR;
 			const string withoutDelimeter = partL + partR;
-			
+
 			const string noResult = "";
 			const string noRemainder = "";
-			
+
 			Assert.AreEqual(partL, withDelimeter.ExtractFirstWord(out var remainder, delimeter));
 			Assert.AreEqual(partR, remainder);
 
@@ -295,10 +297,10 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			const string lDelimeter = partL + delimeter;
 			const string rDelimeter = delimeter + partR;
 			const string withoutDelimeter = partL + partR;
-			
+
 			const string noResult = "";
 			const string noRemainder = "";
-			
+
 			Assert.AreEqual(partR, withDelimeter.ExtractLastWord(out var remainder));
 			Assert.AreEqual(partL, remainder);
 
@@ -327,10 +329,10 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			const string lDelimeter = partL + delimeter;
 			const string rDelimeter = delimeter + partR;
 			const string withoutDelimeter = partL + partR;
-			
+
 			const string noResult = "";
 			const string noRemainder = "";
-			
+
 			Assert.AreEqual(partR, withDelimeter.ExtractLastWord(out var remainder, delimeter));
 			Assert.AreEqual(partL, remainder);
 
