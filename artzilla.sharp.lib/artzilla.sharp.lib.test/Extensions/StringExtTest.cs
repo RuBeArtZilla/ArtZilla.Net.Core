@@ -254,5 +254,30 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			
 			// todo: add tests with comparisonType argument
 		}
+
+		[TestMethod, Description("Tests of " + nameof(StringExtensions.Repeat))]
+		public void RepeatTest() {
+			// null check
+			AssertEx.IsFailWith<ArgumentNullException>(() => ((string)null).Repeat(uint.MinValue));
+			AssertEx.IsFailWith<ArgumentNullException>(() => ((string)null).Repeat(uint.MaxValue));
+			
+			// repeat of any text zero times should return empty string
+			Assert.AreEqual(string.Empty, "Akemi Homura <3".Repeat(0));
+
+			// repeat of empty string should return empty string
+			Assert.AreEqual(string.Empty, string.Empty.Repeat(uint.MinValue));
+			Assert.AreEqual(string.Empty, string.Empty.Repeat(uint.MaxValue));
+
+			// usual work tests:
+			// with 1 length of pattern
+			Assert.AreEqual("a", "a".Repeat(1));
+			Assert.AreEqual("aa", "a".Repeat(2));
+			Assert.AreEqual("aaa", "a".Repeat(3));
+
+			// with 2 length of pattern
+			Assert.AreEqual("ab", "ab".Repeat(1));
+			Assert.AreEqual("abab", "ab".Repeat(2));
+			Assert.AreEqual("ababab", "ab".Repeat(3));
+		}
 	}
 }

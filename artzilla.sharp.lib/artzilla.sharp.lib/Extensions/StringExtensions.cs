@@ -592,6 +592,27 @@ namespace ArtZilla.Net.Core.Extensions {
 
 		#endregion
 
+		/// <summary> Repeat <paramref name="pattern"/> <paramref name="count"/> times </summary>
+		/// <param name="pattern"></param>
+		/// <param name="count"></param>
+		/// <returns></returns>
+		public static string Repeat(this string pattern, uint count) {
+			Guard.NotNull(pattern, nameof(pattern));
+			if (pattern.Length == 0)
+				return string.Empty;
+			
+			switch (count) {
+				case 0: return string.Empty;
+				case 1: return pattern;
+				default: {
+					var sb = new StringBuilder(pattern.Length * (int) count);
+					for (var i = 0; i < count; i++) 
+						sb.Append(pattern);
+					return sb.ToString();
+				}
+			}
+		}
+
 		private static int IndexOf(
 			this StringBuilder sb,
 			string value,
