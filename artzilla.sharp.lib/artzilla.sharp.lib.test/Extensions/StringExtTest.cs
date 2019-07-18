@@ -88,6 +88,19 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 		}
 
 		[TestMethod]
+		public void ToDictionaryTest() {
+			var d = "a=1;b=2;c=  ".ToDictionary();
+			Assert.AreEqual(3, d.Count);
+			Assert.AreEqual("1", d["a"]); // same as key
+			Assert.AreEqual("2", d["B"]); // other case key
+			Assert.AreEqual(string.Empty, d["c"]); // key without value
+
+			Assert.IsNull(default(string).ToDictionary());
+			Assert.AreEqual(0, string.Empty.ToDictionary().Count);
+			Assert.AreEqual(0, "noDelimeter".ToDictionary().Count);
+		}
+
+		[TestMethod]
 		public void ConvertTest() {
 			TestParseInt("", int.MinValue);
 			TestParseInt("-1", -1);

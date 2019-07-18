@@ -27,8 +27,8 @@
 		<Copyright>Copyright (c) 2017-2019 Artyom Fomin</Copyright>
 		<RepositoryType>Github</RepositoryType>
 		<Company>ArtZilla's development</Company>
-		<PackageVersion>1.1.3</PackageVersion>
-		<AssemblyVersion>1.1.3</AssemblyVersion>
+		<PackageVersion>1.1.4-rc01</PackageVersion>
+		<AssemblyVersion>1.1.4</AssemblyVersion>
 		<RepositoryUrl>https://github.com/RuBeArtZilla/ArtZilla.Net.Core</RepositoryUrl>
 		<IncludeSymbols>false</IncludeSymbols>
 		<IncludeSource>false</IncludeSource>

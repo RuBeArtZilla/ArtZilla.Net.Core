@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ArtZilla.Net.Core.Extensions {
@@ -37,6 +40,21 @@ namespace ArtZilla.Net.Core.Extensions {
 		public static bool Like(this string left, string right)
 			=> left?.Equals(right, StringComparison.OrdinalIgnoreCase) ?? false;
 
+		/// <summary> Parse source string to dictionary </summary>
+		/// <param name="source"></param>
+		/// <param name="pairSeparator">separator between key and value</param>
+		/// <param name="listSeparator">separator between pairs</param>
+		/// <returns></returns>
+		public static Dictionary<string, string> ToDictionary(
+			this string source,
+			string pairSeparator = "=",
+			string listSeparator = ";")
+			=> source?.Split(new[] { listSeparator }, StringSplitOptions.RemoveEmptyEntries)
+				.Select(i => i.Split(new[] { pairSeparator }, 2, StringSplitOptions.None))
+				.Where(i => i.Length == 2 && i[0].Length > 0)
+				.GroupBy(i => i[0], i => i[1], StringComparer.OrdinalIgnoreCase)
+				.ToDictionary(i => i.Key, i => i.First().Trim(), StringComparer.OrdinalIgnoreCase);
+		
 		/// <summary>
 		/// <TODO>add description, that method return combined strings with delimeter, or any not bad string, or empty string.</TODO>
 		/// </summary>
@@ -235,9 +253,9 @@ namespace ArtZilla.Net.Core.Extensions {
 		#region Extract methods
 
 		public static string Extract(
-			this string input, 
-			out string remainder, 
-			string op, 
+			this string input,
+			out string remainder,
+			string op,
 			string ed,
 			StringComparison comparison = StringComparison.Ordinal
 		) {
@@ -266,8 +284,8 @@ namespace ArtZilla.Net.Core.Extensions {
 		}
 
 		public static string Extract(
-			this string input, 
-			out string remainder, 
+			this string input,
+			out string remainder,
 			string border,
 			StringComparison comparison = StringComparison.Ordinal
 		) {
@@ -295,9 +313,9 @@ namespace ArtZilla.Net.Core.Extensions {
 		}
 
 		public static string Extract(
-			this string input, 
-			string op, 
-			string ed, 
+			this string input,
+			string op,
+			string ed,
 			StringComparison comparison = StringComparison.Ordinal
 		) {
 			Guard.NotNullOrEmpty(op, nameof(op));
@@ -322,8 +340,8 @@ namespace ArtZilla.Net.Core.Extensions {
 		}
 
 		public static string Extract(
-			this string input, 
-			string border, 
+			this string input,
+			string border,
 			StringComparison comparison = StringComparison.Ordinal
 		) {
 			Guard.NotNullOrEmpty(border, nameof(border));
@@ -586,7 +604,7 @@ namespace ArtZilla.Net.Core.Extensions {
 
 				--opPos;
 			}
-			
+
 			return sb.ToString();
 		}
 
@@ -600,16 +618,16 @@ namespace ArtZilla.Net.Core.Extensions {
 			Guard.NotNull(pattern, nameof(pattern));
 			if (pattern.Length == 0)
 				return string.Empty;
-			
+
 			switch (count) {
 				case 0: return string.Empty;
 				case 1: return pattern;
 				default: {
-					var sb = new StringBuilder(pattern.Length * (int) count);
-					for (var i = 0; i < count; i++) 
-						sb.Append(pattern);
-					return sb.ToString();
-				}
+						var sb = new StringBuilder(pattern.Length * (int) count);
+						for (var i = 0; i < count; i++)
+							sb.Append(pattern);
+						return sb.ToString();
+					}
 			}
 		}
 
@@ -627,51 +645,51 @@ namespace ArtZilla.Net.Core.Extensions {
 				case StringComparison.Ordinal:
 				case StringComparison.CurrentCulture:
 				case StringComparison.InvariantCulture: {
-					for (var i = startIndex; i < maxSearchLength; ++i) {
-						if (sb[i].Equals(value[0])) {
-							index = 1;
-							while (index < length && sb[i + index] == value[index])
-								++index;
+						for (var i = startIndex; i < maxSearchLength; ++i) {
+							if (sb[i].Equals(value[0])) {
+								index = 1;
+								while (index < length && sb[i + index] == value[index])
+									++index;
 
-							if (index == length)
-								return i;
+								if (index == length)
+									return i;
+							}
 						}
-					}
 
-					return -1;
-				}
+						return -1;
+					}
 
 				case StringComparison.OrdinalIgnoreCase:
 				case StringComparison.CurrentCultureIgnoreCase: {
-					var culture = CultureInfo.CurrentCulture;
-					for (var i = startIndex; i < maxSearchLength; ++i) {
-						if (char.ToUpper(sb[i], culture) == char.ToUpper(value[0], culture)) {
-							index = 1;
-							while (index < length && char.ToUpper(sb[i + index], culture) == char.ToUpper(value[index], culture))
-								++index;
+						var culture = CultureInfo.CurrentCulture;
+						for (var i = startIndex; i < maxSearchLength; ++i) {
+							if (char.ToUpper(sb[i], culture) == char.ToUpper(value[0], culture)) {
+								index = 1;
+								while (index < length && char.ToUpper(sb[i + index], culture) == char.ToUpper(value[index], culture))
+									++index;
 
-							if (index == length)
-								return i;
+								if (index == length)
+									return i;
+							}
 						}
-					}
 
-					return -1;
-				}
+						return -1;
+					}
 
 				case StringComparison.InvariantCultureIgnoreCase: {
-					for (var i = startIndex; i < maxSearchLength; ++i) {
-						if (char.ToUpperInvariant(sb[i]) == char.ToUpperInvariant(value[0])) {
-							index = 1;
-							while (index < length && char.ToUpperInvariant(sb[i + index]) == char.ToUpperInvariant(value[index]))
-								++index;
+						for (var i = startIndex; i < maxSearchLength; ++i) {
+							if (char.ToUpperInvariant(sb[i]) == char.ToUpperInvariant(value[0])) {
+								index = 1;
+								while (index < length && char.ToUpperInvariant(sb[i + index]) == char.ToUpperInvariant(value[index]))
+									++index;
 
-							if (index == length)
-								return i;
+								if (index == length)
+									return i;
+							}
 						}
-					}
 
-					return -1;
-				}
+						return -1;
+					}
 
 				default:
 					throw new ArgumentOutOfRangeException(nameof(comparisonType), comparisonType, null);
@@ -691,51 +709,51 @@ namespace ArtZilla.Net.Core.Extensions {
 				case StringComparison.Ordinal:
 				case StringComparison.CurrentCulture:
 				case StringComparison.InvariantCulture: {
-					for (var i = startIndex; i >= index; --i) {
-						if (sb[i].Equals(value[index])) {
-							count = 1;
-							while (count <= index && sb[i - count] == value[index - count])
-								++count;
+						for (var i = startIndex; i >= index; --i) {
+							if (sb[i].Equals(value[index])) {
+								count = 1;
+								while (count <= index && sb[i - count] == value[index - count])
+									++count;
 
-							if (count >= index)
-								return i - index;
+								if (count >= index)
+									return i - index;
+							}
 						}
-					}
 
-					return -1;
-				}
+						return -1;
+					}
 
 				case StringComparison.OrdinalIgnoreCase:
 				case StringComparison.CurrentCultureIgnoreCase: {
-					var culture = CultureInfo.CurrentCulture;
-					for (var i = startIndex; i >= index; --i) {
-						if (char.ToUpper(sb[i], culture) == char.ToUpper(value[index], culture)) {
-							count = 1;
-							while (count <= index && char.ToUpper(sb[i - count], culture) == char.ToUpper(value[index - count], culture))
-								++count;
+						var culture = CultureInfo.CurrentCulture;
+						for (var i = startIndex; i >= index; --i) {
+							if (char.ToUpper(sb[i], culture) == char.ToUpper(value[index], culture)) {
+								count = 1;
+								while (count <= index && char.ToUpper(sb[i - count], culture) == char.ToUpper(value[index - count], culture))
+									++count;
 
-							if (count >= index)
-								return i - index;
+								if (count >= index)
+									return i - index;
+							}
 						}
-					}
 
-					return -1;
-				}
+						return -1;
+					}
 
 				case StringComparison.InvariantCultureIgnoreCase: {
-					for (var i = startIndex; i >= index; --i) {
-						if (char.ToUpperInvariant(sb[i]) == char.ToUpperInvariant(value[index])) {
-							count = 1;
-							while (count <= index && char.ToUpperInvariant(sb[i - count]) == char.ToUpperInvariant(value[index - count]))
-								++count;
+						for (var i = startIndex; i >= index; --i) {
+							if (char.ToUpperInvariant(sb[i]) == char.ToUpperInvariant(value[index])) {
+								count = 1;
+								while (count <= index && char.ToUpperInvariant(sb[i - count]) == char.ToUpperInvariant(value[index - count]))
+									++count;
 
-							if (count >= index)
-								return i - index;
+								if (count >= index)
+									return i - index;
+							}
 						}
-					}
 
-					return -1;
-				}
+						return -1;
+					}
 
 				default:
 					throw new ArgumentOutOfRangeException(nameof(comparisonType), comparisonType, null);
