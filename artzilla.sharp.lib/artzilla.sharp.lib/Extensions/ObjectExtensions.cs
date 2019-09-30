@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ArtZilla.Net.Core.Extensions {
@@ -82,5 +83,11 @@ namespace ArtZilla.Net.Core.Extensions {
 		// todo: add description
 		public static TResult Use<TResult, TSource>(this TSource source, Func<TSource, TResult> useMethod)
 			=> useMethod(source);
+
+		/// <summary> Gets the total elapsed time measured by the current instance, in seconds. </summary>
+		/// <param name="stopwatch"></param>
+		/// <returns>A double representing the total number of seconds measured by the current instance.</returns>
+		public static double ElapsedSeconds(this Stopwatch stopwatch)
+			=> stopwatch.ElapsedMilliseconds * 0.001D;
 	}
 }

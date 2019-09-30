@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using ArtZilla.Net.Core.Extensions;
+using ArtZilla.Net.Core.Tests.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ArtZilla.Net.Core.Tests.Extensions {
@@ -141,6 +145,18 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 
 			Assert.IsTrue(x.Flag);
 			Assert.AreEqual(42, x.Value);
+		}
+
+		[TestMethod]
+		public void TestElapsedSeconds() {
+			AssertEx.IsFailWith<NullReferenceException>(() => default(Stopwatch).ElapsedSeconds());
+
+			var sw = Stopwatch.StartNew();
+			Thread.Sleep(TimeSpan.FromMilliseconds(100));
+			sw.Stop();
+			Assert.IsTrue(sw.ElapsedMilliseconds > 0);
+			Assert.IsTrue(sw.ElapsedSeconds() > 0);
+			Assert.IsTrue(Math.Abs(sw.ElapsedMilliseconds - sw.ElapsedSeconds() * 1000D) < double.Epsilon);
 		}
 	}
 }
