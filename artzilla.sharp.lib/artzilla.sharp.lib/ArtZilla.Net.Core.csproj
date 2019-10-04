@@ -1,14 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net40;net45;netstandard2.0;netcoreapp3.0</TargetFrameworks>
 		<RuntimeIdentifiers>win7-x86;win7-x64</RuntimeIdentifiers>
 		<Authors>ArtZilla</Authors>
-		<RequireLicenseAcceptance>false</RequireLicenseAcceptance>
 		<ProjectGuid>{F6773F6A-3BF9-469E-8349-74A3E0EF18FF}</ProjectGuid>
 		<OutputType>Library</OutputType>
-		<AppDesignerFolder>Properties</AppDesignerFolder>
 		<LangVersion>8</LangVersion>
 		<Language>en-US</Language>
 		<NeutralLanguage>en-US</NeutralLanguage>
@@ -20,16 +16,16 @@
 		<Summary>Common .Net library.</Summary>
 		<PackageCopyright>Copyright (c) 2017-2019 Artyom Fomin</PackageCopyright>
 		<PackageTags>ArtZilla, .Net, Common</PackageTags>
-		<PackageIconUrl>https://artzilla.name/ArtZilla.Net.Core/Icon.png</PackageIconUrl>
+		<PackageIcon>Icon.png</PackageIcon>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RequireLicenseAcceptance>false</RequireLicenseAcceptance>
 		<PackageProjectUrl>https://artzilla.name/ArtZilla.Net.Core</PackageProjectUrl>
-		<PackageLicenseUrl>https://artzilla.name/ArtZilla.Net.Core/License.txt</PackageLicenseUrl>
-		<AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+		<RepositoryUrl>https://github.com/RuBeArtZilla/ArtZilla.Net.Core</RepositoryUrl>
 		<Copyright>Copyright (c) 2017-2019 Artyom Fomin</Copyright>
 		<RepositoryType>Github</RepositoryType>
 		<Company>ArtZilla's development</Company>
 		<PackageVersion>1.1.5</PackageVersion>
 		<AssemblyVersion>1.1.5</AssemblyVersion>
-		<RepositoryUrl>https://github.com/RuBeArtZilla/ArtZilla.Net.Core</RepositoryUrl>
 		<IncludeSymbols>false</IncludeSymbols>
 		<IncludeSource>false</IncludeSource>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -77,4 +73,12 @@
 	<PropertyGroup Condition=" '$(TargetFramework)' == 'net40'">
 		<DefineConstants>NET40;NETFULL</DefineConstants>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="Icon.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
 </Project>

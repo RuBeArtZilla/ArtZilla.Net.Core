@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace ArtZilla.Net.Core.Serialization {
 	internal static class ReflectionExt {
@@ -15,6 +11,7 @@ namespace ArtZilla.Net.Core.Serialization {
 			=> (TAttribute) element.GetCustomAttributes(typeof(TAttribute), true).FirstOrDefault();
 	}
 
+	/*
 	internal class SpecialSerializer : IXmlSerializer, IStringSerializer, ISerializer {
 		private string _className;
 		private string _nsName;
@@ -117,5 +114,5 @@ namespace ArtZilla.Net.Core.Serialization {
 		public T DeserializeFrom(XmlReader xmlReader) => throw new NotImplementedException();
 
 		public bool TryDeserializeFrom(XmlReader xmlReader, out T o) => throw new NotImplementedException();
-	}
+	}*/
 }
