@@ -145,5 +145,16 @@ namespace ArtZilla.Net.Core.PInvoke {
 			uint msg,
 			UIntPtr wParam,
 			IntPtr lParam);
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct Rect {
+			public int Left;
+			public int Top;
+			public int Right;
+			public int Bottom;
+		}
+
+		[DllImport(DllName)]
+		public static extern IntPtr GetWindowRect(IntPtr hWnd, ref Rect rect);
 	}
 }
