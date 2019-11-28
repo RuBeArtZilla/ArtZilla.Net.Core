@@ -152,6 +152,14 @@ namespace ArtZilla.Net.Core.PInvoke {
 			public int Top;
 			public int Right;
 			public int Bottom;
+
+			public int Width => Right - Left;
+
+			public int Height => Bottom - Top;
+
+			/// <inheritdoc />
+			public override string ToString()
+				=> $"({Left}, {Top}, {Right}, {Bottom}) W={Width}, H={Height}";
 		}
 
 		[DllImport(DllName)]
