@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ArtZilla.Net.Core.Extensions;
 using ArtZilla.Net.Core.Tests.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -292,5 +293,58 @@ namespace ArtZilla.Net.Core.Tests.Extensions {
 			Assert.AreEqual("abab", "ab".Repeat(2));
 			Assert.AreEqual("ababab", "ab".Repeat(3));
 		}
+
+		[TestMethod, Description("Tests of " + nameof(StringExtensions.GetIndexOfFirstSymbol))]
+		public void GetIndexOfFirstSymbolTest() {
+			const int notFound = -1;
+			const string example0 = " "; // one space
+			const string example1 = " \t\t "; // mixed spaces with tabs
+			const string example2 = "  text starts after 2 spaces        ";
+			const string example3 = "\t\t\t\ttext starts after 4 tabs    ";
+			
+			Assert.AreEqual(notFound, example0.GetIndexOfFirstSymbol());
+			Assert.AreEqual(notFound, example1.GetIndexOfFirstSymbol());
+			Assert.AreEqual(notFound, example1.GetIndexOfFirstSymbol(1));
+			Assert.AreEqual(notFound, example2.GetIndexOfFirstSymbol(example2.Length - 3));
+			Assert.AreEqual(notFound, example3.GetIndexOfFirstSymbol(example3.Length - 3));
+			
+			Assert.AreEqual(2, example2.GetIndexOfFirstSymbol());
+			Assert.AreEqual(4, example3.GetIndexOfFirstSymbol());
+		}
+		
+		[TestMethod, Description("Tests of " + nameof(StringExtensions.GetIndexOfAny))]
+		public void GetIndexOfAnyTest() {
+			const int notFound = -1;
+			const string example0 = "0123456789+";
+			
+			Assert.AreEqual(notFound, string.Empty.GetIndexOfAny(out _, ' '));
+			Assert.AreEqual(notFound, example0.GetIndexOfAny(out _, ' '));
+			Assert.AreEqual(notFound, example0.GetIndexOfAny(1, out _, '0'));
+			Assert.AreEqual(notFound, example0.GetIndexOfAny(2, out _, '1'));
+			
+			for (var i = 0; i <= 9; ++i) {
+				var c = i.ToString()[0];
+				var array = Enumerable.Range(0, 10 - i).Select(j => (9 - j).ToString()[0]).Append('+').Reverse().ToArray();
+				var index = example0.GetIndexOfAny(i, out var @char, array);
+				Assert.AreEqual(i, index);
+				Assert.AreEqual(c, @char);
+			}
+		}
+		
+		[TestMethod, Description("Tests of " + nameof(StringExtensions.GetNextBracket))]
+		public void GetNextBracketTest() {
+			const int notFound = -1;
+			const string example0 = "{...}";
+			const string example1 = "}{..{..}..}{";
+			
+			Assert.AreEqual(notFound, string.Empty.GetNextBracket());
+			Assert.AreEqual(notFound, example0.GetNextBracket());
+			Assert.AreEqual(notFound, example0.GetNextBracket(0, '[', ']'));
+			Assert.AreEqual(notFound, example0.GetNextBracket(1, '[', ']'));
+			Assert.AreEqual(notFound, example0.GetNextBracket(0, '{', '}'));
+			Assert.AreEqual(example0.Length - 1, example0.GetNextBracket(1, '{', '}'));
+			Assert.AreEqual(0, example1.GetNextBracket(0, '{', '}'));
+			Assert.AreEqual(10, example1.GetNextBracket(2, '{', '}')); // index should be after op
+		} 
 	}
 }

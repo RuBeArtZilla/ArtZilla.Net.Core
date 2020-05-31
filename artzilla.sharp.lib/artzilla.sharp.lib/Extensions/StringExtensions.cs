@@ -48,13 +48,14 @@ namespace ArtZilla.Net.Core.Extensions {
 		public static Dictionary<string, string> ToDictionary(
 			this string source,
 			string pairSeparator = "=",
-			string listSeparator = ";")
-			=> source?.Split(new[] { listSeparator }, StringSplitOptions.RemoveEmptyEntries)
-				.Select(i => i.Split(new[] { pairSeparator }, 2, StringSplitOptions.None))
+			string listSeparator = ";"
+		)
+			=> source?.Split(new[] {listSeparator}, StringSplitOptions.RemoveEmptyEntries)
+				.Select(i => i.Split(new[] {pairSeparator}, 2, StringSplitOptions.None))
 				.Where(i => i.Length == 2 && i[0].Length > 0)
 				.GroupBy(i => i[0], i => i[1], StringComparer.OrdinalIgnoreCase)
 				.ToDictionary(i => i.Key, i => i.First().Trim(), StringComparer.OrdinalIgnoreCase);
-		
+
 		/// <summary>
 		/// <TODO>add description, that method return combined strings with delimeter, or any not bad string, or empty string.</TODO>
 		/// </summary>
@@ -196,8 +197,11 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// <param name="comparisonType"></param>
 		/// <returns></returns>
 		/// <exception cref="ArgumentNullException">prefix </exception>
-		public static string TrimPrefix(this string source, string prefix,
-			StringComparison comparisonType = StringComparison.Ordinal)
+		public static string TrimPrefix(
+			this string source,
+			string prefix,
+			StringComparison comparisonType = StringComparison.Ordinal
+		)
 			=> source?.StartsWith(prefix, comparisonType) == true
 				? source.Substring(prefix.Length)
 				: source ?? string.Empty;
@@ -207,8 +211,11 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// <param name="suffix">Suffix string</param>
 		/// <param name="comparisonType"></param>
 		/// <returns></returns>
-		public static string TrimSuffix(this string source, string suffix,
-			StringComparison comparisonType = StringComparison.Ordinal)
+		public static string TrimSuffix(
+			this string source,
+			string suffix,
+			StringComparison comparisonType = StringComparison.Ordinal
+		)
 			=> source?.EndsWith(suffix, comparisonType) == true
 				? source.Remove(source.Length - suffix.Length)
 				: source ?? string.Empty;
@@ -235,8 +242,12 @@ namespace ArtZilla.Net.Core.Extensions {
 			return double.TryParse(source, out var val) ? val : defValue;
 		}
 
-		public static double ParseDoubleEx(this string source, NumberStyles ns, IFormatProvider ifp,
-			double defValue = double.NaN) {
+		public static double ParseDoubleEx(
+			this string source,
+			NumberStyles ns,
+			IFormatProvider ifp,
+			double defValue = double.NaN
+		) {
 			if (source.IsBad())
 				return defValue;
 			return double.TryParse(source, ns, ifp, out var val) ? val : defValue;
@@ -368,8 +379,13 @@ namespace ArtZilla.Net.Core.Extensions {
 
 		#region ExtractLast methods
 
-		public static string ExtractLast(this string input, out string remainder, string op, string ed,
-			StringComparison comparison = StringComparison.Ordinal) {
+		public static string ExtractLast(
+			this string input,
+			out string remainder,
+			string op,
+			string ed,
+			StringComparison comparison = StringComparison.Ordinal
+		) {
 			Guard.NotNullOrEmpty(op, nameof(op));
 			Guard.NotNullOrEmpty(ed, nameof(ed));
 
@@ -394,8 +410,12 @@ namespace ArtZilla.Net.Core.Extensions {
 			return input.Substring(nop, ned - nop);
 		}
 
-		public static string ExtractLast(this string input, out string remainder, string border,
-			StringComparison comparison = StringComparison.Ordinal) {
+		public static string ExtractLast(
+			this string input,
+			out string remainder,
+			string border,
+			StringComparison comparison = StringComparison.Ordinal
+		) {
 			Guard.NotNullOrEmpty(border, nameof(border));
 
 			remainder = input;
@@ -419,8 +439,12 @@ namespace ArtZilla.Net.Core.Extensions {
 			return input.Substring(nop, ned - nop);
 		}
 
-		public static string ExtractLast(this string input, string op, string ed,
-			StringComparison comparison = StringComparison.Ordinal) {
+		public static string ExtractLast(
+			this string input,
+			string op,
+			string ed,
+			StringComparison comparison = StringComparison.Ordinal
+		) {
 			Guard.NotNullOrEmpty(op, nameof(op));
 			Guard.NotNullOrEmpty(ed, nameof(ed));
 
@@ -443,8 +467,11 @@ namespace ArtZilla.Net.Core.Extensions {
 			return input.Substring(nop, ned - nop);
 		}
 
-		public static string ExtractLast(this string input, string border,
-			StringComparison comparison = StringComparison.Ordinal) {
+		public static string ExtractLast(
+			this string input,
+			string border,
+			StringComparison comparison = StringComparison.Ordinal
+		) {
 			Guard.NotNullOrEmpty(border, nameof(border));
 
 			if (input is null)
@@ -623,141 +650,88 @@ namespace ArtZilla.Net.Core.Extensions {
 				case 0: return string.Empty;
 				case 1: return pattern;
 				default: {
-						var sb = new StringBuilder(pattern.Length * (int) count);
-						for (var i = 0; i < count; i++)
-							sb.Append(pattern);
-						return sb.ToString();
-					}
+					var sb = new StringBuilder(pattern.Length * (int) count);
+					for (var i = 0; i < count; i++)
+						sb.Append(pattern);
+					return sb.ToString();
+				}
 			}
 		}
 
-		private static int IndexOf(
-			this StringBuilder sb,
-			string value,
-			int startIndex,
-			StringComparison comparisonType = StringComparison.OrdinalIgnoreCase
-		) {
-			int index;
-			var length = value.Length;
-			var maxSearchLength = (sb.Length - length) + 1;
+		// alt. wrapper for substring with begin & end position
+		/// <summary>
+		/// Retrieves a substring from this instance.
+		/// The substring starts at a specified character position to the next position </summary>
+		/// <param name="source">A string</param>
+		/// <param name="startIndex">The zero-based starting character position of a substring in this instance.</param>
+		/// <param name="endIndex">The zero-based ending character position of a substring in this instance.</param>
+		/// <returns></returns>
+		public static string Cut(this string source, int startIndex, int endIndex)
+			=> source.Substring(startIndex, endIndex - startIndex);
 
-			switch (comparisonType) {
-				case StringComparison.Ordinal:
-				case StringComparison.CurrentCulture:
-				case StringComparison.InvariantCulture: {
-						for (var i = startIndex; i < maxSearchLength; ++i) {
-							if (sb[i].Equals(value[0])) {
-								index = 1;
-								while (index < length && sb[i + index] == value[index])
-									++index;
+		/// <summary> The zero-based index of first not a white space character </summary>
+		/// <param name="source">A string</param>
+		/// <param name="startIndex">The zero-based starting character position of a substring in this instance.</param>
+		/// <returns>
+		/// The zero-based starting index position of first not a white space character,
+		/// or -1 if it is not found or if the current instance equals <see cref="String.Empty" />. </returns>
+		/// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
+		/// <exception cref="ArgumentOutOfRangeException"><paramref name="startIndex" /> is less than zero.</exception>
+		public static int GetIndexOfFirstSymbol(this string source, int startIndex = 0) {
+			for (var i = startIndex; i < source.Length; i++)
+				if (!char.IsWhiteSpace(source, i))
+					return i;
 
-								if (index == length)
-									return i;
-							}
-						}
-
-						return -1;
-					}
-
-				case StringComparison.OrdinalIgnoreCase:
-				case StringComparison.CurrentCultureIgnoreCase: {
-						var culture = CultureInfo.CurrentCulture;
-						for (var i = startIndex; i < maxSearchLength; ++i) {
-							if (char.ToUpper(sb[i], culture) == char.ToUpper(value[0], culture)) {
-								index = 1;
-								while (index < length && char.ToUpper(sb[i + index], culture) == char.ToUpper(value[index], culture))
-									++index;
-
-								if (index == length)
-									return i;
-							}
-						}
-
-						return -1;
-					}
-
-				case StringComparison.InvariantCultureIgnoreCase: {
-						for (var i = startIndex; i < maxSearchLength; ++i) {
-							if (char.ToUpperInvariant(sb[i]) == char.ToUpperInvariant(value[0])) {
-								index = 1;
-								while (index < length && char.ToUpperInvariant(sb[i + index]) == char.ToUpperInvariant(value[index]))
-									++index;
-
-								if (index == length)
-									return i;
-							}
-						}
-
-						return -1;
-					}
-
-				default:
-					throw new ArgumentOutOfRangeException(nameof(comparisonType), comparisonType, null);
-			}
+			return -1;
 		}
 
-		private static int LastIndexOf(
-			this StringBuilder sb,
-			string value,
-			int startIndex,
-			StringComparison comparisonType = StringComparison.OrdinalIgnoreCase
-		) {
-			int count;
-			var index = value.Length - 1;
+		/// <summary> The zero-based index of first occurence of any <paramref name="characters"/> in <paramref name="source"/> </summary>
+		/// <param name="source">A string</param>
+		/// <param name="found">Founded character</param>
+		/// <param name="characters">Array of characters</param>
+		/// <returns></returns>
+		public static int GetIndexOfAny(this string source, out char found, params char[] characters)
+			=> GetIndexOfAny(source, 0, out found, characters);
 
-			switch (comparisonType) {
-				case StringComparison.Ordinal:
-				case StringComparison.CurrentCulture:
-				case StringComparison.InvariantCulture: {
-						for (var i = startIndex; i >= index; --i) {
-							if (sb[i].Equals(value[index])) {
-								count = 1;
-								while (count <= index && sb[i - count] == value[index - count])
-									++count;
-
-								if (count >= index)
-									return i - index;
-							}
-						}
-
-						return -1;
+		/// <summary> The zero-based index of first occurence of any <paramref name="characters"/> in <paramref name="source"/> </summary>
+		/// <param name="source">A string</param>
+		/// <param name="startIndex">The search starting position. The search proceeds from <paramref name="startIndex" /> toward the beginning of <paramref name="source"/>.</param>
+		/// <param name="found">Founded character</param>
+		/// <param name="characters">Array of characters</param>
+		/// <returns></returns>
+		public static int GetIndexOfAny(this string source, int startIndex, out char found, params char[] characters) {
+			for (var i = startIndex; i < source.Length; ++i) 
+				for (var j = 0; j < characters.Length; ++j)
+					if (source[i] == characters[j]) {
+						found = characters[j];
+						return i;
 					}
 
-				case StringComparison.OrdinalIgnoreCase:
-				case StringComparison.CurrentCultureIgnoreCase: {
-						var culture = CultureInfo.CurrentCulture;
-						for (var i = startIndex; i >= index; --i) {
-							if (char.ToUpper(sb[i], culture) == char.ToUpper(value[index], culture)) {
-								count = 1;
-								while (count <= index && char.ToUpper(sb[i - count], culture) == char.ToUpper(value[index - count], culture))
-									++count;
+			found = default;
+			return -1;
+		}
 
-								if (count >= index)
-									return i - index;
-							}
-						}
-
-						return -1;
-					}
-
-				case StringComparison.InvariantCultureIgnoreCase: {
-						for (var i = startIndex; i >= index; --i) {
-							if (char.ToUpperInvariant(sb[i]) == char.ToUpperInvariant(value[index])) {
-								count = 1;
-								while (count <= index && char.ToUpperInvariant(sb[i - count]) == char.ToUpperInvariant(value[index - count]))
-									++count;
-
-								if (count >= index)
-									return i - index;
-							}
-						}
-
-						return -1;
-					}
-
-				default:
-					throw new ArgumentOutOfRangeException(nameof(comparisonType), comparisonType, null);
+		/// <summary>
+		/// Reports the zero-based index of the of the <paramref name="ed"/> bracket in the <paramref name="source"/>.  
+		/// </summary>
+		/// <param name="source"></param>
+		/// <param name="start"></param>
+		/// <param name="op"></param>
+		/// <param name="ed"></param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
+		/// <exception cref="ArgumentOutOfRangeException"><paramref name="start" /> is less than zero.</exception>
+		public static int GetNextBracket(this string source, int start = 0, char op = '(', char ed = ')') {
+			var deep = 0;
+			for (var i = start; i < source.Length; ++i) {
+				var c = source[i];
+				if (c == op)
+					++deep;
+				else if (c == ed && 0 == deep--)
+					return i;
 			}
+
+			return -1;
 		}
 	}
 }
