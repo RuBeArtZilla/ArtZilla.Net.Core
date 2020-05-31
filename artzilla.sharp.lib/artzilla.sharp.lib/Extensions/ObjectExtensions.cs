@@ -17,7 +17,7 @@ namespace ArtZilla.Net.Core.Extensions {
 		public static bool IsAnyOf<T>(this T value, IEqualityComparer<T> comparer, params T[] values)
 			=> values.Contains(value, comparer);
 
-		/// <summary> Return collection, that contain only <paramref name="item"/> </summary>
+		/// <summary> Return enumeration, that contain only <paramref name="item"/> </summary>
 		/// <typeparam name="T">Type of the <paramref name="item"/></typeparam>
 		/// <param name="item">Element of result collection</param>
 		/// <returns>Collection that contain only <paramref name="item"/></returns>
@@ -25,6 +25,12 @@ namespace ArtZilla.Net.Core.Extensions {
 			yield return item;
 		}
 
+		/// <summary> Check if value in open interval (lesser bound &lt; value &lt; greater bound) </summary>
+		/// <param name="value"></param>
+		/// <param name="bound1"></param>
+		/// <param name="bound2"></param>
+		/// <typeparam name="T"></typeparam>
+		/// <returns></returns>
 		public static bool IsInOpenInterval<T>(this T value, T bound1, T bound2 = default) where T : IComparable<T> {
 			var c1 = value.CompareTo(bound1);
 			var c2 = value.CompareTo(bound2);
@@ -32,6 +38,12 @@ namespace ArtZilla.Net.Core.Extensions {
 			return (c1 > 0 && c2 < 0) || (c1 < 0 && c2 > 0);
 		}
 
+		/// <summary> Check if value in open interval (lesser bound &lt;= value &lt;= greater bound) </summary>
+		/// <param name="value"></param>
+		/// <param name="bound1"></param>
+		/// <param name="bound2"></param>
+		/// <typeparam name="T"></typeparam>
+		/// <returns></returns>
 		public static bool IsInClosedInterval<T>(this T value, T bound1, T bound2 = default) where T : IComparable<T> {
 			var c1 = value.CompareTo(bound1);
 			var c2 = value.CompareTo(bound2);
