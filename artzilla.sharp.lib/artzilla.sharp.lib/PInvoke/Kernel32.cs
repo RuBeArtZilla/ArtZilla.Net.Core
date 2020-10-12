@@ -10,7 +10,8 @@ namespace ArtZilla.Net.Core.PInvoke {
 		public static extern uint GetShortPathName(
 			[MarshalAs(UnmanagedType.LPTStr)] string lpszLongPath,
 			[MarshalAs(UnmanagedType.LPTStr)] StringBuilder lpszShortPath,
-			uint cchBuffer);
+			uint cchBuffer
+		);
 
 		[DllImport(DllName, CharSet = CharSet.Auto, SetLastError = true)]
 		public static extern uint GetShortPathName(string lpszLongPath, char[] lpszShortPath, int cchBuffer);
@@ -32,7 +33,7 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// <returns>
 		/// If the function succeeds, the return value is nonzero.
 		/// If the function fails, the return value is zero.To get extended error information, call GetLastError.
-	  /// </returns>
+		/// </returns>
 		[DllImport(DllName, SetLastError = true, ExactSpelling = true)]
 		public static extern bool FreeConsole();
 
@@ -67,11 +68,54 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// <returns>The return value is the process identifier of the calling process.</returns>
 		[DllImport(DllName)]
 		internal static extern uint GetCurrentProcessId();
-		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="esFlags"></param>
+		/// <remarks>
+		/// There is no need to store the state you set, Windows remembers it for you.
+		/// Just set it back to ES_CONTINUOUS when you don't want it anymore.
+		/// Also note that this setting is per thread/application not global,
+		/// so if you go to ES_CONTINUOUS and another app/thread is still setting ES_DISPLAY
+		/// the display will be kept on.
+		/// </remarks>
+		/// <returns></returns>
+		[DllImport(DllName, CharSet = CharSet.Auto,SetLastError = true)]
+		public static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
+
 		public static String GetShortPathName(String longpath) {
 			var buffer = new Char[256];
 			GetShortPathName(longpath, buffer, buffer.Length);
 			return new String(buffer);
 		}
+	}
+
+	[FlagsAttribute]
+	public enum EXECUTION_STATE : uint {
+		/// <summary>
+		/// Enables away mode. This value must be specified with ES_CONTINUOUS.
+		/// Away mode should be used only by media-recording and media-distribution
+		/// applications that must perform critical background processing on desktop
+		/// computers while the computer appears to be sleeping. See Remarks.
+		/// </summary>
+		ES_AWAYMODE_REQUIRED = 0x00000040,
+		/// <summary>
+		/// Informs the system that the state being set should remain in effect until the next call
+		/// that uses ES_CONTINUOUS and one of the other state flags is cleared.
+		/// </summary>
+		ES_CONTINUOUS = 0x80000000,
+		
+		/// <summary>
+		/// Forces the display to be on by resetting the display idle timer.
+		/// </summary>
+		ES_DISPLAY_REQUIRED = 0x00000002,
+		
+		/// <summary>
+		/// Forces the system to be in the working state by resetting the system idle timer.
+		/// </summary>
+		ES_SYSTEM_REQUIRED = 0x00000001
+		// Legacy flag, should not be used.
+		// ES_USER_PRESENT = 0x00000004
 	}
 }

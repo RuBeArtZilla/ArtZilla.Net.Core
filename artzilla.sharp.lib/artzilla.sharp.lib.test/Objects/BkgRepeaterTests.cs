@@ -2,7 +2,7 @@
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArtZilla.Net.Core.Tests.BkgOp {
+namespace ArtZilla.Net.Core.Tests.Objects {
 	[TestClass]
 	public class BkgRepeaterTests {
 		private static Int64 _counter = 0;

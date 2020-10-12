@@ -43,7 +43,6 @@
     <LangVersion>8</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BkgOp\BkgRepeaterTests.cs" />
     <Compile Include="Common\AssertEx.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\LibTests.cs" />
@@ -58,6 +57,8 @@
     <Compile Include="Extensions\StringExtractTests.cs" />
     <Compile Include="Extensions\StringExtTest.cs" />
     <Compile Include="Extensions\TypeExtTest.cs" />
+    <Compile Include="Objects\BkgRepeaterTests.cs" />
+    <Compile Include="Objects\PeriodTests.cs" />
     <Compile Include="Plugins\PluginsTest.cs" />
     <Compile Include="Plugins\VersionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,7 +6,7 @@ namespace ArtZilla.Net.Core.Objects {
 	/// <summary>Represents a period of time</summary>
 	[Serializable]
 	[StructLayout(LayoutKind.Auto)]
-	public readonly struct Period {
+	public readonly struct Period : IEquatable<Period> {
 		public readonly DateTime Begin;
 		public readonly DateTime End;
 
@@ -95,7 +95,25 @@ namespace ArtZilla.Net.Core.Objects {
 			return new Period(dt2.AddYears(-1), dt2);
 		}
 
+		/// <inheritdoc />
+		public bool Equals(Period other) 
+			=> Begin.Equals(other.Begin) && End.Equals(other.End);
 
+		/// <inheritdoc />
+		public override bool Equals(object obj) 
+			=> obj is Period other && Equals(other);
+
+		/// <inheritdoc />
+		public override int GetHashCode() {
+			unchecked { return (Begin.GetHashCode() * 397) ^ End.GetHashCode(); }
+		}
+
+		public static bool operator ==(Period left, Period right) 
+			=> left.Equals(right);
+		
+		public static bool operator !=(Period left, Period right)
+			=> !left.Equals(right);
+		
 		public static implicit operator (DateTime Begin, DateTime End)(Period period)
 			=> (period.Begin, period.End);
 
