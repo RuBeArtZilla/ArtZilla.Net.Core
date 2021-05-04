@@ -3,7 +3,15 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 namespace ArtZilla.Net.Core.PInvoke {
+	/// <summary>
+	/// KERNEL32.DLL exposes to applications most of the Win32 base APIs, such as memory management,
+	/// input/output (I/O) operations, process and thread creation, and synchronization functions.
+	/// Many of these are implemented within KERNEL32.DLL by calling corresponding functions in the native API,
+	/// exposed by NTDLL.DLL.
+	/// <para>https://en.wikipedia.org/wiki/Microsoft_Windows_library_files#KERNEL32.DLL</para>
+	/// </summary>
 	public static class Kernel32 {
+		/// <summary> The name of the DLL that contains the unmanaged method. </summary>
 		public const string DllName = "kernel32.dll";
 
 		[DllImport(DllName, CharSet = CharSet.Auto, SetLastError = true)]
@@ -36,6 +44,23 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// </returns>
 		[DllImport(DllName, SetLastError = true, ExactSpelling = true)]
 		public static extern bool FreeConsole();
+
+		/// <summary> Use the console of the parent of the current process. </summary>
+		public const uint ATTACH_PARENT_PROCESS = unchecked((uint) -1);
+
+		/// <summary>
+		/// Attaches the calling process to the console of the specified process as a client application.
+		/// </summary>
+		/// <param name="dwProcessId">
+		///	<para>* <b>pid</b>: Use the console of the specified process.</para>
+		/// <para>* <b>ATTACH_PARENT_PROCESS (DWORD)-1</b>: Use the console of the parent of the current process.</para>
+		/// </param>
+		/// <returns>
+		/// <para>If the function succeeds, the return value is nonzero.</para>
+		/// <para>If the function fails, the return value is zero. To get extended error information, call GetLastError.</para>
+		/// </returns>
+		[DllImport("kernel32.dll", SetLastError = true)]
+		static extern bool AttachConsole(uint dwProcessId);
 
 		/// <summary> Retrieves the window handle used by the console associated with the calling process. </summary>
 		/// <returns>
@@ -84,10 +109,10 @@ namespace ArtZilla.Net.Core.PInvoke {
 		[DllImport(DllName, CharSet = CharSet.Auto,SetLastError = true)]
 		public static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
 
-		public static String GetShortPathName(String longpath) {
-			var buffer = new Char[256];
+		public static string GetShortPathName(string longpath) {
+			var buffer = new char[256];
 			GetShortPathName(longpath, buffer, buffer.Length);
-			return new String(buffer);
+			return new string(buffer);
 		}
 	}
 
@@ -115,6 +140,7 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// Forces the system to be in the working state by resetting the system idle timer.
 		/// </summary>
 		ES_SYSTEM_REQUIRED = 0x00000001
+		
 		// Legacy flag, should not be used.
 		// ES_USER_PRESENT = 0x00000004
 	}

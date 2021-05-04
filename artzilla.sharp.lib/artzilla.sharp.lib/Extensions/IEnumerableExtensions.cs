@@ -34,6 +34,8 @@ namespace ArtZilla.Net.Core.Extensions {
 			}
 		}
 
+#if NETFULL // .net core & .net standard already has this method
+		
 		/// <summary>
 		/// Return collection that enumerates <paramref name="items"/> and contain <paramref name="item"/> at the end. 
 		/// </summary>
@@ -45,6 +47,7 @@ namespace ArtZilla.Net.Core.Extensions {
 		public static IEnumerable<T> Append<T>(this IEnumerable<T> items, T item) {
 			if (items is null)
 				throw new ArgumentNullException(nameof(items));
+
 			return InnerAppend(items, item);
 
 			// local method for fail fast if arguments is null;
@@ -55,6 +58,8 @@ namespace ArtZilla.Net.Core.Extensions {
 				yield return lItem;
 			}
 		}
+
+#endif
 
 		/// <summary>
 		/// Return collection that enumerates <paramref name="items"/> and contain <paramref name="item0"/> and <paramref name="item1"/> at the end. 

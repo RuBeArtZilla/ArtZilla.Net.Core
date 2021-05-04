@@ -7,7 +7,7 @@ namespace ArtZilla.Net.Core.Tests.Common {
 	public class LibTests {
 		[TestMethod]
 		public void DoAct() {
-			var r = Lib.Do(() => { throw new Exception("None"); });
+			var r = Lib.Do(() => throw new ("None"));
 			Assert.IsFalse(r.IsOk);
 			Assert.IsTrue(r.Exception.Message == "None");
 			r = Lib.Do(null);
@@ -18,10 +18,10 @@ namespace ArtZilla.Net.Core.Tests.Common {
 
 		[TestMethod]
 		public void DoFunc() {
-			var r = Lib.Do<Boolean>(() => { throw new Exception("Hello"); });
+			var r = Lib.Do<Boolean>(() => throw new ("Hello"));
 			Assert.IsFalse(r.IsOk);
 			Assert.IsTrue(r.Exception.Message == "Hello");
-			Assert.AreEqual(r.Result, default(Boolean));
+			Assert.AreEqual(r.Result, default(bool));
 
 			var r2 = Lib.Do(() => true);
 			Assert.IsTrue(r2.IsOk);

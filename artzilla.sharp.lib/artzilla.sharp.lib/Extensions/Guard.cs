@@ -120,21 +120,43 @@ namespace ArtZilla.Net.Core.Extensions {
 				throw new ArgumentException(paramName);
 		}
 
+		/// <summary> throw exception if value not in open interval </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="value"></param>
+		/// <param name="minimum"></param>
+		/// <param name="maximum"></param>
 		public static void InOpenInterval<T>(T value, T minimum, T maximum) where T : IComparable<T> {
 			if (value.CompareTo(minimum) <= 0 || value.CompareTo(maximum) >= 0)
 				throw new ArgumentOutOfRangeException();
 		}
-
+		
+		/// <summary> throw exception if value not in open interval </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="value"></param>
+		/// <param name="minimum"></param>
+		/// <param name="maximum"></param>
+		/// <param name="paramName"></param>
 		public static void InOpenInterval<T>(T value, T minimum, T maximum, string paramName) where T : IComparable<T> {
 			if (value.CompareTo(minimum) <= 0 || value.CompareTo(maximum) >= 0)
 				throw new ArgumentOutOfRangeException(paramName);
 		}
-
+		
+		/// <summary> throw exception if value not in closed interval </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="value"></param>
+		/// <param name="minimum"></param>
+		/// <param name="maximum"></param>
 		public static void InClosedInterval<T>(T value, T minimum, T maximum) where T : IComparable<T> {
 			if (value.CompareTo(minimum) < 0 || value.CompareTo(maximum) > 0)
 				throw new ArgumentOutOfRangeException();
 		}
-
+		
+		/// <summary> throw exception if value not in closed interval </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="value"></param>
+		/// <param name="minimum"></param>
+		/// <param name="maximum"></param>
+		/// <param name="paramName"></param>
 		public static void InClosedInterval<T>(T value, T minimum, T maximum, string paramName) where T : IComparable<T> {
 			if (value.CompareTo(minimum) < 0 || value.CompareTo(maximum) > 0)
 				throw new ArgumentOutOfRangeException(paramName);

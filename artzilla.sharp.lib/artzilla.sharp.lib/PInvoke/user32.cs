@@ -2,15 +2,84 @@
 using System.Runtime.InteropServices;
 
 namespace ArtZilla.Net.Core.PInvoke {
-	/// <summary> Second argument for function <see cref="User32.ShowWindowAsync"/> </summary>
+	/// <summary>
+	/// Second argument for function <see cref="User32.ShowWindow(IntPtr,ShowWindowCommand)"/>
+	/// and <see cref="User32.ShowWindowAsync(IntPtr,ShowWindowCommand)"/>
+	/// </summary>
 	public enum ShowWindowCommand {
+		/// <summary>
+		/// Minimizes a window, even if the thread that owns the window is not responding.
+		/// This flag should only be used when minimizing windows from a different thread.
+		/// </summary>
+		ForceMinimize = 11,
+
+		/// <summary>
+		/// Hides the window and activates another window.
+		/// </summary>
 		Hide = 0,
-		Normal = 1,
-		Minimized = 2,
-		Maximized = 3,
-		NoActivate = 4,
+
+		/// <summary>
+		/// Maximizes the specified window.
+		/// </summary>
+		Maximize = 3,
+
+		/// <summary>
+		/// Minimizes the specified window and activates the next top-level window in the Z order.
+		/// </summary>
+		Minimize = 2,
+
+		/// <summary>
+		/// Activates and displays the window. If the window is minimized or maximized,
+		/// the system restores it to its original size and position.
+		/// An application should specify this flag when restoring a minimized window.
+		/// </summary>
 		Restore = 9,
-		Default = 10,
+
+		/// <summary>
+		/// Activates the window and displays it in its current size and position.
+		/// </summary>
+		Show = 5,
+
+		/// <summary>
+		/// Sets the show state based on the SW_ value specified in the STARTUPINFO structure
+		/// passed to the CreateProcess function by the program that started the application.
+		/// </summary>
+		ShowDefault = 10,
+
+		/// <summary>
+		/// Activates the window and displays it as a maximized window.
+		/// </summary>
+		ShowMaximized = 3,
+
+		/// <summary>
+		/// Activates the window and displays it as a minimized window.
+		/// </summary>
+		ShowMinimized = 2,
+
+		/// <summary>
+		/// Displays the window as a minimized window. This value is similar to SW_SHOWMINIMIZED,
+		/// except the window is not activated.
+		/// </summary>
+		ShowMinNoActive = 7,
+
+		/// <summary>
+		/// Displays the window in its current size and position. This value is similar to SW_SHOW,
+		/// except that the window is not activated.
+		/// </summary>
+		ShowNa = 8,
+
+		/// <summary>
+		/// Displays a window in its most recent size and position. This value is similar to SW_SHOWNORMAL,
+		/// except that the window is not activated.
+		/// </summary>
+		ShowNoActivate = 4,
+
+		/// <summary>
+		/// Activates and displays a window. If the window is minimized or maximized,
+		/// the system restores it to its original size and position.
+		/// An application should specify this flag when displaying the window for the first time.
+		/// </summary>
+		ShowNormal = 1,
 	}
 
 	public static class WM {
@@ -46,15 +115,74 @@ namespace ArtZilla.Net.Core.PInvoke {
 		public POINT pt;
 	}
 
+	/// <summary>
+	/// USER32.DLL implements the Windows USER component that creates and manipulates the standard elements
+	/// of the Windows user interface, such as the desktop, windows, and menus. It thus enables programs
+	/// to implement a graphical user interface (GUI) that matches the Windows look and feel.
+	/// Programs call functions from Windows USER to perform operations such as creating and managing windows,
+	/// receiving window messages (which are mostly user input such as mouse and keyboard events,
+	/// but also notifications from the operating system), displaying text in a window, and displaying message boxes.
+	/// Many of the functions in USER32.DLL call upon GDI functions exported by GDI32.DLL to do the actual rendering
+	/// of the various elements of the user interface. Some types of programs will also call GDI functions directly
+	/// to perform lower-level drawing operations within a window previously created via USER32 functions.
+	/// <para>https://en.wikipedia.org/wiki/Microsoft_Windows_library_files#USER32.DLL"</para>
+	/// </summary>
 	public static class User32 {
+		/// <summary> The name of the DLL that contains the unmanaged method. </summary>
 		public const string DllName = "user32.dll";
 
 		[DllImport(DllName)]
 		public static extern bool SetForegroundWindow(IntPtr hWnd);
 
+		/// <summary>
+		/// Sets the specified window's show state.
+		/// </summary>
+		/// <param name="hWnd">A handle to the window.</param>
+		/// <param name="nCmdShow">Controls how the window is to be shown.
+		/// This parameter is ignored the first time an application calls ShowWindow,
+		/// if the program that launched the application provides a STARTUPINFO structure.
+		/// Otherwise, the first time ShowWindow is called, the value should be the value obtained by the WinMain
+		/// function in its nCmdShow parameter. In subsequent calls, this parameter can be one of the following values.
+		/// </param>
+		[DllImport(DllName)]
+		public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+		/// <summary>
+		/// Sets the specified window's show state.
+		/// </summary>
+		/// <param name="hWnd">A handle to the window.</param>
+		/// <param name="nCmdShow">Controls how the window is to be shown.
+		/// This parameter is ignored the first time an application calls ShowWindow,
+		/// if the program that launched the application provides a STARTUPINFO structure.
+		/// Otherwise, the first time ShowWindow is called, the value should be the value obtained by the WinMain
+		/// function in its nCmdShow parameter. In subsequent calls, this parameter can be one of the following values.
+		/// </param>
+		public static void ShowWindow(IntPtr hWnd, ShowWindowCommand nCmdShow)
+			=> ShowWindow(hWnd, (int) nCmdShow);
+
+		/// <summary>
+		/// Sets the show state of a window without waiting for the operation to complete.
+		/// </summary>
+		/// <param name="hWnd">A handle to the window.</param>
+		/// <param name="nCmdShow">Controls how the window is to be shown.
+		/// This parameter is ignored the first time an application calls ShowWindow,
+		/// if the program that launched the application provides a STARTUPINFO structure.
+		/// Otherwise, the first time ShowWindow is called, the value should be the value obtained by the WinMain
+		/// function in its nCmdShow parameter. In subsequent calls, this parameter can be one of the following values.
+		/// </param>
 		[DllImport(DllName)]
 		public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
 
+		/// <summary>
+		/// Sets the show state of a window without waiting for the operation to complete.
+		/// </summary>
+		/// <param name="hWnd">A handle to the window.</param>
+		/// <param name="nCmdShow">Controls how the window is to be shown.
+		/// This parameter is ignored the first time an application calls ShowWindow,
+		/// if the program that launched the application provides a STARTUPINFO structure.
+		/// Otherwise, the first time ShowWindow is called, the value should be the value obtained by the WinMain
+		/// function in its nCmdShow parameter. In subsequent calls, this parameter can be one of the following values.
+		/// </param>
 		public static void ShowWindowAsync(IntPtr hWnd, ShowWindowCommand nCmdShow)
 			=> ShowWindowAsync(hWnd, (int) nCmdShow);
 

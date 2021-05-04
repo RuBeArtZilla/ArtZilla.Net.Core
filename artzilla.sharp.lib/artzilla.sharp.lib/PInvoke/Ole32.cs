@@ -79,7 +79,11 @@ namespace ArtZilla.Net.Core.PInvoke {
 		SURROGATE = 8,
 	}
 
+	/// <summary>
+	/// OLE32.DLL provides the Component Object Model, as well as Object Linking and Embedding.
+	/// </summary>
 	public static class Ole32 {
+		/// <summary> The name of the DLL that contains the unmanaged method. </summary>
 		public const string DllName = "ole32.dll";
 
 		/// <summary>
@@ -127,12 +131,12 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// supported.
 		/// </remarks>
 		[DllImport(DllName)]
-		public static extern Int32 CoRegisterClassObject(
+		public static extern int CoRegisterClassObject(
 			ref Guid rclsid,
 			[MarshalAs(UnmanagedType.Interface)] IClassFactory pUnk,
 			CLSCTX dwClsContext,
 			REGCLS flags,
-			out UInt32 lpdwRegister);
+			out uint lpdwRegister);
 
 		/// <summary>
 		/// Informs OLE that a class object, previously registered with the 
@@ -143,7 +147,7 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// </param>
 		/// <returns></returns>
 		[DllImport(DllName)]
-		public static extern UInt32 CoRevokeClassObject(UInt32 dwRegister);
+		public static extern uint CoRevokeClassObject(uint dwRegister);
 
 		/// <summary>
 		/// Called by a server that can register multiple class objects to inform 
@@ -170,7 +174,7 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// deal with activation requests, and possibly shutdown requests. 
 		/// </remarks>
 		[DllImport(DllName)]
-		public static extern Int32 CoResumeClassObjects();
+		public static extern int CoResumeClassObjects();
 
 		/// <summary> Interface Id of IClassFactory </summary>
 		public const string IID_IClassFactory = "00000001-0000-0000-C000-000000000046";
@@ -184,11 +188,11 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// <summary>
 		/// Class does not support aggregation (or class object is remote)
 		/// </summary>
-		public const int CLASS_E_NOAGGREGATION = unchecked((Int32) 0x80040110);
+		public const int CLASS_E_NOAGGREGATION = unchecked((int) 0x80040110);
 
 		/// <summary>
 		/// No such interface supported
 		/// </summary>
-		public const int E_NOINTERFACE = unchecked((Int32) 0x80004002);
+		public const int E_NOINTERFACE = unchecked((int) 0x80004002);
 	}
 }

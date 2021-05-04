@@ -4,6 +4,8 @@ using System.Collections.Generic;
 namespace ArtZilla.Net.Core.Extensions {
 	/// <summary> Extension methods for <see cref="IDictionary{TKey,TValue}"/> </summary>
 	public static class DictionaryExtensions {
+#if !NET50_OR_GREATER && !NETCORE
+
 		/// <summary>
 		/// Gets the value associated with the specified key or default value if key not exist
 		/// </summary>
@@ -17,7 +19,9 @@ namespace ArtZilla.Net.Core.Extensions {
 		/// <exception cref="NullReferenceException" ><paramref name="dictionary"/> is null</exception>
 		public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue = default)
 			=> dictionary.TryGetValue(key, out var value) ? value : defaultValue;
-
+		
+#endif
+		
 		/// <summary>
 		/// Gets the value associated with the specified key or create default value if key not exist (without dictionary change)
 		/// </summary>

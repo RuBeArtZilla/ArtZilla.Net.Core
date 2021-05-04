@@ -4,9 +4,10 @@ using System.Xml.Serialization;
 using ArtZilla.Net.Core.Extensions;
 
 namespace ArtZilla.Net.Core.Serialization {
+	/// <summary> </summary>
 	public static class SerXml {
+		/// <summary> </summary>
 		public static object Load(Type type, string file, bool clear = false) {
-			// Будет исключение, если тип нельзя сериализовать в XML
 			var serializator = new XmlSerializer(type);
 			object res = null;
 
@@ -14,15 +15,14 @@ namespace ArtZilla.Net.Core.Serialization {
 				if (!File.Exists(file))
 					return null;
 
-				using (var fs = new FileStream(file, FileMode.Open)) {
-					if (fs.Length == 0)
-						return null;
+				using var fs = new FileStream(file, FileMode.Open);
+				if (fs.Length == 0)
+					return null;
 
-					res = serializator.Deserialize(fs);
+				res = serializator.Deserialize(fs);
 
-					if (clear)
-						fs.SetLength(0);
-				}
+				if (clear)
+					fs.SetLength(0);
 			} catch {
 				// ignored
 			}
@@ -30,8 +30,8 @@ namespace ArtZilla.Net.Core.Serialization {
 			return res;
 		}
 
+		/// <summary> </summary>
 		public static T Load<T>(string file, bool clear = false) where T : class {
-			// Будет исключение, если тип нельзя сериализовать в XML
 			var serializator = new XmlSerializer(typeof(T));
 
 			T res = null;
@@ -40,15 +40,14 @@ namespace ArtZilla.Net.Core.Serialization {
 				if (!File.Exists(file))
 					return null;
 
-				using (var fs = new FileStream(file, FileMode.Open)) {
-					if (fs.Length == 0)
-						return null;
+				using var fs = new FileStream(file, FileMode.Open);
+				if (fs.Length == 0)
+					return null;
 
-					res = serializator.Deserialize(fs) as T;
+				res = serializator.Deserialize(fs) as T;
 
-					if (clear)
-						fs.SetLength(0);
-				}
+				if (clear)
+					fs.SetLength(0);
 			} catch {
 				// ignored
 			}
@@ -69,9 +68,8 @@ namespace ArtZilla.Net.Core.Serialization {
 			CreateIfNotExist(file);
 
 			try {
-				using (var fs = new FileStream(file, append ? FileMode.Append : FileMode.Create))
-					serializator.Serialize(fs, item);
-
+				using var fs = new FileStream(file, append ? FileMode.Append : FileMode.Create);
+				serializator.Serialize(fs, item);
 				return true;
 			} catch {
 				return false;
@@ -91,9 +89,8 @@ namespace ArtZilla.Net.Core.Serialization {
 			CreateIfNotExist(file);
 
 			try {
-				using (var fs = new FileStream(file, append ? FileMode.Append : FileMode.Create))
-					serializator.Serialize(fs, item);
-
+				using var fs = new FileStream(file, append ? FileMode.Append : FileMode.Create);
+				serializator.Serialize(fs, item);
 				return true;
 			} catch {
 				return false;
