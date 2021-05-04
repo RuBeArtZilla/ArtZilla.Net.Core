@@ -16,8 +16,8 @@
 		<Copyright>Copyright (c) 2017-2021 Artyom Fomin</Copyright>
 		<RepositoryType>Github</RepositoryType>
 		<Company>ArtZilla's development</Company>
-		<Version>1.1.8</Version>
-		<PackageVersion>1.1.8</PackageVersion>
+		<Version>1.1.9</Version>
+		<PackageVersion>1.1.9</PackageVersion>
 		<IncludeSymbols>false</IncludeSymbols>
 		<IncludeSource>false</IncludeSource>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>

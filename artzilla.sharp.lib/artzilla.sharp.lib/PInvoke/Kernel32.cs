@@ -60,7 +60,7 @@ namespace ArtZilla.Net.Core.PInvoke {
 		/// <para>If the function fails, the return value is zero. To get extended error information, call GetLastError.</para>
 		/// </returns>
 		[DllImport("kernel32.dll", SetLastError = true)]
-		static extern bool AttachConsole(uint dwProcessId);
+		public static extern bool AttachConsole(uint dwProcessId);
 
 		/// <summary> Retrieves the window handle used by the console associated with the calling process. </summary>
 		/// <returns>
