@@ -17,7 +17,7 @@
 		<RepositoryType>Github</RepositoryType>
 		<Company>ArtZilla's development</Company>
 		<Version>1.1.8</Version>
-		<PackageVersion>1.1.8-rc04</PackageVersion>
+		<PackageVersion>1.1.8</PackageVersion>
 		<IncludeSymbols>false</IncludeSymbols>
 		<IncludeSource>false</IncludeSource>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
