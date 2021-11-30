@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net40;net45;netstandard2.0;netcoreapp3.1;net5.0</TargetFrameworks>
-		<LangVersion>9</LangVersion>
+		<TargetFrameworks>net40;net45;netstandard2.0;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
+		<LangVersion>10</LangVersion>
 		<Language>en-US</Language>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<PackageId>ArtZilla.Net.Core</PackageId>
@@ -16,8 +16,8 @@
 		<Copyright>Copyright (c) 2017-2021 Artyom Fomin</Copyright>
 		<RepositoryType>Github</RepositoryType>
 		<Company>ArtZilla's development</Company>
-		<Version>1.1.9</Version>
-		<PackageVersion>1.1.9</PackageVersion>
+		<Version>1.1.10</Version>
+		<PackageVersion>1.1.10-rc01</PackageVersion>
 		<IncludeSymbols>false</IncludeSymbols>
 		<IncludeSource>false</IncludeSource>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -35,6 +35,10 @@
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>
 	
+	<PropertyGroup Condition=" '$(TargetFramework)' == 'net6.0'">
+		<DefineConstants>$(DefineConstants);NET50_OR_GREATER;NET60_OR_GREATER;NET60</DefineConstants>
+	</PropertyGroup>
+
 	<PropertyGroup Condition=" '$(TargetFramework)' == 'net5.0'">
 		<DefineConstants>$(DefineConstants);NET50_OR_GREATER;NET50</DefineConstants>
 	</PropertyGroup>

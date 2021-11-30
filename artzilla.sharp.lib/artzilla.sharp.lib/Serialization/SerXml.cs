@@ -3,114 +3,114 @@ using System.IO;
 using System.Xml.Serialization;
 using ArtZilla.Net.Core.Extensions;
 
-namespace ArtZilla.Net.Core.Serialization {
+namespace ArtZilla.Net.Core.Serialization;
+
+/// <summary> </summary>
+public static class SerXml {
 	/// <summary> </summary>
-	public static class SerXml {
-		/// <summary> </summary>
-		public static object Load(Type type, string file, bool clear = false) {
-			var serializator = new XmlSerializer(type);
-			object res = null;
+	public static object Load(Type type, string file, bool clear = false) {
+		var serializator = new XmlSerializer(type);
+		object res = null;
 
-			try {
-				if (!File.Exists(file))
-					return null;
+		try {
+			if (!File.Exists(file))
+				return null;
 
-				using var fs = new FileStream(file, FileMode.Open);
-				if (fs.Length == 0)
-					return null;
+			using var fs = new FileStream(file, FileMode.Open);
+			if (fs.Length == 0)
+				return null;
 
-				res = serializator.Deserialize(fs);
+			res = serializator.Deserialize(fs);
 
-				if (clear)
-					fs.SetLength(0);
-			} catch {
-				// ignored
-			}
-
-			return res;
+			if (clear)
+				fs.SetLength(0);
+		} catch {
+			// ignored
 		}
 
-		/// <summary> </summary>
-		public static T Load<T>(string file, bool clear = false) where T : class {
-			var serializator = new XmlSerializer(typeof(T));
+		return res;
+	}
 
-			T res = null;
+	/// <summary> </summary>
+	public static T Load<T>(string file, bool clear = false) where T : class {
+		var serializator = new XmlSerializer(typeof(T));
 
-			try {
-				if (!File.Exists(file))
-					return null;
+		T res = null;
 
-				using var fs = new FileStream(file, FileMode.Open);
-				if (fs.Length == 0)
-					return null;
+		try {
+			if (!File.Exists(file))
+				return null;
 
-				res = serializator.Deserialize(fs) as T;
+			using var fs = new FileStream(file, FileMode.Open);
+			if (fs.Length == 0)
+				return null;
 
-				if (clear)
-					fs.SetLength(0);
-			} catch {
-				// ignored
-			}
+			res = serializator.Deserialize(fs) as T;
 
-			return res;
+			if (clear)
+				fs.SetLength(0);
+		} catch {
+			// ignored
 		}
 
-		/// <summary>
-		/// Object serialization to file as XML
-		/// </summary>
-		/// <param name="file">Path to file</param>
-		/// <param name="item">Object to serialize</param>
-		/// <param name="append">Adding to end of file if true</param>
-		/// <returns>True if success</returns>
-		public static bool Save(string file, object item, bool append = false) {
-			var serializator = new XmlSerializer(item.GetType());
+		return res;
+	}
 
-			CreateIfNotExist(file);
+	/// <summary>
+	/// Object serialization to file as XML
+	/// </summary>
+	/// <param name="file">Path to file</param>
+	/// <param name="item">Object to serialize</param>
+	/// <param name="append">Adding to end of file if true</param>
+	/// <returns>True if success</returns>
+	public static bool Save(string file, object item, bool append = false) {
+		var serializator = new XmlSerializer(item.GetType());
 
-			try {
-				using var fs = new FileStream(file, append ? FileMode.Append : FileMode.Create);
-				serializator.Serialize(fs, item);
-				return true;
-			} catch {
-				return false;
-			}
+		CreateIfNotExist(file);
+
+		try {
+			using var fs = new FileStream(file, append ? FileMode.Append : FileMode.Create);
+			serializator.Serialize(fs, item);
+			return true;
+		} catch {
+			return false;
 		}
+	}
 
-		/// <summary>
-		/// Object serialization to file as XML
-		/// </summary>
-		/// <param name="file">Path to file</param>
-		/// <param name="item">Object to serialize</param>
-		/// <param name="append">Adding to end of file if true</param>
-		/// <returns>True if success</returns>
-		public static bool Save<T>(string file, T item, bool append = false) where T : class {
-			var serializator = new XmlSerializer(typeof(T));
+	/// <summary>
+	/// Object serialization to file as XML
+	/// </summary>
+	/// <param name="file">Path to file</param>
+	/// <param name="item">Object to serialize</param>
+	/// <param name="append">Adding to end of file if true</param>
+	/// <returns>True if success</returns>
+	public static bool Save<T>(string file, T item, bool append = false) where T : class {
+		var serializator = new XmlSerializer(typeof(T));
 
-			CreateIfNotExist(file);
+		CreateIfNotExist(file);
 
-			try {
-				using var fs = new FileStream(file, append ? FileMode.Append : FileMode.Create);
-				serializator.Serialize(fs, item);
-				return true;
-			} catch {
-				return false;
-			}
+		try {
+			using var fs = new FileStream(file, append ? FileMode.Append : FileMode.Create);
+			serializator.Serialize(fs, item);
+			return true;
+		} catch {
+			return false;
 		}
+	}
 
-		private static void CreateIfNotExist(string file) {
-			try {
-				if (File.Exists(file))
-					return;
+	private static void CreateIfNotExist(string file) {
+		try {
+			if (File.Exists(file))
+				return;
 
-				var path = Path.GetDirectoryName(file);
-				if (path.IsBad())
-					return;
+			var path = Path.GetDirectoryName(file);
+			if (path.IsBad())
+				return;
 
-				if (!Directory.Exists(path))
-					Directory.CreateDirectory(path);
-			} catch {
-				// ignored
-			}
+			if (!Directory.Exists(path))
+				Directory.CreateDirectory(path);
+		} catch {
+			// ignored
 		}
 	}
 }
