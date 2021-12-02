@@ -153,10 +153,11 @@ public class ObjExtTests {
 		AssertEx.IsFailWith<NullReferenceException>(() => default(Stopwatch).ElapsedSeconds());
 
 		var sw = Stopwatch.StartNew();
-		Thread.Sleep(TimeSpan.FromMilliseconds(100));
+		Thread.Sleep(TimeSpan.FromMilliseconds(300));
 		sw.Stop();
+		Console.WriteLine("{0} ?? {1}", sw.ElapsedMilliseconds, sw.ElapsedSeconds());
 		Assert.IsTrue(sw.ElapsedMilliseconds > 0);
 		Assert.IsTrue(sw.ElapsedSeconds() > 0);
-		Assert.IsTrue(Math.Abs(sw.ElapsedMilliseconds - sw.ElapsedSeconds() * 1000D) < double.Epsilon);
+		Assert.IsTrue(Math.Abs(sw.ElapsedMilliseconds - sw.ElapsedSeconds() * 1000D) < 1e-10);
 	}
 }

@@ -1,5 +1,4 @@
 using System;
-using ArtZilla.Net.Core.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ArtZilla.Net.Core.Tests.Objects;
