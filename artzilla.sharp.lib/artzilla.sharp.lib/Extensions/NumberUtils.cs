@@ -1,31 +1,25 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace ArtZilla.Net.Core.Extensions;
 
+/// 
 public static class NumberUtils {
-	/// <summary>
 	/// todo: add description
 	/// method from https://stackoverflow.com/a/33325313
-	/// </summary>
 	/// <param name="high"></param>
 	/// <param name="low"></param>
 	/// <returns></returns>
 	public static long MakeLong(int high, int low)
 		=> (long) high << 32 | (long) (uint) low;
 
-	/// <summary>
 	/// todo: add description
-	/// </summary>
 	/// <param name="high"></param>
 	/// <param name="low"></param>
 	/// <returns></returns>
 	public static long MakeLong(int high, uint low)
 		=> (long) high << 32 | low;
 
-	/// <summary>
 	/// todo: add description
-	/// </summary>
 	/// <param name="high"></param>
 	/// <param name="low"></param>
 	/// <returns></returns>
@@ -38,7 +32,7 @@ public static class NumberUtils {
 	public const long BytesInGigabyte = 1073741824;
 	public const long BytesInTerabyte = 1099511627776;
 
-	/// <summary> Usual conversation with 1024 base and invariant culture </summary>
+	/// Usual conversation with 1024 base and invariant culture
 	/// <param name="bytes"></param>
 	/// <returns></returns>
 	public static string HumanReadableByteCount(this ulong bytes)
@@ -50,7 +44,7 @@ public static class NumberUtils {
 		: bytes < 0xfffccccccccccccL ? ((bytes >> 10) / (double) BytesInTerabyte).ToString("F1", CultureInfo.InvariantCulture) + " PB"
 		: ((bytes >> 20) / (double) BytesInTerabyte).ToString("F1", CultureInfo.InvariantCulture) + " EB";
 
-	/// <summary> Binary conversation with 1024 base and invariant culture </summary>
+	/// Binary conversation with 1024 base and invariant culture
 	/// <param name="bytes"></param>
 	/// <returns></returns>
 	public static string HumanReadableByteCountBin(this ulong bytes)
@@ -62,7 +56,7 @@ public static class NumberUtils {
 			: bytes < 0xfffccccccccccccL ? ((bytes >> 10) / (double) BytesInTerabyte).ToString("F1", CultureInfo.InvariantCulture) + " PiB"
 			: ((bytes >> 20) / (double) BytesInTerabyte).ToString("F1", CultureInfo.InvariantCulture) + " EiB";
 
-	/// <summary> SI conversation with 1000 base and invariant culture </summary>
+	/// SI conversation with 1000 base and invariant culture
 	/// <param name="bytes"></param>
 	/// <returns></returns>
 	public static string HumanReadableByteCountSI(this ulong bytes)

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net40;net45;netstandard2.0;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
-		<LangVersion>10</LangVersion>
+		<TargetFrameworks>net40;net45;netstandard2.0;net6.0</TargetFrameworks>
+		<LangVersion>preview</LangVersion>
 		<Language>en-US</Language>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<PackageId>ArtZilla.Net.Core</PackageId>
@@ -12,12 +12,12 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RequireLicenseAcceptance>false</RequireLicenseAcceptance>
 		<PackageProjectUrl>https://artzilla.name/ArtZilla.Net.Core</PackageProjectUrl>
-		<PackageCopyright>Copyright (c) 2017-2021 Artyom Fomin</PackageCopyright>
-		<Copyright>Copyright (c) 2017-2021 Artyom Fomin</Copyright>
+		<PackageCopyright>Copyright (c) 2017-2022 Artyom Fomin</PackageCopyright>
+		<Copyright>Copyright (c) 2017-2022 Artyom Fomin</Copyright>
 		<RepositoryType>Github</RepositoryType>
 		<Company>ArtZilla's development</Company>
 		<Version>1.1.10</Version>
-		<PackageVersion>1.1.10-rc01</PackageVersion>
+		<PackageVersion>1.1.10-rc02</PackageVersion>
 		<IncludeSymbols>false</IncludeSymbols>
 		<IncludeSource>false</IncludeSource>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -27,6 +27,7 @@
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
 		<DefineConstants>$(DefineConstants);TRACE;DEBUG;</DefineConstants>
 	</PropertyGroup>
+
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
 		<DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
 	</PropertyGroup>
@@ -37,14 +38,6 @@
 	
 	<PropertyGroup Condition=" '$(TargetFramework)' == 'net6.0'">
 		<DefineConstants>$(DefineConstants);NET50_OR_GREATER;NET60_OR_GREATER;NET60</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(TargetFramework)' == 'net5.0'">
-		<DefineConstants>$(DefineConstants);NET50_OR_GREATER;NET50</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
-		<DefineConstants>$(DefineConstants);NETCORE;NETCORE31</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">

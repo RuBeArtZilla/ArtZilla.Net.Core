@@ -1,34 +1,60 @@
-﻿using ArtZilla.Net.Core.Patterns;
+﻿using System;
+using ArtZilla.Net.Core.Patterns;
 
 namespace ArtZilla.Net.Core.Interfaces;
 
+///
 public enum State {
+	/// Stopped state
 	Stopped,
+	
+	/// StartPending state
 	StartPending,
+	
+	/// StopPending state
 	StopPending,
+	
+	/// Running state
 	Running,
+	
+	/// ContinuePending state
 	ContinuePending,
+	
+	/// PausePending state 
 	PausePending,
+	
+	/// Paused state
 	Paused
 }
 
-/// <summary>Запускаемый класс</summary>
+/// interface for runnable object
 public interface IRunnable {
+	/// 
 	bool IsStarted { get; }
 
+	/// 
 	void Start();
+
+	/// 
 	void Stop();
 }
 
+/// 
 public interface IPausable : IRunnable {
+	/// 
 	bool IsPaused { get; }
 
+	/// 
 	void Pause();
+
+	/// 
 	void Continue();
 }
 
-/// <summary> Not ready for work. Untested. </summary>
+/// Not ready for work. Untested.
+[Obsolete("not ready for use")]
 public class Runnable : Disposable, IRunnable {
+	/// <inheritdoc />
 	public bool IsStarted {
 		get { lock (_sync) return _isStarted; }
 		set {
@@ -39,6 +65,7 @@ public class Runnable : Disposable, IRunnable {
 		}
 	}
 
+	/// <inheritdoc />
 	public void Start() {
 		lock (_sync) {
 			if (_isStarted)
@@ -49,8 +76,10 @@ public class Runnable : Disposable, IRunnable {
 		}
 	}
 
+	///
 	protected virtual void LockedStart() { }
 
+	/// <inheritdoc />
 	public void Stop() {
 		lock (_sync) {
 			if (!_isStarted)
@@ -60,17 +89,21 @@ public class Runnable : Disposable, IRunnable {
 			_isStarted = false;
 		}
 	}
-
+	
+	///
 	protected virtual void LockedStop() { }
 
+	///
 	protected override void DisposeManaged() => Stop();
 
-	private bool _isStarted;
-	private readonly object _sync = new object();
+	bool _isStarted;
+	readonly object _sync = new();
 }
 
-/// <summary> Not ready for work. Untested. </summary>
+/// Not ready for work. Untested.
+[Obsolete("not ready for use")]
 public class RunnableAndPausable : Disposable, IRunnable, IPausable {
+	/// <inheritdoc />
 	public bool IsStarted {
 		get { lock (_sync) return _isStarted; }
 		set {
@@ -80,7 +113,8 @@ public class RunnableAndPausable : Disposable, IRunnable, IPausable {
 				Stop();
 		}
 	}
-
+	
+	/// <inheritdoc />
 	public bool IsPaused {
 		get { lock (_sync) return _isPaused; }
 		set {
@@ -90,7 +124,8 @@ public class RunnableAndPausable : Disposable, IRunnable, IPausable {
 				Continue();
 		}
 	}
-
+	
+	/// <inheritdoc />
 	public void Start() {
 		lock (_sync) {
 			if (_isStarted)
@@ -104,8 +139,10 @@ public class RunnableAndPausable : Disposable, IRunnable, IPausable {
 		}
 	}
 
+	/// 
 	protected virtual void LockedStart() { }
-
+	
+	/// <inheritdoc />
 	public void Stop() {
 		lock (_sync) {
 			if (!_isStarted)
@@ -118,9 +155,11 @@ public class RunnableAndPausable : Disposable, IRunnable, IPausable {
 			_isStarted = false;
 		}
 	}
-
+	
+	/// 
 	protected virtual void LockedStop() { }
-
+	
+	/// <inheritdoc />
 	public void Pause() {
 		lock (_sync) {
 			if (!_isPaused)
@@ -133,9 +172,11 @@ public class RunnableAndPausable : Disposable, IRunnable, IPausable {
 			_isPaused = true;
 		}
 	}
-
+	
+	/// 
 	protected virtual void LockedPause() { }
-
+	
+	/// <inheritdoc />
 	public void Continue() {
 		lock (_sync) {
 			if (!_isPaused)
@@ -148,12 +189,14 @@ public class RunnableAndPausable : Disposable, IRunnable, IPausable {
 			_isPaused = false;
 		}
 	}
-
+	
+	/// 
 	protected virtual void LockedContinue() { }
 
+	/// <inheritdoc />
 	protected override void DisposeManaged() => Stop();
 
-	private bool _isStarted;
-	private bool _isPaused;
-	private readonly object _sync = new object();
+	bool _isStarted;
+	bool _isPaused;
+	readonly object _sync = new();
 }

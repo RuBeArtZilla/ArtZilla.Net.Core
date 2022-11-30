@@ -5,15 +5,13 @@ using System.Text;
 
 namespace ArtZilla.Net.Core.Extensions;
 
-/// <summary> Extension for <see cref="IEnumerable{T}"/> </summary>
+/// Extension for <see cref="IEnumerable{T}"/>
 public static class EnumerableExtensions {
-	/// <summary> Default size for chunk </summary>
+	/// Default size for chunk
 	public const int DefaultChunkSize = 0x1 << 10;
 
-	/// <summary>
 	/// Performs the specified action on each element in <see cref="IEnumerable{T}"/> and return collection.
 	/// <para>Invoke action only if result was enumerated!</para>
-	/// </summary>
 	/// <typeparam name="T">The type of elements.</typeparam>
 	/// <param name="items">Collection of elements.</param>
 	/// <param name="action">The <see cref="Action{T}"/> delegate to perform on each element of the <see cref="IEnumerable{T}"/>.</param>
@@ -37,9 +35,7 @@ public static class EnumerableExtensions {
 
 #if NETFULL // .net core & .net standard already has this method
 
-	/// <summary>
 	/// Return collection that enumerates <paramref name="items"/> and contain <paramref name="item"/> at the end. 
-	/// </summary>
 	/// <typeparam name="T">The type of the elements of the input sequences.</typeparam>
 	/// <param name="items">Input sequence.</param>
 	/// <param name="item">Item after input sequence.</param>
@@ -62,9 +58,7 @@ public static class EnumerableExtensions {
 
 #endif
 
-	/// <summary>
 	/// Return collection that enumerates <paramref name="items"/> and contain <paramref name="item0"/> and <paramref name="item1"/> at the end. 
-	/// </summary>
 	/// <typeparam name="T">The type of the elements of the input sequences.</typeparam>
 	/// <param name="items">Input sequence.</param>
 	/// <param name="item0">Item after input sequence.</param>
@@ -86,9 +80,7 @@ public static class EnumerableExtensions {
 		}
 	}
 
-	/// <summary>
 	/// Return collection that enumerates <paramref name="items"/> and <paramref name="args"/> at the end. 
-	/// </summary>
 	/// <typeparam name="T">The type of the elements of the input sequences.</typeparam>
 	/// <param name="items">Input sequence.</param>
 	/// <param name="args">Items that would be after input sequence.</param>
@@ -112,7 +104,7 @@ public static class EnumerableExtensions {
 		return items.Concat(args);
 	}
 
-	/// <summary> Convert items sequence to string </summary>
+	/// Convert items sequence to string
 	/// <typeparam name="T">Type of item in sequence</typeparam>
 	/// <param name="items">sequence of items</param>
 	/// <param name="delimeter">delimeter between each item</param>
@@ -134,7 +126,7 @@ public static class EnumerableExtensions {
 		return sb.ToString();
 	}
 
-	/// <summary> Split enumerable by chunks </summary>
+	/// Split enumerable by chunks
 	/// <typeparam name="T">Type of element in the enumerable</typeparam>
 	/// <param name="items">counf of items</param>
 	/// <param name="size"></param>

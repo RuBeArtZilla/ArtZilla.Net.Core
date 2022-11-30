@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ArtZilla.Net.Core.Extensions;
 
-/// <summary> Some useless string builder extensions </summary>
+/// Some useless string builder extensions
 public static class StringBuilderExtensions {
-
+	///
 	public static int IndexOf(
 		this StringBuilder sb,
 		string value,
@@ -72,6 +72,7 @@ public static class StringBuilderExtensions {
 		}
 	}
 
+	///
 	public static int LastIndexOf(
 		this StringBuilder sb,
 		string value,

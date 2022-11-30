@@ -156,9 +156,9 @@ public class StringExtTest {
 
 	[TestMethod]
 	public void EnframeTests() {
-		Assert.AreEqual("Hello world!", "world".EnframeGood("Hello ", "!"));
-		Assert.AreEqual("", "".EnframeGood("Hello ", "!"));
-		Assert.AreEqual("", ExampleNull.EnframeGood("Hello ", "!"));
+		Assert.AreEqual("Hello world!", "world".EnframeText("Hello ", "!"));
+		Assert.AreEqual("", "".EnframeText("Hello ", "!"));
+		Assert.AreEqual("", ExampleNull.EnframeText("Hello ", "!"));
 	}
 
 	[TestMethod]

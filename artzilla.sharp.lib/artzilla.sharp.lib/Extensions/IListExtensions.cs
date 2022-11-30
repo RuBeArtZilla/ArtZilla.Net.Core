@@ -3,10 +3,9 @@ using System.Collections.Generic;
 
 namespace ArtZilla.Net.Core.Extensions;
 
+/// Extension methods for IList{}
 public static class ListExtensions {
-	/// <summary>
 	/// Adds an <paramref name="item"/> to the <paramref name="list"/> and return it.
-	/// </summary>
 	/// <typeparam name="TListItem">List item type</typeparam>
 	/// <typeparam name="TItem">Item type</typeparam>
 	/// <param name="list">Represents a collection of objects that can be individually accessed by index.</param>

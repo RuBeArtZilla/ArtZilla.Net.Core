@@ -5,9 +5,9 @@ using ArtZilla.Net.Core.Extensions;
 
 namespace ArtZilla.Net.Core.Serialization;
 
-/// <summary> </summary>
+/// 
 public static class SerXml {
-	/// <summary> </summary>
+	/// 
 	public static object Load(Type type, string file, bool clear = false) {
 		var serializator = new XmlSerializer(type);
 		object res = null;
@@ -31,7 +31,7 @@ public static class SerXml {
 		return res;
 	}
 
-	/// <summary> </summary>
+	/// 
 	public static T Load<T>(string file, bool clear = false) where T : class {
 		var serializator = new XmlSerializer(typeof(T));
 
@@ -55,10 +55,8 @@ public static class SerXml {
 
 		return res;
 	}
-
-	/// <summary>
+	
 	/// Object serialization to file as XML
-	/// </summary>
 	/// <param name="file">Path to file</param>
 	/// <param name="item">Object to serialize</param>
 	/// <param name="append">Adding to end of file if true</param>
@@ -77,9 +75,7 @@ public static class SerXml {
 		}
 	}
 
-	/// <summary>
 	/// Object serialization to file as XML
-	/// </summary>
 	/// <param name="file">Path to file</param>
 	/// <param name="item">Object to serialize</param>
 	/// <param name="append">Adding to end of file if true</param>

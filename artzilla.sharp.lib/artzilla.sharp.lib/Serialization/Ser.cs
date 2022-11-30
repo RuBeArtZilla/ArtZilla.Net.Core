@@ -5,99 +5,99 @@ using System.Xml.Serialization;
 
 namespace ArtZilla.Net.Core.Serialization;
 
-/// <summary> </summary>
+/// 
 public interface ISerializer {
-	/// <summary> </summary>
+	/// 
 	void Serialize(Stream stream, object o);
 
-	/// <summary> </summary>
+	/// 
 	object Deserialize(Stream stream);
 
-	/// <summary> </summary>
+	/// 
 	bool TryDeserialize(Stream stream, out object o);
 }
 
-/// <summary> </summary>
+/// 
 public interface ISerializer<T> : ISerializer {
-	/// <summary> </summary>
+	/// 
 	void SerializeTo(Stream stream, T o);
 
-	/// <summary> </summary>
+	/// 
 	T DeserializeFrom(Stream stream);
 
-	/// <summary> </summary>
+	/// 
 	bool TryDeserializeFrom(Stream stream, out T o);
 }
 
-/// <summary> </summary>
+/// 
 public interface IStringSerializer : ISerializer {
-	/// <summary> </summary>
+	/// 
 	string SerializeToString(object o);
 
-	/// <summary> </summary>
+	/// 
 	object Deserialize(string source);
 
-	/// <summary> </summary>
+	/// 
 	bool TryDeserialize(string source, out object o);
 }
 
-/// <summary> </summary>
+/// 
 public interface IStringSerializer<T> : ISerializer<T>, IStringSerializer {
-	/// <summary> </summary>
+	/// 
 	string SerializeToString(T o);
 
-	/// <summary> </summary>
+	/// 
 	T DeserializeFrom(string source);
 
-	/// <summary> </summary>
+	/// 
 	bool TryDeserializeFrom(string source, out T o);
 }
 
-/// <summary> </summary>
+/// 
 public interface IXmlSerializer : ISerializer {
-	/// <summary> </summary>
+	/// 
 	XmlDocument SerializeToXml(object o);
 
-	/// <summary> </summary>
+	/// 
 	void Serialize(XmlWriter xmlWriter, object o);
 
-	/// <summary> </summary>
+	/// 
 	object Deserialize(XmlDocument xml);
 
-	/// <summary> </summary>
+	/// 
 	bool TryDeserialize(XmlDocument xml, out object o);
 
-	/// <summary> </summary>
+	/// 
 	object Deserialize(XmlReader xmlReader);
 
-	/// <summary> </summary>
+	/// 
 	bool TryDeserialize(XmlReader xmlReader, out object o);
 }
 
-/// <summary> </summary>
+/// 
 public interface IXmlSerializer<T> : ISerializer<T>, IXmlSerializer {
-	/// <summary> </summary>
+	/// 
 	XmlDocument SerializeToXml(T o);
 
-	/// <summary> </summary>
+	/// 
 	void SerializeTo(XmlWriter xmlWriter, T o);
 
-	/// <summary> </summary>
+	/// 
 	T DeserializeFrom(XmlDocument xml);
 
-	/// <summary> </summary>
+	/// 
 	bool TryDeserializeFrom(XmlDocument xml, out T o);
 
-	/// <summary> </summary>
+	/// 
 	T DeserializeFrom(XmlReader xmlReader);
 
-	/// <summary> </summary>
+	/// 
 	bool TryDeserializeFrom(XmlReader xmlReader, out T o);
 }
 
-/// <summary> </summary>
+/// 
 public class XmlSrlzr : IXmlSerializer {
-	/// <summary> </summary>
+	/// 
 	public XmlSrlzr(Type type)
 		=> _serializer = new XmlSerializer(type);
 
@@ -140,9 +140,9 @@ public class XmlSrlzr : IXmlSerializer {
 	private readonly XmlSerializer _serializer;
 }
 
-/// <summary> </summary>
+/// 
 public sealed class XmlSrlzr<T> : XmlSrlzr, IXmlSerializer<T> {
-	/// <summary> </summary>
+	/// 
 	public XmlSrlzr() : base(typeof(T)) { }
 
 	/// <inheritdoc />

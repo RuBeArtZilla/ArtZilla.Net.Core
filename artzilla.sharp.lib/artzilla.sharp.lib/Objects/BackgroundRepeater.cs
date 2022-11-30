@@ -5,33 +5,35 @@ using System.Threading.Tasks;
 
 namespace ArtZilla.Net.Core;
 
-/// <summary> Represent a background repeated action </summary>
+/// Represent a background repeated action
 public class BackgroundRepeater {
 	public const string StopGuid = "{B098C6A3-C478-4E2B-969A-36B5F6D0B780}";
 
-	/// <summary> Default value of <see cref="Cooldown"/> in milliseconds </summary>
+	/// Default value of <see cref="Cooldown"/> in milliseconds
 	public const double DefaultCooldownMsec = 1000D;
 
-	/// <summary> Default value of <see cref="IsCatchExceptions"/></summary>
+	/// Default value of <see cref="IsCatchExceptions"/>
 	public const bool DefaultIsCatchExceptions = true;
 
-	/// <summary> Period between repeating background operation </summary>
+	/// Period between repeating background operation
 	public TimeSpan Cooldown {
 		get => _cooldown;
 		set => _cooldown = CheckCooldown(value) ? value : throw new ArgumentOutOfRangeException(nameof(Cooldown));
 	}
 
-	/// <summary> When true any exception from repeated operation will be ignored </summary>
+	/// When true any exception from repeated operation will be ignored
 	public bool IsCatchExceptions { get; set; } = DefaultIsCatchExceptions;
-
+	
+	/// 
 	public ExceptionHandlerDelegate ExceptionHandler {
 		get => _exceptionHandler;
 		set => _exceptionHandler = value;
 	}
 
+	/// 
 	public delegate void ExceptionHandlerDelegate(BackgroundRepeater sender, Exception exception);
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <param name="action">The delegate that represents the code to repeat.</param>
 	public BackgroundRepeater(Action action)
@@ -40,7 +42,7 @@ public class BackgroundRepeater {
 			throw new ArgumentNullException(nameof(action));
 	}
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <param name="name">Task name</param>
 	/// <param name="action">The delegate that represents the code to repeat.</param>
@@ -50,20 +52,20 @@ public class BackgroundRepeater {
 			throw new ArgumentNullException(nameof(action));
 	}
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <param name="action">The delegate that represents the code to repeat.</param>
 	public BackgroundRepeater(Action<CancellationToken> action)
 		=> _action = action ?? throw new ArgumentNullException(nameof(action));
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <param name="name">Task name</param>
 	/// <param name="action">The delegate that represents the code to repeat.</param>
 	public BackgroundRepeater(string name, Action<CancellationToken> action) : this(action)
 		=> _threadName = name ?? throw new ArgumentNullException(nameof(name));
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 	/// <param name="action">The delegate that represents the code to repeat.</param>
@@ -74,7 +76,7 @@ public class BackgroundRepeater {
 			throw new ArgumentNullException(nameof(action));
 	}
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 	/// <param name="name">Task name</param>
@@ -86,7 +88,7 @@ public class BackgroundRepeater {
 			throw new ArgumentNullException(nameof(action));
 	}
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 	/// <param name="action">The delegate that represents the code to repeat.</param>
@@ -95,7 +97,7 @@ public class BackgroundRepeater {
 		: this(action)
 		=> Cooldown = cooldown;
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 	/// <param name="name"></param>
@@ -105,7 +107,7 @@ public class BackgroundRepeater {
 		: this(name, action)
 		=> Cooldown = cooldown;
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 	/// <param name="action">The delegate that represents the code to repeat.</param>
@@ -117,7 +119,7 @@ public class BackgroundRepeater {
 			throw new ArgumentNullException(nameof(action));
 	}
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 	/// <param name="name">Task name</param>
@@ -130,7 +132,7 @@ public class BackgroundRepeater {
 			throw new ArgumentNullException(nameof(action));
 	}
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 	/// <param name="action">The delegate that represents the code to repeat.</param>
@@ -141,7 +143,7 @@ public class BackgroundRepeater {
 		_exceptionHandler = exceptionHandler;
 	}
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 	/// <param name="name"></param>
@@ -153,7 +155,7 @@ public class BackgroundRepeater {
 		_exceptionHandler = exceptionHandler;
 	}
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 	/// <param name="action">The delegate that represents the code to repeat.</param>
@@ -166,7 +168,7 @@ public class BackgroundRepeater {
 			throw new ArgumentNullException(nameof(action));
 	}
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 	/// <param name="name">Task name</param>
@@ -180,7 +182,7 @@ public class BackgroundRepeater {
 			throw new ArgumentNullException(nameof(action));
 	}
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 	/// <param name="action">The delegate that represents the code to repeat.</param>
@@ -193,7 +195,7 @@ public class BackgroundRepeater {
 		Enabled(isStarted);
 	}
 
-	/// <summary> Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat. </summary>
+	/// Initializes a new <see cref="BackgroundRepeater"/> with specified cancellable action to repeat.
 	/// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
 	/// <exception cref="ArgumentOutOfRangeException">The <paramref name="cooldown"/> argument is negative time.</exception>
 	/// <param name="name"></param>
@@ -210,21 +212,21 @@ public class BackgroundRepeater {
 	/// <inheritdoc />
 	public override string ToString() => _threadName + " (" + Cooldown + ") - " + (IsStarted() ? "enabled" : "disabled");
 
-	/// <summary> Set repeater on/off </summary>
+	/// Set repeater on/off
 	/// <param name="value">todo</param>
 	public void Enabled(bool value) { // todo: write test?
 		if (value) Start();
 		else Stop();
 	}
 
-	/// <summary> Start repeating </summary>
+	/// Start repeating
 	public void Start() {
 		lock (_sync) {
 			if (_cts != null)
 				return;
 
-			_cts = new CancellationTokenSource();
-			_thread = new Thread(o => Repeater(_action, o)) {
+			_cts = new();
+			_thread = new(o => Repeater(_action, o)) {
 				IsBackground = true,
 				Name = _threadName,
 			};
@@ -233,7 +235,7 @@ public class BackgroundRepeater {
 		}
 	}
 
-	/// <summary> Stop repeating </summary>
+	/// Stop repeating
 	public void Stop() {
 		lock (_sync) {
 			if (_cts == null)
@@ -249,20 +251,20 @@ public class BackgroundRepeater {
 		}
 	}
 
-	/// <summary> Gets a value indicating the execution status of current <see cref="BackgroundRepeater"/> </summary>
+	/// Gets a value indicating the execution status of current <see cref="BackgroundRepeater"/>
 	public bool IsStarted() {
 		lock (_sync)
 			return _cts != null;
 	}
 
-	/// <summary> Invoke this inside of repeated method to stop repeating </summary>
+	/// Invoke this inside of repeated method to stop repeating
 	public static void InnerStop() =>
 		throw new OperationCanceledException(StopGuid);
 
-	private static bool CheckCooldown(TimeSpan cooldown)
+	static bool CheckCooldown(TimeSpan cooldown)
 		=> cooldown >= TimeSpan.Zero;
 
-	private static void Cancelable(Action action, CancellationToken token) {
+	static void Cancelable(Action action, CancellationToken token) {
 		try {
 			using var t = new Task(action, token);
 			t.Start();
@@ -274,7 +276,7 @@ public class BackgroundRepeater {
 		}
 	}
 
-	private void Repeater(Action<CancellationToken> action, object token) {
+	void Repeater(Action<CancellationToken> action, object token) {
 		var t = (CancellationToken) token;
 
 		try {
@@ -303,11 +305,11 @@ public class BackgroundRepeater {
 		}
 	}
 
-	private Thread _thread;
-	private TimeSpan _cooldown = TimeSpan.FromMilliseconds(DefaultCooldownMsec);
-	private CancellationTokenSource _cts;
-	private ExceptionHandlerDelegate _exceptionHandler;
-	private readonly string _threadName = nameof(BackgroundRepeater);
-	private readonly object _sync = new object();
-	private readonly Action<CancellationToken> _action;
+	Thread _thread;
+	TimeSpan _cooldown = TimeSpan.FromMilliseconds(DefaultCooldownMsec);
+	CancellationTokenSource _cts;
+	ExceptionHandlerDelegate _exceptionHandler;
+	readonly string _threadName = nameof(BackgroundRepeater);
+	readonly object _sync = new object();
+	readonly Action<CancellationToken> _action;
 }

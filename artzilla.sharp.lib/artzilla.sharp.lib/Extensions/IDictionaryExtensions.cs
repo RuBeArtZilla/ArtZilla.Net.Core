@@ -3,13 +3,11 @@ using System.Collections.Generic;
 
 namespace ArtZilla.Net.Core.Extensions;
 
-/// <summary> Extension methods for <see cref="IDictionary{TKey,TValue}"/> </summary>
+/// Extension methods for <see cref="IDictionary{TKey,TValue}"/>
 public static class DictionaryExtensions {
 #if !NET50_OR_GREATER && !NETCORE
 
-	/// <summary>
 	/// Gets the value associated with the specified key or default value if key not exist
-	/// </summary>
 	/// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
 	/// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
 	/// <param name="dictionary">Represents a generic collection of key/value pairs.</param>
@@ -23,9 +21,7 @@ public static class DictionaryExtensions {
 
 #endif
 
-	/// <summary>
 	/// Gets the value associated with the specified key or create default value if key not exist (without dictionary change)
-	/// </summary>
 	/// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
 	/// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
 	/// <param name="dictionary">Represents a generic collection of key/value pairs.</param>
@@ -36,9 +32,7 @@ public static class DictionaryExtensions {
 	public static TValue GetValueOrCreate<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key) where TValue : new()
 		=> dictionary.TryGetValue(key, out var value) ? value : new TValue();
 
-	/// <summary>
 	/// Gets the value associated with the specified key or default value if key not exist (without dictionary change)
-	/// </summary>
 	/// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
 	/// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
 	/// <param name="dictionary">Represents a generic collection of key/value pairs.</param>
@@ -50,9 +44,7 @@ public static class DictionaryExtensions {
 	public static TValue GetValueOrCreate<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> createFunc)
 		=> dictionary.TryGetValue(key, out var value) ? value : createFunc();
 
-	/// <summary>
 	/// Gets the value associated with the specified key or default value if key not exist (without dictionary change)
-	/// </summary>
 	/// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
 	/// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
 	/// <param name="dictionary">Represents a generic collection of key/value pairs.</param>
@@ -64,9 +56,7 @@ public static class DictionaryExtensions {
 	public static TValue GetValueOrCreate<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> createFunc)
 		=> dictionary.TryGetValue(key, out var value) ? value : createFunc(key);
 
-	/// <summary>
 	/// Gets the value associated with the specified key or default value if key not exist (with dictionary change)
-	/// </summary>
 	/// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
 	/// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
 	/// <param name="dictionary">Represents a generic collection of key/value pairs.</param>
@@ -81,9 +71,7 @@ public static class DictionaryExtensions {
 		return dictionary[key] = defaultValue;
 	}
 
-	/// <summary>
 	/// Gets the value associated with the specified key or default value if key not exist (with dictionary change)
-	/// </summary>
 	/// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
 	/// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
 	/// <param name="dictionary">Represents a generic collection of key/value pairs.</param>
@@ -98,9 +86,7 @@ public static class DictionaryExtensions {
 		return dictionary[key] = createFunc();
 	}
 
-	/// <summary>
 	/// Gets the value associated with the specified key or default value if key not exist (with dictionary change)
-	/// </summary>
 	/// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
 	/// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
 	/// <param name="dictionary">Represents a generic collection of key/value pairs.</param>
@@ -115,9 +101,7 @@ public static class DictionaryExtensions {
 		return dictionary[key] = createFunc(key);
 	}
 
-	/// <summary>
 	/// Gets the value associated with the specified key or default value if key not exist (with dictionary change)
-	/// </summary>
 	/// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
 	/// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
 	/// <param name="dictionary">Represents a generic collection of key/value pairs.</param>
@@ -128,6 +112,6 @@ public static class DictionaryExtensions {
 	public static TValue GetValueOrAddNew<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key) where TValue : new() {
 		if (dictionary.TryGetValue(key, out var value))
 			return value;
-		return dictionary[key] = new TValue();
+		return dictionary[key] = new();
 	}
 }

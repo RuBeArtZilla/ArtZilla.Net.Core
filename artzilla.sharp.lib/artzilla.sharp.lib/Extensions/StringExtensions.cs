@@ -2,46 +2,43 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ArtZilla.Net.Core.Extensions;
 
-/// <summary> Some useless string extensions </summary>
+/// Some useless string extensions
 public static class StringExtensions {
-	/// <summary> Wrapper for <see cref="string.IsNullOrWhiteSpace"/> </summary>
+	/// Wrapper for <see cref="string.IsNullOrWhiteSpace"/>
 	public static bool IsBad(this string value)
 		=> string.IsNullOrWhiteSpace(value);
 
-	/// <summary> Wrapper for is not <see cref="string.IsNullOrWhiteSpace"/> </summary>
+	/// Wrapper for is not <see cref="string.IsNullOrWhiteSpace"/>
 	public static bool IsGood(this string value)
 		=> !string.IsNullOrWhiteSpace(value);
 
-	/// <summary> Wrapper for <see cref="string.IsNullOrEmpty"/> </summary>
+	/// Wrapper for <see cref="string.IsNullOrEmpty"/>
 	public static bool IsNullOrEmpty(this string value)
 		=> string.IsNullOrEmpty(value);
 
-	/// <summary> Negation of <see cref="string.IsNullOrWhiteSpace"/> </summary>
+	/// Negation of <see cref="string.IsNullOrWhiteSpace"/>
 	public static bool IsNotNullOrEmpty(this string value)
 		=> !string.IsNullOrEmpty(value);
 
-	/// <summary> Wrapper for <see cref="string.IsNullOrWhiteSpace"/> </summary>
+	/// Wrapper for <see cref="string.IsNullOrWhiteSpace"/>
 	public static bool IsNullOrWhiteSpace(this string value)
 		=> string.IsNullOrWhiteSpace(value);
 
-	/// <summary> Negation of <see cref="string.IsNullOrWhiteSpace"/> </summary>
+	/// Negation of <see cref="string.IsNullOrWhiteSpace"/>
 	public static bool IsNotNullOrWhiteSpace(this string value)
 		=> !string.IsNullOrWhiteSpace(value);
 
-	/// <summary>
 	/// Wrapper for <see cref="string.Equals(string, System.StringComparison)"/> with OrdinalIgnoreCase.
 	/// Null values always returns false.
-	/// </summary>
 	/// <returns> True if left string equals other string (IgnoreCase), otherwise false. </returns>
 	public static bool Like(this string left, string right)
 		=> left?.Equals(right, StringComparison.OrdinalIgnoreCase) ?? false;
 
-	/// <summary> Parse source string to dictionary </summary>
+	/// Parse source string to dictionary
 	/// <param name="source"></param>
 	/// <param name="pairSeparator">separator between key and value</param>
 	/// <param name="listSeparator">separator between pairs</param>
@@ -57,9 +54,7 @@ public static class StringExtensions {
 			.GroupBy(i => i[0], i => i[1], StringComparer.OrdinalIgnoreCase)
 			.ToDictionary(i => i.Key, i => i.First().Trim(), StringComparer.OrdinalIgnoreCase);
 
-	/// <summary>
 	/// <TODO>add description, that method return combined strings with delimeter, or any not bad string, or empty string.</TODO>
-	/// </summary>
 	/// <param name="delimeter"></param>
 	/// <param name="item1"></param>
 	/// <param name="item2"></param>
@@ -76,10 +71,8 @@ public static class StringExtensions {
 			return item2;
 		return string.Empty;
 	}
-
-	/// <summary>
+	
 	/// <TODO>add description, that method return combined strings with delimeter, or any not bad string, or empty string.</TODO>
-	/// </summary>
 	/// <param name="delimeter"></param>
 	/// <param name="items"></param>
 	/// <returns></returns>
@@ -121,11 +114,9 @@ public static class StringExtensions {
 	}
 
 	#region Enframe methods
-
-	/// <summary>
+	
 	/// Add <paramref name="prefix"/> and <paramref name="postfix"/> to <paramref name="source"/>
 	/// if statement is true otherwise returns empty string.
-	/// </summary>
 	/// <param name="source">the source string</param>
 	/// <param name="condition"></param>
 	/// <param name="prefix">prefix string, can be empty</param>
@@ -141,46 +132,28 @@ public static class StringExtensions {
 
 		return condition(source) ? prefix + source + postfix : "";
 	}
-
-	/// <summary>
-	/// Add <paramref name="prefix"/> and <paramref name="postfix"/> if <paramref name="source"/>
-	/// is <see cref="IsGood(string)"/> otherwise returns empty string.
-	/// </summary>
-	/// <param name="source">the source string</param>
-	/// <param name="prefix">prefix string, can be empty</param>
-	/// <param name="postfix">postfix string, can be empty</param>
-	/// <returns></returns>
-	[Obsolete("Renamed to StringExtensions.EnframeText, will be deleted in future release")]
-	public static string EnframeGood(this string source, string prefix = "", string postfix = "")
-		=> source.IsGood() ? prefix + source + postfix : "";
-
-	/// <summary>
+	
 	/// Add <paramref name="prefix"/> and <paramref name="postfix"/> to <paramref name="source"/>
 	/// if statement is not <see langword="null" /> otherwise returns empty string.
-	/// </summary>
 	/// <param name="source">the source string</param>
 	/// <param name="prefix">prefix string, can be empty</param>
 	/// <param name="postfix">postfix string, can be empty</param>
 	/// <returns></returns>
 	public static string EnframeNotNull(this string source, string prefix = "", string postfix = "")
 		=> source is null ? "" : prefix + source + postfix;
-
-	/// <summary>
+	
 	/// Add <paramref name="prefix"/> and <paramref name="postfix"/> to <paramref name="source"/>
 	/// if source is not <see langword="null" /> or empty otherwise returns empty string.
-	/// </summary>
 	/// <param name="source">the source string</param>
 	/// <param name="prefix">prefix string, can be empty</param>
 	/// <param name="postfix">postfix string, can be empty</param>
 	/// <returns></returns>
 	public static string EnframeNotEmpty(this string source, string prefix = "", string postfix = "")
 		=> string.IsNullOrEmpty(source) ? "" : prefix + source + postfix;
-
-	/// <summary>
+	
 	/// Add <paramref name="prefix"/> and <paramref name="postfix"/> to <paramref name="source"/>
 	/// if source is not <see langword="null" />, empty, or consists only of white-space characters
 	/// otherwise returns empty string.
-	/// </summary>
 	/// <param name="source">the source string</param>
 	/// <param name="prefix">prefix string, can be empty</param>
 	/// <param name="postfix">postfix string, can be empty</param>
@@ -192,7 +165,7 @@ public static class StringExtensions {
 
 	#region Trim methods
 
-	/// <summary> Method remove prefix if exist </summary>
+	/// Method remove prefix if exist
 	/// <param name="source">Source string</param>
 	/// <param name="prefix">Prefix string</param>
 	/// <param name="comparisonType"></param>
@@ -207,7 +180,7 @@ public static class StringExtensions {
 			? source.Substring(prefix.Length)
 			: source ?? string.Empty;
 
-	/// <summary> Method remove suffix if exist </summary>
+	/// Method remove suffix if exist
 	/// <param name="source">Source string</param>
 	/// <param name="suffix">Suffix string</param>
 	/// <param name="comparisonType"></param>
@@ -224,10 +197,8 @@ public static class StringExtensions {
 	#endregion
 
 	#region Parse methods
-
-	/// <summary>
+	
 	///	Converts the string representation of a number to its 32-bit signed integer equivalent, or default value
-	/// </summary>
 	/// <param name="source">A string containing a number to convert.</param>
 	/// <param name="defValue">Default value, returned if conversion failed. Default value <see cref="int.MinValue"/></param>
 	/// <returns> When this method returns, result is the 32-bit signed integer value equivalent to the number contained in s, or defValue if can't parse number </returns>
@@ -237,12 +208,14 @@ public static class StringExtensions {
 		return int.TryParse(source, out var val) ? val : defValue;
 	}
 
+	///
 	public static double ParseDoubleEx(this string source, double defValue = double.NaN) {
 		if (source.IsBad())
 			return defValue;
 		return double.TryParse(source, out var val) ? val : defValue;
 	}
-
+	
+	///
 	public static double ParseDoubleEx(
 		this string source,
 		NumberStyles ns,
@@ -253,7 +226,8 @@ public static class StringExtensions {
 			return defValue;
 		return double.TryParse(source, ns, ifp, out var val) ? val : defValue;
 	}
-
+	
+	///
 	public static bool ParseBoolEx(this string source, bool defValue = false) {
 		if (source.IsBad())
 			return defValue;
@@ -263,7 +237,8 @@ public static class StringExtensions {
 	#endregion
 
 	#region Extract methods
-
+	
+	///
 	public static string Extract(
 		this string input,
 		out string remainder,
@@ -294,7 +269,8 @@ public static class StringExtensions {
 		nop += op.Length;
 		return input.Substring(nop, ned - nop);
 	}
-
+	
+	///
 	public static string Extract(
 		this string input,
 		out string remainder,
@@ -323,7 +299,8 @@ public static class StringExtensions {
 		remainder = input.Remove(nop - border.Length, ned + (border.Length << 1));
 		return input.Substring(nop, ned - nop);
 	}
-
+	
+	///
 	public static string Extract(
 		this string input,
 		string op,
@@ -350,7 +327,8 @@ public static class StringExtensions {
 
 		return input.Substring(nop, ned - nop);
 	}
-
+	
+	///
 	public static string Extract(
 		this string input,
 		string border,
@@ -379,7 +357,8 @@ public static class StringExtensions {
 	#endregion
 
 	#region ExtractLast methods
-
+	
+	///
 	public static string ExtractLast(
 		this string input,
 		out string remainder,
@@ -410,7 +389,8 @@ public static class StringExtensions {
 
 		return input.Substring(nop, ned - nop);
 	}
-
+	
+	///
 	public static string ExtractLast(
 		this string input,
 		out string remainder,
@@ -439,7 +419,8 @@ public static class StringExtensions {
 
 		return input.Substring(nop, ned - nop);
 	}
-
+	
+	///
 	public static string ExtractLast(
 		this string input,
 		string op,
@@ -467,7 +448,8 @@ public static class StringExtensions {
 
 		return input.Substring(nop, ned - nop);
 	}
-
+	
+	///
 	public static string ExtractLast(
 		this string input,
 		string border,
@@ -497,7 +479,7 @@ public static class StringExtensions {
 
 	#region Extract_Word methods
 
-	/// <summary> Extract first word (part of the string before first delimeter). </summary>
+	/// Extract first word (part of the string before first delimeter).
 	/// <param name="source"></param>
 	/// <param name="remainder">Part of source after first delimeter</param>
 	/// <param name="delimeter"></param>
@@ -521,7 +503,7 @@ public static class StringExtensions {
 		return source.Remove(i);
 	}
 
-	/// <summary> Extract last word (part of the string after last delimeter). </summary>
+	/// Extract last word (part of the string after last delimeter).
 	/// <param name="source"></param>
 	/// <param name="remainder">Part of source before last delimeter</param>
 	/// <param name="delimeter"></param>
@@ -549,14 +531,16 @@ public static class StringExtensions {
 	#endregion
 
 	#region Replace methods
-
+	
+	///
 	public static string ReplaceLeft(
 		this string source,
 		string br,
 		Func<string, string> replaceFunc,
 		StringComparison comparisonType = StringComparison.OrdinalIgnoreCase
 	) => ReplaceLeft(source, br, br, replaceFunc, comparisonType);
-
+	
+	///
 	public static string ReplaceLeft(
 		this string source,
 		string op,
@@ -590,14 +574,16 @@ public static class StringExtensions {
 
 		return sb.ToString();
 	}
-
+	
+	///
 	public static string ReplaceRight(
 		this string source,
 		string br,
 		Func<string, string> replaceFunc,
 		StringComparison comparisonType = StringComparison.OrdinalIgnoreCase
 	) => ReplaceRight(source, br, br, replaceFunc, comparisonType);
-
+	
+	///
 	public static string ReplaceRight(
 		this string source,
 		string op,
@@ -638,7 +624,7 @@ public static class StringExtensions {
 
 	#endregion
 
-	/// <summary> Repeat <paramref name="pattern"/> <paramref name="count"/> times </summary>
+	/// Repeat <paramref name="pattern"/> <paramref name="count"/> times
 	/// <param name="pattern"></param>
 	/// <param name="count"></param>
 	/// <returns></returns>
@@ -660,9 +646,8 @@ public static class StringExtensions {
 	}
 
 	// alt. wrapper for substring with begin & end position
-	/// <summary>
 	/// Retrieves a substring from this instance.
-	/// The substring starts at a specified character position to the next position </summary>
+	/// The substring starts at a specified character position to the next position
 	/// <param name="source">A string</param>
 	/// <param name="startIndex">The zero-based starting character position of a substring in this instance.</param>
 	/// <param name="endIndex">The zero-based ending character position of a substring in this instance.</param>
@@ -670,7 +655,7 @@ public static class StringExtensions {
 	public static string Cut(this string source, int startIndex, int endIndex)
 		=> source.Substring(startIndex, endIndex - startIndex);
 
-	/// <summary> The zero-based index of first not a white space character </summary>
+	/// The zero-based index of first not a white space character
 	/// <param name="source">A string</param>
 	/// <param name="startIndex">The zero-based starting character position of a substring in this instance.</param>
 	/// <returns>
@@ -686,7 +671,7 @@ public static class StringExtensions {
 		return -1;
 	}
 
-	/// <summary> The zero-based index of first occurence of any <paramref name="characters"/> in <paramref name="source"/> </summary>
+	/// The zero-based index of first occurence of any <paramref name="characters"/> in <paramref name="source"/>
 	/// <param name="source">A string</param>
 	/// <param name="found">Founded character</param>
 	/// <param name="characters">Array of characters</param>
@@ -694,7 +679,7 @@ public static class StringExtensions {
 	public static int GetIndexOfAny(this string source, out char found, params char[] characters)
 		=> GetIndexOfAny(source, 0, out found, characters);
 
-	/// <summary> The zero-based index of first occurence of any <paramref name="characters"/> in <paramref name="source"/> </summary>
+	/// The zero-based index of first occurence of any <paramref name="characters"/> in <paramref name="source"/>
 	/// <param name="source">A string</param>
 	/// <param name="startIndex">The search starting position. The search proceeds from <paramref name="startIndex" /> toward the beginning of <paramref name="source"/>.</param>
 	/// <param name="found">Founded character</param>
@@ -712,9 +697,7 @@ public static class StringExtensions {
 		return -1;
 	}
 
-	/// <summary>
 	/// Reports the zero-based index of the of the <paramref name="ed"/> bracket in the <paramref name="source"/>.  
-	/// </summary>
 	/// <param name="source"></param>
 	/// <param name="start"></param>
 	/// <param name="op"></param>
