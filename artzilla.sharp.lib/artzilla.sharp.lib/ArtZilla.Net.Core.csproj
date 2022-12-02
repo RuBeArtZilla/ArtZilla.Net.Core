@@ -17,7 +17,7 @@
 		<RepositoryType>Github</RepositoryType>
 		<Company>ArtZilla's development</Company>
 		<Version>1.1.10</Version>
-		<PackageVersion>1.1.10-rc02</PackageVersion>
+		<PackageVersion>1.1.10-rc03</PackageVersion>
 		<IncludeSymbols>false</IncludeSymbols>
 		<IncludeSource>false</IncludeSource>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
