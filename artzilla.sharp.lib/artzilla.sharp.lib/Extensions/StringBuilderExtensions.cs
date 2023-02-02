@@ -186,7 +186,11 @@ public static class StringBuilderExtensions {
 	/// append list
 	public static StringBuilder AppendList<T>(
 		this StringBuilder sb,
+		#if NET40
+		IList<T> items,
+		#else
 		IReadOnlyList<T> items,
+		#endif
 		string separator = "",
 		string prefix = "",
 		string suffix = "",
