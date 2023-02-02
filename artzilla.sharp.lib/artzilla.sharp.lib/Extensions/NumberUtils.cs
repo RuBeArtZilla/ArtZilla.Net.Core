@@ -34,7 +34,6 @@ public static class NumberUtils {
 
 	/// Usual conversation with 1024 base and invariant culture
 	/// <param name="bytes"></param>
-	/// <returns></returns>
 	public static string HumanReadableByteCount(this ulong bytes)
 		=> bytes < 1024L ? bytes + " B"
 		: bytes < 0xfffccccccccccccL >> 40 ? (bytes / (double) BytesInKilobyte).ToString("F1", CultureInfo.InvariantCulture) + " KB"
@@ -46,7 +45,6 @@ public static class NumberUtils {
 
 	/// Binary conversation with 1024 base and invariant culture
 	/// <param name="bytes"></param>
-	/// <returns></returns>
 	public static string HumanReadableByteCountBin(this ulong bytes)
 		=> bytes < 1024L ? bytes + " B"
 			: bytes < 0xfffccccccccccccL >> 40 ? (bytes / (double) BytesInKilobyte).ToString("F1", CultureInfo.InvariantCulture) + " KiB"
@@ -58,7 +56,6 @@ public static class NumberUtils {
 
 	/// SI conversation with 1000 base and invariant culture
 	/// <param name="bytes"></param>
-	/// <returns></returns>
 	public static string HumanReadableByteCountSI(this ulong bytes)
 		=> bytes < 1000L ? bytes + " B"
 			: bytes < 999_950L ? (bytes / 1e3).ToString("F1", CultureInfo.InvariantCulture) + " kB"

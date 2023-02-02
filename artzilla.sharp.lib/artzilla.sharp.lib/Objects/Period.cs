@@ -1,6 +1,9 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Text;
+using ArtZilla.Net.Core.Extensions;
+using ArtZilla.Net.Core.Interfaces;
 
 namespace ArtZilla.Net.Core;
 
@@ -16,17 +19,29 @@ public interface IReadOnlyPeriod {
 /// Represents a period of time
 [Serializable]
 [StructLayout(LayoutKind.Auto)]
-public readonly struct Period : IReadOnlyPeriod, IEquatable<Period> {
-	/// 
+public readonly struct Period : IReadOnlyPeriod, IEquatable<Period>, IToStringBuilder {
+	///
+#if NET50_OR_GREATER
+	[System.Text.Json.Serialization.JsonInclude]
+#endif
 	public readonly DateTime Begin;
 	
 	/// 
+#if NET50_OR_GREATER
+	[System.Text.Json.Serialization.JsonInclude]
+#endif
 	public readonly DateTime End;
 
 	/// <inheritdoc />
+#if NET50_OR_GREATER
+	[System.Text.Json.Serialization.JsonIgnore]
+#endif
 	DateTime IReadOnlyPeriod.Begin => Begin;
 
 	/// <inheritdoc />
+#if NET50_OR_GREATER
+	[System.Text.Json.Serialization.JsonIgnore]
+#endif
 	DateTime IReadOnlyPeriod.End => End;
 
 	/// timespan between Begin and End
@@ -46,6 +61,12 @@ public readonly struct Period : IReadOnlyPeriod, IEquatable<Period> {
 		}
 	}
 
+	///
+#if NET50_OR_GREATER
+	[System.Text.Json.Serialization.JsonConstructor]
+#endif
+	public Period(DateTime begin, DateTime end) : this(dt1: begin, dt2: end) { }
+
 	/// 
 	public Period(DateTime start, TimeSpan duration) {
 		Begin = start;
@@ -54,7 +75,15 @@ public readonly struct Period : IReadOnlyPeriod, IEquatable<Period> {
 
 	/// <inheritdoc />
 	public override string ToString()
-		=> "[" + Begin.ToString(CultureInfo.InvariantCulture) + ", " + End.ToString(CultureInfo.InvariantCulture) + "]";
+		=> this.ToStringViaStringBuilder();
+
+	/// <inheritdoc />
+	public void ToStringBuilder(StringBuilder sb)
+		=> sb.Append('[')
+		     .Append(Begin.ToString(CultureInfo.InvariantCulture))
+		     .Append(", ")
+		     .Append(End.ToString(CultureInfo.InvariantCulture))
+		     .Append(']');
 
 	/// 
 	public Period Move(TimeSpan shift) => this + shift;
@@ -137,7 +166,7 @@ public readonly struct Period : IReadOnlyPeriod, IEquatable<Period> {
 	public override int GetHashCode() {
 		unchecked { return (Begin.GetHashCode() * 397) ^ End.GetHashCode(); }
 	}
-
+	
 	/// 
 	public static bool operator ==(Period left, Period right)
 		=> left.Equals(right);

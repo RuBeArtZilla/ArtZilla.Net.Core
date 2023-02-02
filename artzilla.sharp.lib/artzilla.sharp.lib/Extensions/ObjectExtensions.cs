@@ -32,7 +32,6 @@ public static class ObjectExtensions {
 	/// <param name="bound1"></param>
 	/// <param name="bound2"></param>
 	/// <typeparam name="T"></typeparam>
-	/// <returns></returns>
 	public static bool IsInOpenInterval<T>(this T value, T bound1, T bound2 = default) where T : IComparable<T> {
 		var c1 = value.CompareTo(bound1);
 		var c2 = value.CompareTo(bound2);
@@ -45,7 +44,6 @@ public static class ObjectExtensions {
 	/// <param name="bound1"></param>
 	/// <param name="bound2"></param>
 	/// <typeparam name="T"></typeparam>
-	/// <returns></returns>
 	public static bool IsInClosedInterval<T>(this T value, T bound1, T bound2 = default) where T : IComparable<T> {
 		var c1 = value.CompareTo(bound1);
 		var c2 = value.CompareTo(bound2);

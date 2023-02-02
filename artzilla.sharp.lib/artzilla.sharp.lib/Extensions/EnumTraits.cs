@@ -42,9 +42,8 @@ public static class EnumTraits<TEnum> where TEnum : struct, Enum {
 	}
 
 	// This version is almost an order of magnitude faster then Enum.IsDefined
-	/// <summary> Returns an indication whether a constant with a specified value exists in a specified enumeration. </summary>
+	/// Returns an indication whether a constant with a specified value exists in a specified enumeration.
 	/// <param name="value"></param>
-	/// <returns></returns>
 	public static bool IsValid(TEnum value)
 		=> ValuesSet.Contains(value);
 

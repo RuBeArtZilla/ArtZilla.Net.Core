@@ -13,5 +13,14 @@
   <ItemGroup>
     <ProjectReference Include="..\artzilla.sharp.lib\ArtZilla.Net.Core.csproj" />
   </ItemGroup>
-  
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net7.0'">
+    <DefineConstants>$(DefineConstants);NET50_OR_GREATER;NET60_OR_GREATER;NET70_OR_GREATER;NET70</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net462'">
+    <DefineConstants>$(DefineConstants);NETFULL;NET462</DefineConstants>
+  </PropertyGroup>
+	
+
 </Project>
