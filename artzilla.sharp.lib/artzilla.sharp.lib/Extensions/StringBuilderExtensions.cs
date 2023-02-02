@@ -1,10 +1,11 @@
 using System;
 using System.Globalization;
 using System.Text;
+using ArtZilla.Net.Core.Interfaces;
 
 namespace ArtZilla.Net.Core.Extensions;
 
-/// Some useless string builder extensions
+/// some useless string builder extensions
 public static class StringBuilderExtensions {
 	///
 	public static int IndexOf(
@@ -136,4 +137,21 @@ public static class StringBuilderExtensions {
 				throw new ArgumentOutOfRangeException(nameof(comparisonType), comparisonType, null);
 		}
 	}
+
+	/// call <see cref="IToStringBuilder.ToStringBuilder"/> and return StringBuilder
+	public static StringBuilder AppendEx<T>(this StringBuilder sb, T obj) where T : IToStringBuilder {
+		obj.ToStringBuilder(sb);
+		return sb;
+	}
+
+	/// call <see cref="IToStringBuilder.ToStringBuilder"/> and return StringBuilder
+	public static StringBuilder AppendLineEx<T>(this StringBuilder sb, T obj) where T : IToStringBuilder {
+		obj.ToStringBuilder(sb);
+		return sb.AppendLine();
+	}
+
+	/// return string that contain result of a method <see cref="IToStringBuilder"/>
+	public static string ToStringViaStringBuilder<T>(this T obj) where T : IToStringBuilder
+		=> new StringBuilder().AppendEx(obj).ToString();
+
 }

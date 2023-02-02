@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net40;net45;netstandard2.0;net6.0</TargetFrameworks>
+		<TargetFrameworks>net40;net45;netstandard2.0;net7.0</TargetFrameworks>
 		<LangVersion>preview</LangVersion>
 		<Language>en-US</Language>
 		<NeutralLanguage>en-US</NeutralLanguage>
@@ -12,12 +12,12 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RequireLicenseAcceptance>false</RequireLicenseAcceptance>
 		<PackageProjectUrl>https://artzilla.name/ArtZilla.Net.Core</PackageProjectUrl>
-		<PackageCopyright>Copyright (c) 2017-2022 Artyom Fomin</PackageCopyright>
-		<Copyright>Copyright (c) 2017-2022 Artyom Fomin</Copyright>
+		<PackageCopyright>Copyright (c) 2017-2023 Artyom Fomin</PackageCopyright>
+		<Copyright>Copyright (c) 2017-2023 Artyom Fomin</Copyright>
 		<RepositoryType>Github</RepositoryType>
 		<Company>ArtZilla's development</Company>
 		<Version>1.1.10</Version>
-		<PackageVersion>1.1.10-rc03</PackageVersion>
+		<PackageVersion>1.1.10-rc04</PackageVersion>
 		<IncludeSymbols>false</IncludeSymbols>
 		<IncludeSource>false</IncludeSource>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -36,8 +36,8 @@
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>
 	
-	<PropertyGroup Condition=" '$(TargetFramework)' == 'net6.0'">
-		<DefineConstants>$(DefineConstants);NET50_OR_GREATER;NET60_OR_GREATER;NET60</DefineConstants>
+	<PropertyGroup Condition=" '$(TargetFramework)' == 'net7.0'">
+		<DefineConstants>$(DefineConstants);NET50_OR_GREATER;NET60_OR_GREATER;NET70_OR_GREATER;NET70</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
