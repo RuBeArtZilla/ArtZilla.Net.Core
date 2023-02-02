@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using ArtZilla.Net.Core.Interfaces;
@@ -153,5 +154,57 @@ public static class StringBuilderExtensions {
 	/// return string that contain result of a method <see cref="IToStringBuilder"/>
 	public static string ToStringViaStringBuilder<T>(this T obj) where T : IToStringBuilder
 		=> new StringBuilder().AppendEx(obj).ToString();
+
+	// todo: add tests
+	/// conditional append
+	public static StringBuilder AppendIf(
+		this StringBuilder sb, 
+		bool condition, 
+		string trueText = "",
+		string falseText = ""
+	) => sb.Append(condition ? trueText : falseText);
+
+	// todo: add tests
+	/// append text with prefix and suffix only if text is not null or empty
+	public static StringBuilder AppendText(this StringBuilder sb, string? text, string prefix = "", string suffix = "")
+		=> string.IsNullOrEmpty(text)
+			? sb
+			: sb.Append(prefix).Append(text).Append(suffix);
+
+	// todo: add tests
+	/// conditional append
+	public static StringBuilder AppendFormatIf(
+		this StringBuilder sb, 
+		bool condition, 
+		string format, 
+		params object[] args
+	) => condition
+		? sb.AppendFormat(format, args)
+		: sb;
+
+	// todo: add tests
+	/// append list
+	public static StringBuilder AppendList<T>(
+		this StringBuilder sb,
+		IReadOnlyList<T> items,
+		string separator = "",
+		string prefix = "",
+		string suffix = "",
+		bool enframeIfEmpty = false
+	) {
+		if (items.Count == 0)
+			return enframeIfEmpty 
+				? sb.Append(prefix).Append(suffix)
+				: sb;
+
+		sb.Append(prefix)
+		  .Append(items[0]);
+
+		for (var index = 1; index < items.Count; ++index)
+			sb.Append(separator)
+			  .Append(items[index]);
+
+		return sb.Append(suffix);
+	}
 
 }
