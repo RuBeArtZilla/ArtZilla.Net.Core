@@ -165,4 +165,20 @@ public static class EnumerableExtensions {
 			yield return buffer;
 		}
 	}
+
+	public static IEnumerable<T> ConditionalWhere<T>(
+		this IEnumerable<T> source,
+		bool condition,
+		Func<T, bool> predicate
+	) => condition
+			? source.Where(predicate)
+			: source;
+
+	public static IEnumerable<T> ConditionalWhere<T>(
+		this IEnumerable<T> source,
+		bool condition,
+		Func<T, int, bool> predicate
+	) => condition
+		? source.Where(predicate)
+		: source;
 }
